@@ -1,0 +1,32 @@
+/** Import des modules nécessaires */
+import Axios from './caller.service'
+
+let getAllFournisseurs= () => {
+
+    return Axios.get('/fournisseurs/')
+}
+
+
+let getFournisseur= (cid:number) => {
+    return Axios.get('/fournisseurs/'+cid+'/')
+}
+
+let updateFournisseur = (property:object) => {
+    return Axios.put('/fournisseurs/'+property.id+'/', property)
+}
+
+let createFournisseur = (property:object) => {
+    return Axios.post('/fournisseurs/', property)
+}
+
+let deleteFOurnisseur = (cid:number) => {
+    return Axios.delete('/fournisseurs/'+cid+'/')
+}
+
+export const fournisseurService = {
+    getAllFournisseurs,
+    getFournisseur,
+    updateFournisseur,
+    createFournisseur,
+    deleteFOurnisseur,
+}

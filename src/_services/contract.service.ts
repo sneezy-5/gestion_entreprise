@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllContracts= () => {
+let getAllContracts= (filter?) => {
 
-    return Axios.get('/contracts/')
+    return Axios.get('/contracts/?'+filter)
 }
 
 

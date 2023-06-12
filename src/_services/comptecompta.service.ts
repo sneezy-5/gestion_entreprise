@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllComptes= () => {
+let getAllComptes= (filter) => {
 
-    return Axios.get('/comptes/')
+    return Axios.get('/comptes/?'+filter)
 }
 
 

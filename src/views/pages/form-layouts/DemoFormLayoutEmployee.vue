@@ -1,18 +1,12 @@
 <script lang="ts" setup>
 import { employeesService } from '@/_services';
 import { useMainStore } from '@/stores/main';
-
-const firstName = ref('')
-const lastName = ref('')
-const city = ref('')
-const country = ref('')
-const company = ref('')
-const email = ref('')
-
-
-
-const sucess = ref('')
-const errors = ref([]);
+import avatar1 from '@images/avatars/avatar-1.png';
+const toast = ref({
+  show: false,
+  text: '',
+  color: '',
+});
 const form = reactive({
     matricule: "",
     civility: "Femme",
@@ -21,7 +15,7 @@ const form = reactive({
     birthdate: null,
     birthplace: "",
     nationality: "",
-    pictureURL: null,
+    pictureURL: '',
     CNPSnumber: "",
     CMUnumber: "",
     street: "",
@@ -65,17 +59,31 @@ const form = reactive({
     // ...
   },
 });
+// const refInputEl = ref<HTMLElement>()
 
-const checkbox = ref(false)
+// // changeAvatar function
+// const changeAvatar = (file: Event) => {
+//   const fileReader = new FileReader()
+//   const { files } = file.target as HTMLInputElement
+
+//   if (files && files.length) {
+//     fileReader.readAsDataURL(files[0])
+//     fileReader.onload = () => {
+//       if (typeof fileReader.result === 'string')
+//         form.pictureURL = fileReader.result
+//     }
+//   }
+// }
+
+// // reset avatar image
+// const resetAvatar = () => {
+//   form.pictureURL = form.pictureURL
+// }
 
 const submit = () => {
   //
   console.log(form)
-  if (form.firstName === '') {
-    form.formErrors.firstName = true;
-  } else {
-    form.formErrors.firstName = false;
-  }
+
   employeesService.createEmploye(form)
       .then((res: any) => {
         form.formErrors.firstName = false;
@@ -103,41 +111,202 @@ const submit = () => {
           form.formErrors.NbrOfParts = false;
           form.formErrors.hiringDate = false;
           form.formErrors.CMUnumber = false;
-        useMainStore().fetchAllEmployees()
-        //sucess.value ="Create successfuly"
-
+       // useMainStore().fetchAllEmployees()
+        toast.value = {
+        show: true,
+        text: 'Enregistré avec succès',
+        color: 'green',
+      };
     })
     .catch((error) => {
 
-          form.formErrors.firstName = true;
-          form.formErrors.lastName = true;
-          form.formErrors.email = true;
-          form.formErrors.street = true;
-          form.formErrors.matricule = true;
-          form.formErrors.maritalStatus = true;
-          form.formErrors.phonenumbers = true;
-          form.formErrors.CNPSnumber = true;
-          form.formErrors.currentPosition = true;
-          form.formErrors.numberOfDependents = true;
-          form.formErrors.birthdate = true;
-          form.formErrors.birthplace = true;
-          form.formErrors.city = true;
-          form.formErrors.country = true;
-          form.formErrors.CNPSnumber = true;
-          form.formErrors.country= true;
-          form.formErrors.exitDate = true;
-          form.formErrors.civility = true;
-          form.formErrors.nationality = true;
-          form.formErrors.seniority = true;
-          form.formErrors.pictureURL = true;
-          form.formErrors.neighborhood = true;
-          form.formErrors.NbrOfParts = true;
-          form.formErrors.hiringDate = true;
-          form.formErrors.CMUnumber = true;
 
-         sucess.value =""
-         
-         console.log(errors)
+if(error.response.data['firstName']){
+
+form.formErrors.firstName = true;
+toast.value = {
+show: true,
+text: error.response.data['firstName'],
+color: 'red', 
+};
+} if(error.response.data['lastName']){
+
+form.formErrors.lastName = true;
+toast.value = {
+show: true,
+text: error.response.data['lastName'],
+color: 'red', 
+};
+}  if(error.response.data['email']){
+
+form.formErrors.email = true;
+toast.value = {
+show: true,
+text: error.response.data['email'],
+color: 'red', 
+};
+} if(error.response.data['street']){
+
+form.formErrors.street = true;
+toast.value = {
+show: true,
+text: error.response.data['street'],
+color: 'red', 
+};
+} if(error.response.data['matricule']){
+
+form.formErrors.matricule = true;
+toast.value = {
+show: true,
+text: error.response.data['matricule'],
+color: 'red', 
+};
+} if(error.response.data['maritalStatus']){
+
+form.formErrors.maritalStatus = true;
+toast.value = {
+show: true,
+text: error.response.data['maritalStatus'],
+color: 'red', 
+};
+} if(error.response.data['phonenumbers']){
+
+form.formErrors.phonenumbers = true;
+toast.value = {
+show: true,
+text: error.response.data['phonenumbers'],
+color: 'red', 
+};
+}  if(error.response.data['CNPSnumber']){
+
+form.formErrors.CNPSnumber = true;
+toast.value = {
+show: true,
+text: error.response.data['CNPSnumber'],
+color: 'red', 
+};
+}  if(error.response.data['currentPosition']){
+
+form.formErrors.currentPosition = true;
+toast.value = {
+show: true,
+text: error.response.data['currentPosition'],
+color: 'red', 
+};
+} if(error.response.data['numberOfDependents']){
+
+form.formErrors.numberOfDependents = true;
+toast.value = {
+show: true,
+text: error.response.data['numberOfDependents'],
+color: 'red', 
+};
+}if(error.response.data['birthdate']){
+
+form.formErrors.birthdate = true;
+toast.value = {
+show: true,
+text: error.response.data['birthdate'],
+color: 'red', 
+};
+}if(error.response.data['birthplace']){
+
+form.formErrors.birthplace = true;
+toast.value = {
+show: true,
+text: error.response.data['birthplace'],
+color: 'red', 
+};
+}if(error.response.data['city']){
+
+form.formErrors.city = true;
+toast.value = {
+show: true,
+text: error.response.data['city'],
+color: 'red', 
+};
+}if(error.response.data['country']){
+
+form.formErrors.country = true;
+toast.value = {
+show: true,
+text: error.response.data['country'],
+color: 'red', 
+};
+}if(error.response.data['exitDate']){
+
+form.formErrors.exitDate = true;
+toast.value = {
+show: true,
+text: error.response.data['exitDate'],
+color: 'red', 
+};
+}if(error.response.data['civility']){
+
+form.formErrors.civility = true;
+toast.value = {
+show: true,
+text: error.response.data['civility'],
+color: 'red', 
+};
+}if(error.response.data['seniority']){
+
+form.formErrors.seniority = true;
+toast.value = {
+show: true,
+text: error.response.data['seniority'],
+color: 'red', 
+};
+}if(error.response.data['neighborhood']){
+
+form.formErrors.neighborhood = true;
+toast.value = {
+show: true,
+text: error.response.data['neighborhood'],
+color: 'red', 
+};
+}if(error.response.data['NbrOfParts']){
+
+form.formErrors.NbrOfParts = true;
+toast.value = {
+show: true,
+text: error.response.data['NbrOfParts'],
+color: 'red', 
+};
+}if(error.response.data['pictureURL']){
+
+form.formErrors.pictureURL = true;
+toast.value = {
+show: true,
+text: error.response.data['pictureURL'],
+color: 'red', 
+};
+}if(error.response.data['CMUnumber']){
+
+form.formErrors.CMUnumber = true;
+toast.value = {
+show: true,
+text: error.response.data['CMUnumber'],
+color: 'red', 
+};
+}if(error.response.data['hiringDate']){
+
+form.formErrors.hiringDate = true;
+toast.value = {
+show: true,
+text: error.response.data['hiringDate'],
+color: 'red', 
+};
+}if(error.response.data['nationality']){
+
+form.formErrors.nationality = true;
+toast.value = {
+show: true,
+text: error.response.data['nationality'],
+color: 'red', 
+};
+}
+         console.log(error)
         
      });
 };
@@ -145,7 +314,7 @@ const submit = () => {
 </script>
 
 <template>
-  <VForm @submit.prevent="submit">
+  <VForm @submit.prevent="submit" enctype="multipart/form-data">
     <VRow>
       <!-- 👉 First Name -->
       <VCol
@@ -192,10 +361,10 @@ const submit = () => {
         md="6"
       >
         <VTextField
-          v-model="form.email"
+          v-model="form.city"
           label="City"
           placeholder="City"
-          :error="form.formErrors.email"
+          :error="form.formErrors.city"
         />
       </VCol>
 
@@ -446,20 +615,93 @@ const submit = () => {
                 />
   
       </VCol>
-      <!-- 👉 Remember me -->
-      <VCol cols="12">
-        <VCheckbox
-          v-model="checkbox"
-          label="Remember me"
-        />
-      </VCol>
 
+                <!-- 👉 upload-->
+                <!-- <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+      label="Image"
+    v-model="form.pictureURL"
+      type="file"
+      :error="form.formErrors.pictureURL"
+
+  />
+  
+      </VCol> -->
+      <!-- <VCardText class="d-flex"   :error="form.formErrors.pictureURL">
+ 
+          <VAvatar
+            rounded="lg"
+            size="100"
+            class="me-6"
+            :image="form.pictureURL"
+          />
+
+ 
+          <form class="d-flex flex-column justify-center gap-5">
+            <div class="d-flex flex-wrap gap-2">
+              <VBtn
+                color="primary"
+                @click="refInputEl?.click()"
+              >
+                <VIcon
+                  icon="mdi-cloud-upload-outline"
+                  class="d-sm-none"
+                />
+                <span class="d-none d-sm-block">Photo</span>
+              </VBtn>
+
+              <input
+                ref="refInputEl"
+                type="file"
+                name="file"
+                accept=".jpeg,.png,.jpg,GIF"
+                hidden
+                @input="changeAvatar"
+              >
+
+              <VBtn
+                type="reset"
+                color="error"
+                variant="tonal"
+                @click="resetAvatar"
+              >
+                <span class="d-none d-sm-block">Reset</span>
+                <VIcon
+                  icon="mdi-refresh"
+                  class="d-sm-none"
+                />
+              </VBtn>
+            </div>
+
+            <p class="text-body-1 mb-0">
+              Allowed JPG, GIF or PNG. Max size of 800K
+            </p>
+          </form>
+        </VCardText> -->
+
+        
+ <!--shoxw toats message-->
+ <VSnackbar 
+      v-model="toast.show" 
+      :timeout="3000" 
+      :color="toast.color"
+      top='top' >
+    {{ toast.text }}
+    <template #action="{ attrs }">
+      <VBtn text v-bind="attrs" @click="toast.show = false">
+        <VIcon>mdi-close</VIcon>
+      </VBtn>
+    </template>
+  </VSnackbar>
       <VCol
         cols="12"
         class="d-flex gap-4"
       >
         <VBtn type="submit">
-          Submit
+          Enregistré
         </VBtn>
 
         <VBtn

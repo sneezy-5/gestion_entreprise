@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllPresences= () => {
+let getAllPresences= (filter?) => {
 
-    return Axios.get('/presences/')
+    return Axios.get('/presences/?'+filter)
 }
 
 

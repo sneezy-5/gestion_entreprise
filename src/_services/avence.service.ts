@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllAvance= () => {
+let getAllAvance= (filter?) => {
 
-    return Axios.get('/paydays/')
+    return Axios.get('/paydays/?'+filter)
 }
 
 

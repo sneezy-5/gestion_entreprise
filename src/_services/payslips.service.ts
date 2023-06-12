@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllPayslips= () => {
+let getAllPayslips= (filter) => {
 
-    return Axios.get('/payslips/')
+    return Axios.get('/payslips/?'+filter)
 }
 
 

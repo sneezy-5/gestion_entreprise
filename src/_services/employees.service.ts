@@ -1,9 +1,10 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 const headers = { 'Content-Type': 'multipart/form-data' };
-let getAllEmployees = () => {
 
-    return Axios.get('/employees/')
+let getAllEmployees = (filter?) => {
+
+    return Axios.get('/employees/?'+filter)
 }
 
 

@@ -52,14 +52,7 @@ const upgradeBanner = computed(() => {
 
         <VSpacer />
 
-        <IconBtn
-          class="me-2"
-          href="https://github.com/themeselection/materio-vuetify-vuejs-admin-template-free"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <VIcon icon="mdi-github" />
-        </IconBtn>
+       
 
         <IconBtn class="me-2">
           <VIcon icon="mdi-bell-outline" />
@@ -81,7 +74,7 @@ const upgradeBanner = computed(() => {
       />
       <VerticalNavLink
         :item="{
-          title: 'Account Settings',
+          title: 'Profil',
           icon: 'mdi-account-cog-outline',
           to: '/account-settings',
         }"
@@ -90,98 +83,148 @@ const upgradeBanner = computed(() => {
       <!-- 👉 Pages -->
       <VerticalNavSectionTitle
         :item="{
-          heading: 'Pages',
+          heading: 'Utilisateurs',
         }"
       />
-      <VerticalNavLink
+      <!-- <VerticalNavLink
         :item="{
           title: 'Login',
           icon: 'mdi-login',
           to: '/login',
         }"
-      />
+      /> -->
       <VerticalNavLink
         :item="{
-          title: 'Register',
-          icon: 'mdi-account-plus-outline',
-          to: '/register',
+          title: 'Utilisateurs',
+          icon: 'mdi-account-group',
+          to: '/users',
         }"
       />
-      <VerticalNavLink
+      <!-- <VerticalNavLink
         :item="{
           title: 'Error',
           icon: 'mdi-information-outline',
           to: '/no-existence',
         }"
-      />
+      /> -->
 
       <!-- 👉 User Interface -->
       <VerticalNavSectionTitle
         :item="{
-          heading: 'User Interface',
+          heading: 'Gestion de paie',
         }"
       />
-      <VerticalNavLink
-        :item="{
-          title: 'Typography',
-          icon: 'mdi-alpha-t-box-outline',
-          to: '/typography',
-        }"
-      />
-      <VerticalNavLink
-        :item="{
-          title: 'Icons',
-          icon: 'mdi-eye-outline',
-          to: '/icons',
-        }"
-      />
-      <VerticalNavLink
-        :item="{
-          title: 'Cards',
-          icon: 'mdi-credit-card-outline',
-          to: '/cards',
-        }"
-      />
-      <VerticalNavLink
-        :item="{
-          title: 'Tables',
-          icon: 'mdi-table',
-          to: '/tables',
-        }"
-      />
-      <VerticalNavLink
-        :item="{
-          title: 'Form Layouts',
-          icon: 'mdi-form-select',
-          to: '/form-layouts',
-        }"
-      />
+
       <VerticalNavLink
         :item="{
           title: 'Employes',
-          icon: 'mdi-account-group',
+          icon: 'mdi-account-tie',
           to: '/employes',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Contrats',
+          icon: 'mdi-file-document-edit',
+          to: '/contract',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Présences',
+          icon: 'mdi-note-plus',
+          to: '/presence',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Avances',
+          icon: 'mdi-notebook',
+          to: '/avance',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Primes',
+          icon: 'mdi-square-edit-outline',
+          to: '/primes',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Congés',
+          icon: 'mdi-camera-document',
+          to: '/conges',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Bulletin de paie',
+          icon: 'mdi-clipboard-file',
+          to: '/payslips',
+        }"
+      />
+
+       <!-- 👉 Commptabilité -->
+       <VerticalNavSectionTitle
+        :item="{
+          heading: 'Commptabilité',
+        }"
+      />
+
+      <VerticalNavLink
+        :item="{
+          title: 'Tresorerie',
+          icon: 'mdi-wallet',
+          to: '/tresorerie',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'transactions',
+          icon: 'mdi-square-edit-outline',
+          to: '/Transactions',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Fournisseurs',
+          icon: 'mdi-square-edit-outline',
+          to: '/fournisseurs',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Comptes',
+          icon: 'mdi-wallet-travel',
+          to: '/comptes',
+        }"
+      />
+
+
+       <!-- 👉 Projet -->
+       <VerticalNavSectionTitle
+        :item="{
+          heading: 'Projets',
+        }"
+      />
+
+      <VerticalNavLink
+        :item="{
+          title: 'Projets',
+          icon: 'mdi-inbox-arrow-down',
+          to: '/projet',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Taches',
+          icon: 'mdi-calendar-check',
+          to: '/taches',
         }"
       />
     </template>
 
-    <!-- <template #after-vertical-nav-items>
-     
-      <a
-        href="https://themeselection.com/item/materio-vuetify-vuejs-admin-template"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="margin-left: 7px;"
-      >
-        <img
-          :src="upgradeBanner"
-          alt="upgrade-banner"
-          transition="scale-transition"
-          class="upgrade-banner mx-auto"
-          style="max-width: 230px;"
-        >
-      </a>
-    </template> -->
 
     <!-- 👉 Pages -->
     <slot />

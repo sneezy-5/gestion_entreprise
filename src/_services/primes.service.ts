@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getPrimes= () => {
+let getPrimes= (filter?) => {
 
-    return Axios.get('/primes/')
+    return Axios.get('/primes/?'+filter)
 }
 
 

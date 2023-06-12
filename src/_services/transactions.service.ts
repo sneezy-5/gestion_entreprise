@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllTransactions= () => {
+let getAllTransactions= (filter) => {
 
-    return Axios.get('/transactions/')
+    return Axios.get('/transactions/?'+filter)
 }
 
 

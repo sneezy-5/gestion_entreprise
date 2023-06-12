@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import logo from '@images/logo.svg?raw'
+import logos from '@images/logos.svg?raw'
+
 import type { Component } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 import { useDisplay } from 'vuetify'
@@ -60,11 +62,11 @@ const handleNavScroll = (evt: Event) => {
         >
           <div
             class="d-flex"
-            v-html="logo"
+            v-html="logos"
           />
 
           <h1 class="font-weight-medium leading-normal text-xl text-uppercase">
-            Materio
+            ESOGEST
           </h1>
         </RouterLink>
       </slot>

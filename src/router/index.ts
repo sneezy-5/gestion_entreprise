@@ -45,9 +45,158 @@ const router = createRouter({
           component: () => import('../pages/employes/Employes.vue'),
         },
         {
-          path: 'create-employe',
+          path: 'create-employee',
           component: () => import('../pages/employes/createEmploye.vue'),
         },
+        {
+          meta: {
+            title: "Edit Employee",
+          },
+          path: "/edit-employe/:id(\\d+)",
+          name: "edit-employe",
+          component: () => import("../pages/employes/employeeEdit.vue"),
+        },
+        {
+          path: 'contract',
+          component: () => import('../pages/contracts/contract.vue'),
+        },
+        {
+          path: 'create-contract',
+          component: () => import('../pages/contracts/createContract.vue'),
+        },
+        {
+          meta: {
+            title: "Edit Contract",
+          },
+          path: "/edit-contract/:id(\\d+)",
+          name: "edit-contract",
+          component: () => import("../pages/contracts/contractEdit.vue"),
+        },
+        {
+          path: 'presence',
+          component: () => import('../pages/presences/presences.vue'),
+        },
+        {
+          path: 'create-presence',
+          component: () => import('../pages/presences/createPresence.vue'),
+        },
+        {
+          meta: {
+            title: "Edit presence",
+          },
+          path: "/edit-presence/:id(\\d+)",
+          name: "edit-presence",
+          component: () => import("../pages/presences/presenceEdit.vue"),
+        },
+        {
+          path: 'avance',
+          component: () => import('../pages/avances/avances.vue'),
+        },
+        {
+          path: 'create-avance',
+          component: () => import('../pages/avances/createAvance.vue'),
+        },
+        {
+          meta: {
+            title: "Edit avance",
+          },
+          path: "/edit-avance/:id(\\d+)",
+          name: "edit-avance",
+          component: () => import("../pages/avances/avanceEdit.vue"),
+        },
+        {
+          path: 'primes',
+          component: () => import('../pages/primes/primes.vue'),
+        },
+        {
+          path: 'create-prime',
+          component: () => import('../pages/primes/createPrime.vue'),
+        },
+        {
+          meta: {
+            title: "Edit prime",
+          },
+          path: "/edit-prime/:id(\\d+)",
+          name: "edit-prime",
+          component: () => import("../pages/primes/primeEdit.vue"),
+        },
+        {
+          path: 'conges',
+          component: () => import('../pages/conges/conges.vue'),
+        },
+        {
+          path: 'create-conge',
+          component: () => import('../pages/conges/createConge.vue'),
+        },
+        {
+          meta: {
+            title: "Edit conge",
+          },
+          path: "/edit-conge/:id(\\d+)",
+          name: "edit-conge",
+          component: () => import("../pages/conges/congeEdit.vue"),
+        },
+        {
+          path: 'payslips',
+          component: () => import('../pages/payslips/payslips.vue'),
+        },
+        {
+          meta: {
+            title: "create Bulltin",
+          },
+          path: "/create-payslip",
+          name: "create-payslip",
+          component: () => import("../pages/payslips/createPayslip.vue"),
+        },
+        {
+          meta: {
+            title: "generate Bulltin",
+          },
+          path: "/payslip-generate",
+          name: "payslip-generate",
+          component: () => import("../pages/payslips/createPayslips.vue"),
+        },
+        {
+          meta: {
+            title: "Edit Bulltin",
+          },
+          path: "/edit-payslip/:id(\\d+)",
+          name: "edit-payslip",
+          component: () => import("../pages/payslips/payslipEdit.vue"),
+        },
+        {
+          path: 'comptes',
+          component: () => import('../pages/comptecompta/comptes.vue'),
+        },
+        {
+          path: 'create-compte',
+          component: () => import('../pages/comptecompta/createCompte.vue'),
+        },
+        {
+          meta: {
+            title: "Edit compte",
+          },
+          path: "/edit-compte/:id(\\d+)",
+          name: "edit-compte",
+          component: () => import("../pages/comptecompta/compteEdit.vue"),
+        },
+        {
+          path: 'fournisseurs',
+          component: () => import('../pages/fournisseurs/fournisseurs.vue'),
+        },
+        {
+          path: 'create-fournisseur',
+          component: () => import('../pages/fournisseurs/createFournisseur.vue'),
+        },
+        {
+          meta: {
+            title: "Edit fournisseur",
+          },
+          path: "/edit-fournisseur/:id(\\d+)",
+          name: "edit-fournisseur",
+          component: () => import("../pages/fournisseurs/fournisseurEdit.vue"),
+        },
+      
       ],
     },
     {

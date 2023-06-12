@@ -1,141 +1,107 @@
-<!-- <script setup lang="ts">
-const desserts = [
-  {
-    dessert: 'Frozen Yogurt',
-    calories: 159,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Ice cream sandwich',
-    calories: 237,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Eclair',
-    calories: 262,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Cupcake',
-    calories: 305,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  
-]
+<script setup lang="ts">
+import { employeesService } from '@/_services';
+import router from '@/router';
+
+let ids = ref(0)
+const desserts: any[] = reactive([
+
+])
+const showDialog = ref(false);
+const openDialog = (id:number) => {
+  ids.value =id
+  showDialog.value = true;
+};
+const closeDialog = () => {
+  showDialog.value = false;
+};
+
+
+let goEdit = (id: number)=>{
+  router.push({name: 'edit-employe', params:{id:id}})
+};
+
+
+let page = ref(1);
+const limit = 5;
+const getAll =()=>{
+  console.log(page)
+  const offset = (page.value - 1) * limit;
+  const filter =`limit=${limit}&offset=${offset}`
+  employeesService.getAllEmployees(filter)
+      .then((res: { data: { results: any; }; }) => {
+        const data = res.data.results
+        // for (let i = 0; i < data.length; i++) {
+        //   desserts.push(data[i]);
+        // } 
+        desserts.pop()
+        desserts.push(res.data)
+        console.log(desserts[0].results, data)
+    })
+    .catch((error: { status: string; }) => {
+         // error.response.status Check status code
+            if(error.status ="401"){
+                    //console.error(error.response.data.message);
+                   
+                    console.error(error)
+         
+            }
+     
+     })
+
+}
+
+
+const deleteEl = () => {
+  employeesService.deleteEmploye(ids.value)
+      .then((res: { data: { results: any; }; }) => {
+        getAll()
+    })
+    .catch((error: { status: string; }) => {
+         // error.response.status Check status code
+            if(error.status ="401"){
+                    //console.error(error.response.data.message);
+                   
+                    console.error(error)
+         
+            }
+     
+     })
+   
+     showDialog.value = false;
+
+};
+
+
+getAll()
+const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
+
+
+
 </script>
 
 <template>
+
+  <v-dialog v-model="showDialog" max-width="500px">
+    <v-card>
+      <v-card-title class="headline">Confirmation de suppression</v-card-title>
+
+      <v-card-text>
+        Êtes-vous sûr de vouloir supprimer ces données ?
+      </v-card-text>
+
+      <v-card-actions>
+        <v-btn  @click="deleteEl" style="color: red;">Confimer</v-btn>
+        <v-btn  @click="closeDialog">Annuler</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+
+    <div class="flex-end">
+      <VBtn to="/create-employee">Ajouter</VBtn>
+    </div>
   <VTable density="compact">
     <thead>
-      <tr>
-        <th class="text-uppercase">
-          Desserts(100g Servings)
-        </th>
-        <th class="text-uppercase text-center">
-          calories
-        </th>
-        <th class="text-uppercase text-center">
-          Fat(g)
-        </th>
-        <th class="text-uppercase text-center">
-          Carbs(g)
-        </th>
-        <th class="text-uppercase text-center">
-          protein(g)
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.dessert"
-      >
-        <td>
-          {{ item.dessert }}
-        </td>
-        <td class="text-center">
-          {{ item.calories }}
-        </td>
-        <td class="text-center">
-          {{ item.fat }}
-        </td>
-        <td class="text-center">
-          {{ item.carbs }}
-        </td>
-        <td class="text-center">
-          {{ item.protein }}
-        </td>
-      </tr>
-    </tbody>
-  </VTable>
-</template> -->
-<template>
-
-  <div>
-    <div class="flex-end">
-      <VBtn to="/create-employe">Ajouter</VBtn>
-    </div>
-   
-    <VTable density="compact">
-      <thead>
       <tr>
         <th class="text-uppercase">
           Nom
@@ -144,215 +110,56 @@ const desserts = [
           Prénom
         </th>
         <th class="text-uppercase text-center">
-          Poste
-        </th>
-        <th class="text-uppercase text-center">
           Salaire de base
         </th>
         <th class="text-uppercase text-center">
-          Creadet_at
+          Poste
         </th>
         <th class="text-uppercase text-center">
           Action
         </th>
       </tr>
     </thead>
-      <tbody>
-        <tr v-for="(item, index) in displayedDesserts" :key="item.dessert">
-          <td>
-          {{ item.dessert }}
-        </td>
-        <td class="text-center">
-          {{ item.calories }}
-        </td>
-        <td class="text-center">
-          {{ item.fat }}
-        </td>
-        <td class="text-center">
-          {{ item.carbs }}
-        </td>
-        <td class="text-center">
-          {{ item.protein }}
-        </td>
-        <td class="text-center">
-          <button @click="editDessert(index)">
-              <i class="fas fa-edit"></i> 
-            </button>
-            <button @click="showDessert(index)">
-              <i class="fas fa-eye"></i> 
-            </button>
-            <button @click="deleteDessert(index)">
-              <i class="fas fa-trash"></i> 
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </VTable>
 
-        <!-- 👉 Pagination -->
-        <VCol
-        cols="12"
-        md="6"
+    <tbody>
+      <tr
+        v-for="item in desserts[0]?.results"
+        :key="item.id"
       >
-        <VPagination
+        <td>
+          {{ item.firstName }}
+        </td>
+        <td class="text-center">
+          {{ item.lastName }}
+        </td>
+        <td class="text-center">
+          {{ item.base_salary }}
+        </td>
+        <td class="text-center">
+          {{ item.position }}
+        </td>
+        <td class="text-center">
+          <button @click="goEdit(item.id)">
+            <VIcon icon="mdi-edit"></VIcon>
          
-        />
-     </VCol>
-  
+        </button>
+          <button @click="openDialog(item.id)">
+          <VIcon icon="mdi-trash" style="color: red;"></VIcon>
+      </button>
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+
+      <div class="text-xs-center">
+
+    <v-pagination v-model="page" :length="numPages" circle  @click="getAll" />
   </div>
 </template>
 
-<script>
 
-export default {
-  data() {
-    return {
-      desserts: [
-      {
-    dessert: 'Cupcake',
-    calories: 305,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-      ], // Données complètes provenant du backend
-      pageSize: 5, // Nombre d'éléments à afficher par page
-      currentPage: 1, // Page actuelle
-      previousClicked: false,
-      nextClicked: false,
-    };
-  },
-  computed: {
-    displayedDesserts() {
-      // Calcul des éléments à afficher sur la page actuelle
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      return this.desserts.slice(startIndex, endIndex);
-    },
-    hasNextPage() {
-    
-      // Vérification s'il y a une page suivante
-      const totalPages = Math.ceil(this.desserts.length / this.pageSize);
-      return this.currentPage < totalPages;
-    },
-  },
-  methods: {
-    nextPage() {
-      // Chargement de la page suivante
-      this.nextClicked = true;
-      this.currentPage++;
-      setTimeout(() => {
-        this.nextClicked = false;
-      }, 500);
-      // Appeler le backend pour récupérer les données de la prochaine page
-      // Utilisez le lien de la prochaine page depuis le backend pour effectuer la requête appropriée
-      // Mettez à jour this.desserts avec les nouvelles données
-    },
-
-    previousPage() {
-      // Chargement de la page précédente
-      this.currentPage--;
-      this.previousClicked = true;
-      setTimeout(() => {
-        this.previousClicked = false;
-      }, 500);
-      // Appeler le backend pour récupérer les données de la page précédente
-      // Utilisez le lien de la page précédente depuis le backend pour effectuer la requête appropriée
-      // Mettez à jour this.desserts avec les nouvelles données
-    },
-  },
-};
-</script>
-
-<style>
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-
-.pagination {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.pagination button {
-  background-color: transparent;
-  border: none;
-  color: #000;
-  cursor: pointer;
-  margin: 0 5px;
-}
-
-.pagination button i {
-  margin-right: 5px;
-  transition: color 0.3s ease;
-}
-
-.pagination button.active i {
-  color: blue;
-}
-
-.pagination button.clicked i {
-  animation: clickAnimation 0.3s;
-}
-
-@keyframes clickAnimation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+<style scoped>
+/* stylelint-disable-next-line block-opening-brace-space-before */
 .flex-end{
   display: flex;
   justify-content: end;

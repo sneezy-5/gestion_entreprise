@@ -182,10 +182,10 @@ const isPasswordVisible = ref(false)
     />
 
     <!-- bg img -->
-    <VImg
+    <!-- <VImg
       class="auth-footer-mask d-none d-md-block"
       :src="authThemeMask"
-    />
+    /> -->
   </div>
 </template>
 

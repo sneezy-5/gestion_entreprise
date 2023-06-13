@@ -4,8 +4,11 @@ import Axios from './caller.service'
 const headers = { 'Content-Type': 'multipart/form-data' };
 
 
-let getAllUsers = () => {
-    return Axios.get('/users')
+let getAllUsers = (filter?) => {
+    return Axios.get('/users/?'+filter)
+}
+let getList = () => {
+    return Axios.get('/account-list')
 }
 
 let getUser = (uid) => {
@@ -43,6 +46,7 @@ let deleteUser = (uid) => {
 
 export const userService = {
     getAllUsers,
+    getList ,
     getUser,
     getProfile,
     changePasswordUser,

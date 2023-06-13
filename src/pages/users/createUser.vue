@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DemoFormLayoutEmployee from '@/views/pages/form-layouts/DemoFormLayoutEmployee.vue'
+import DemoFormLayoutUser from '@/views/pages/form-layouts/DemoFormLayoutUser.vue';
 
 
 </script>
@@ -12,9 +13,9 @@ import DemoFormLayoutEmployee from '@/views/pages/form-layouts/DemoFormLayoutEmp
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Créé un employé">
+        <VCard title="Ajouter un utlisateur">
           <VCardText>
-            <DemoFormLayoutEmployee />
+            <DemoFormLayoutUser />
           </VCardText>
         </VCard>
       </VCol>

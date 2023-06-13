@@ -196,7 +196,80 @@ const router = createRouter({
           name: "edit-fournisseur",
           component: () => import("../pages/fournisseurs/fournisseurEdit.vue"),
         },
+        {
+          path: 'journal',
+          component: () => import('../pages/compta/transactions.vue'),
+        },
+        {
+          path: 'create-transaction',
+          component: () => import('../pages/compta/createTransaction.vue'),
+        },
+        {
+          meta: {
+            title: "Edit transaction",
+          },
+          path: "/edit-transaction/:id(\\d+)",
+          name: "edit-transaction",
+          component: () => import("../pages/compta/editTransaction.vue"),
+        },
+        {
+          meta: {
+            title: "grand-livre",
+          },
+          path: "/grand-livre",
+          name: "grand-livre",
+          component: () => import("../pages/compta/grandlivre.vue"),
+        },
+
+        {
+          path: 'projets',
+          component: () => import('../pages/projets/projets.vue'),
+        },
+        {
+          path: 'create-projet',
+          component: () => import('../pages/projets/createProjet.vue'),
+        },
+        {
+          meta: {
+            title: "Edit projet",
+          },
+          path: "/edit-projet/:id(\\d+)",
+          name: "edit-projet",
+          component: () => import("../pages/projets/projetEdit.vue"),
+        },
       
+        {
+          path: 'taches',
+          component: () => import('../pages/taches/taches.vue'),
+        },
+        {
+          path: 'create-tache',
+          component: () => import('../pages/taches/createTache.vue'),
+        },
+        {
+          meta: {
+            title: "Edit tache",
+          },
+          path: "/edit-tache/:id(\\d+)",
+          name: "edit-tache",
+          component: () => import("../pages/taches/tacheEdit.vue"),
+        },
+        {
+          path: 'users',
+          component: () => import('../pages/users/users.vue'),
+        },
+        {
+          path: 'create-user',
+          component: () => import('../pages/users/createUser.vue'),
+        },
+        {
+          meta: {
+            title: "Edit user",
+          },
+          path: "/edit-user/:id(\\d+)",
+          name: "edit-user",
+          component: () => import("../pages/users/userEdit.vue"),
+        },
       ],
     },
     {

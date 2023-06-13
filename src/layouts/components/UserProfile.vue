@@ -1,12 +1,43 @@
 <script setup lang="ts">
-import { accountService } from '@/_services';
+import { accountService, userService } from '@/_services';
 import router from '@/router';
 import avatar1 from '@images/avatars/avatar-1.png';
+
 
 const logout =()=>{
                 accountService.logout();
                 router.push('/auth/login')
         }
+
+
+
+const role = accountService.getDatabase()
+const admin = role=='true'?'Admin':''
+const form=reactive({
+  userName:'',
+  userEmail:'',
+  userAvatar:'',
+  lastLogin:'',
+  is_admin: admin
+})
+userService.getProfile()
+  .then(res => {
+    const profileData = res.data.results[0];
+    if (profileData) {
+     
+      form.userName = profileData.username;
+      form.userEmail = profileData.email;
+      form.userAvatar = profileData.profile_image;
+      form.lastLogin = profileData.last_login;
+      console.log(form)
+    }
+
+    
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
 </script>
 
 <template>
@@ -53,11 +84,10 @@ const logout =()=>{
                 </VBadge>
               </VListItemAction>
             </template>
-
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{form.userName}}
             </VListItemTitle>
-            <VListItemSubtitle>Admin</VListItemSubtitle>
+            <VListItemSubtitle>{{form.is_admin}}</VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 

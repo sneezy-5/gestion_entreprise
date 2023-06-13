@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import {  transactionService } from '@/_services';
+import {  userService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
 const desserts: any[] = reactive([
 
 ])
+
+
+const toast = ref({
+  show: false,
+  text: '',
+  color: '',
+});
 const showDialog = ref(false);
+const showDialogEditPass = ref(false);
 const openDialog = (id:number) => {
+  ids.value =id
+  showDialog.value = true;
+};
+
+const openDialogEdtpass = (id:number) => {
   ids.value =id
   showDialog.value = true;
 };
@@ -17,9 +30,8 @@ const closeDialog = () => {
 
 
 let goEdit = (id: number)=>{
-  router.push({name: 'edit-transaction', params:{id:id}})
+  router.push({name: 'edit-user', params:{id:id}})
 };
-
 
 let page = ref(1);
 const limit = 5;
@@ -27,7 +39,7 @@ const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
   const filter =`limit=${limit}&offset=${offset}`
-  transactionService.getAllTransactions(filter)
+  userService.getAllUsers(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
         // for (let i = 0; i < data.length; i++) {
@@ -52,7 +64,7 @@ const getAll =()=>{
 
 
 const deleteEl = () => {
-  transactionService.deleteTransation(ids.value)
+  userService.deleteUser(ids.value)
       .then((res: { data: { results: any; }; }) => {
         getAll()
     })
@@ -74,9 +86,50 @@ const deleteEl = () => {
 
 getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
+const form = reactive({
+  newpassword:"",
 
+  formErrors: {
+    newpassword: false,
+     
+    
+  },
+});
 
+const editpass = () => {
+  console.log(ids)
+  userService.changePasswordUser(form,ids.value)
+      .then(res => {
+        console.log(res)
+    
+        toast.value = {
+        show: true,
+        text: 'Modifié avec succès',
+        color: 'green',
+      };
+    })
+    .catch((error) => {
+         if (error.response.status == 400) {
+            console.error(error)
+         }
+         if(error.response.data['newpassword']){
 
+form.formErrors.newpassword = true;
+toast.value = {
+show: true,
+text: error.response.data['newpassword'],
+color: 'red', 
+};
+}else{
+
+form.formErrors.newpassword = false;
+
+}
+     });
+   
+     showDialog.value = false;
+
+};
 </script>
 
 <template>
@@ -96,37 +149,75 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
     </v-card>
   </v-dialog>
 
+  <v-dialog v-model="showDialog" max-width="500px">
+    <v-card>
+      <v-card-title class="headline">Changer mot de passe</v-card-title>
+      <div style="min-width: 700px; margin-left:  18px;" >
+        <!-- 👉 password -->
+        <VForm @submit.prevent="editpass">
+                      <VRow>
+              <VCol
+                cols="12"
+                md="6"
+              >
+              <VTextField
+                  type="text"
+                  v-model="form.newpassword"
+                  label="Nouveau Mot de passe"
+                  placeholder="Nouveau Mot de passe"
+                  :error="form.formErrors.newpassword"
+                />
+              </VCol>
+
+     
+            </VRow>
+            <v-card-actions>
+        <v-btn  type="submit" style="color: red;">Confimer</v-btn>
+        <v-btn  @click="closeDialog">Annuler</v-btn>
+      </v-card-actions>
+          </VForm>
+      </div>
+            
+
+
+    </v-card>
+  </v-dialog>
+
+
+ <!--shoxw toats message-->
+ <VSnackbar 
+      v-model="toast.show" 
+      :timeout="3000" 
+      :color="toast.color"
+      top='top' >
+    {{ toast.text }}
+    <template #action="{ attrs }">
+      <VBtn text v-bind="attrs" @click="toast.show = false">
+        <VIcon>mdi-close</VIcon>
+      </VBtn>
+    </template>
+  </VSnackbar>
+
 
     <div class="flex-end">
-      <VBtn to="/create-transaction">Ajouter</VBtn>
+      <VBtn to="/create-user">Ajouter</VBtn>
     </div>
   <VTable density="compact">
     <thead>
       <tr>
         <th class="text-uppercase">
-          Type de transaction
+          Employe
         </th>
         <th class="text-uppercase text-center">
-          Compte
+          Nom
         </th>
         <th class="text-uppercase text-center">
-          Categorie
+          Email
         </th>
         <th class="text-uppercase text-center">
-          Date de transaction
+          dernière connexion
         </th>
-        <th class="text-uppercase text-center">
-          Description
-        </th>
-        <th class="text-uppercase text-center">
-          Fournisseur
-        </th>
-        <th class="text-uppercase text-center">
-          Type depense
-        </th>
-        <th class="text-uppercase text-center">
-          Montant
-        </th>
+  
         <th class="text-uppercase text-center">
           Action
         </th>
@@ -139,39 +230,30 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         :key="item.id"
       >
         <td>
-          {{ item.transaction_type }}
+          {{ item.employee?.firstName }}
         </td>
         <td class="text-center">
-          {{ item.account.name }}
+          {{ item.username }}
         </td>
         <td class="text-center">
-          {{ item.transaction_category }}
+          {{ item.email }}
         </td>
         <td class="text-center">
-          {{ item.transaction_date }}
-        </td>
-        <td class="text-center">
-          {{ item.description }}
-        </td>
-        <td class="text-center">
-          {{ item?.supplier?.name }}
-        </td>
-        <td class="text-center">
-          {{ item.depense_category }}
-        </td>
-        <td class="text-center">
-          {{ item.amount }}
+          {{ item.last_login }}
         </td>
        
-      
+       
         <td class="text-center">
           <button @click="goEdit(item.id)">
             <VIcon icon="mdi-edit"></VIcon>
-         
+
         </button>
-          <button @click="openDialog(item.id)">
-          <VIcon icon="mdi-trash" style="color: red;"></VIcon>
-      </button>
+        <button @click="openDialogEdtpass(item.id)">
+          <VIcon icon="mdi-key-outline"></VIcon>
+        </button>
+        <button @click="openDialog(item.id)">
+            <VIcon icon="mdi-trash" style="color: red;"></VIcon>
+        </button>
         </td>
       </tr>
     </tbody>

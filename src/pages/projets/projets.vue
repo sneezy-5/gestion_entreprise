@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import DemoSimpleTableDensityCompte from '@/views/pages/tables/DemoSimpleTableDensityCompte.vue';
+import DemoSimpleTableDensity from '@/views/pages/tables/DemoSimpleTableDensity.vue'
+import DemoSimpleTableDensityProjet from '@/views/pages/tables/DemoSimpleTableDensityProjet.vue';
 
 </script>
 
@@ -8,11 +9,11 @@ import DemoSimpleTableDensityCompte from '@/views/pages/tables/DemoSimpleTableDe
 
 
     <VCol cols="12">
-      <VCard title="Comptes">
+      <VCard title="Projets">
         <!-- <VCardText>
           You can show a dense version of the table by using the <code>density</code> prop.
         </VCardText> -->
-        <DemoSimpleTableDensityCompte />
+        <DemoSimpleTableDensityProjet />
       </VCard>
     </VCol>
 

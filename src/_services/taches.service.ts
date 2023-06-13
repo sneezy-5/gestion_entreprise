@@ -2,9 +2,9 @@
 import Axios from './caller.service'
 import Axiosss from './caller-other-service '
 
-let getAllTaches = () => {
+let getAllTaches = (filter) => {
 
-    return Axios.get('/taks/')
+    return Axios.get('/taks/?'+filter)
 }
 
 let getTache = (cid:number) => {

@@ -11,6 +11,7 @@ import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTit
 import Footer from '@/layouts/components/Footer.vue'
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
 import UserProfile from '@/layouts/components/UserProfile.vue'
+import { accountService } from '@/_services'
 
 // Banner
 
@@ -19,6 +20,7 @@ const vuetifyTheme = useTheme()
 const upgradeBanner = computed(() => {
   return vuetifyTheme.global.name.value === 'light' ? upgradeBannerLight : upgradeBannerDark
 })
+const role = accountService.getDatabase()
 </script>
 
 <template>
@@ -82,6 +84,7 @@ const upgradeBanner = computed(() => {
 
       <!-- 👉 Pages -->
       <VerticalNavSectionTitle
+       v-if="role=='true'"
         :item="{
           heading: 'Utilisateurs',
         }"
@@ -94,6 +97,7 @@ const upgradeBanner = computed(() => {
         }"
       /> -->
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Utilisateurs',
           icon: 'mdi-account-group',
@@ -110,12 +114,14 @@ const upgradeBanner = computed(() => {
 
       <!-- 👉 User Interface -->
       <VerticalNavSectionTitle
+      v-if="role=='true'"
         :item="{
           heading: 'Gestion de paie',
         }"
       />
 
-      <VerticalNavLink
+      <VerticalNavLink 
+        v-if="role=='true'"
         :item="{
           title: 'Employes',
           icon: 'mdi-account-tie',
@@ -123,6 +129,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Contrats',
           icon: 'mdi-file-document-edit',
@@ -130,6 +137,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Présences',
           icon: 'mdi-note-plus',
@@ -137,6 +145,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Avances',
           icon: 'mdi-notebook',
@@ -144,6 +153,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Primes',
           icon: 'mdi-square-edit-outline',
@@ -151,6 +161,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Congés',
           icon: 'mdi-camera-document',
@@ -158,6 +169,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Bulletin de paie',
           icon: 'mdi-clipboard-file',
@@ -167,26 +179,38 @@ const upgradeBanner = computed(() => {
 
        <!-- 👉 Commptabilité -->
        <VerticalNavSectionTitle
+       v-if="role=='true'"
         :item="{
           heading: 'Commptabilité',
         }"
       />
 
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
-          title: 'Tresorerie',
+          title: 'Etat Financié',
           icon: 'mdi-wallet',
-          to: '/tresorerie',
+          to: '/etat-financie',
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
-          title: 'transactions',
-          icon: 'mdi-square-edit-outline',
-          to: '/Transactions',
+          title: 'Grand livre',
+          icon: 'mdi-book',
+          to: '/grand-livre',
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
+        :item="{
+          title: 'journal',
+          icon: 'mdi-square-edit-outline',
+          to: '/journal',
+        }"
+      />
+      <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Fournisseurs',
           icon: 'mdi-square-edit-outline',
@@ -194,6 +218,7 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+      v-if="role=='true'"
         :item="{
           title: 'Comptes',
           icon: 'mdi-wallet-travel',
@@ -213,7 +238,7 @@ const upgradeBanner = computed(() => {
         :item="{
           title: 'Projets',
           icon: 'mdi-inbox-arrow-down',
-          to: '/projet',
+          to: '/projets',
         }"
       />
       <VerticalNavLink

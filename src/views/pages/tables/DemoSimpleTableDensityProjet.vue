@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  transactionService } from '@/_services';
+import { projetService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
@@ -17,7 +17,7 @@ const closeDialog = () => {
 
 
 let goEdit = (id: number)=>{
-  router.push({name: 'edit-transaction', params:{id:id}})
+  router.push({name: 'edit-projet', params:{id:id}})
 };
 
 
@@ -27,7 +27,7 @@ const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
   const filter =`limit=${limit}&offset=${offset}`
-  transactionService.getAllTransactions(filter)
+  projetService.getProjects(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
         // for (let i = 0; i < data.length; i++) {
@@ -52,7 +52,7 @@ const getAll =()=>{
 
 
 const deleteEl = () => {
-  transactionService.deleteTransation(ids.value)
+  projetService.deleteProejct(ids.value)
       .then((res: { data: { results: any; }; }) => {
         getAll()
     })
@@ -98,35 +98,18 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
     <div class="flex-end">
-      <VBtn to="/create-transaction">Ajouter</VBtn>
+      <VBtn to="/create-projet">Ajouter</VBtn>
     </div>
   <VTable density="compact">
     <thead>
       <tr>
         <th class="text-uppercase">
-          Type de transaction
-        </th>
-        <th class="text-uppercase text-center">
-          Compte
-        </th>
-        <th class="text-uppercase text-center">
-          Categorie
-        </th>
-        <th class="text-uppercase text-center">
-          Date de transaction
+          Nom
         </th>
         <th class="text-uppercase text-center">
           Description
         </th>
-        <th class="text-uppercase text-center">
-          Fournisseur
-        </th>
-        <th class="text-uppercase text-center">
-          Type depense
-        </th>
-        <th class="text-uppercase text-center">
-          Montant
-        </th>
+       
         <th class="text-uppercase text-center">
           Action
         </th>
@@ -139,31 +122,12 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         :key="item.id"
       >
         <td>
-          {{ item.transaction_type }}
-        </td>
-        <td class="text-center">
-          {{ item.account.name }}
-        </td>
-        <td class="text-center">
-          {{ item.transaction_category }}
-        </td>
-        <td class="text-center">
-          {{ item.transaction_date }}
+          {{ item.name }}
         </td>
         <td class="text-center">
           {{ item.description }}
         </td>
-        <td class="text-center">
-          {{ item?.supplier?.name }}
-        </td>
-        <td class="text-center">
-          {{ item.depense_category }}
-        </td>
-        <td class="text-center">
-          {{ item.amount }}
-        </td>
-       
-      
+     
         <td class="text-center">
           <button @click="goEdit(item.id)">
             <VIcon icon="mdi-edit"></VIcon>

@@ -1,12 +1,15 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getProjects= () => {
+let getProjects= (filter?) => {
 
-    return Axios.get('/projects/')
+    return Axios.get('/projects/?'+filter)
 }
 
+let getProjetList= () => {
 
+    return Axios.get('/projet-list/')
+}
 let getProject= (cid:number) => {
     return Axios.get('/projects/'+cid+'/')
 }
@@ -25,6 +28,7 @@ let deleteProejct = (cid:number) => {
 
 export const projetService = {
     getProjects,
+    getProjetList,
     getProject,
     updateProject,
     createProeject,

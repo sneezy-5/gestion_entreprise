@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import {  transactionService } from '@/_services';
+import { accountService, projetService, tacheService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
 const desserts: any[] = reactive([
 
 ])
+const projets = reactive([]);
+
 const showDialog = ref(false);
 const openDialog = (id:number) => {
   ids.value =id
@@ -17,27 +19,51 @@ const closeDialog = () => {
 
 
 let goEdit = (id: number)=>{
-  router.push({name: 'edit-transaction', params:{id:id}})
+  router.push({name: 'edit-tache', params:{id:id}})
 };
 
+let goAsigne = (id: number)=>{
+  router.push({name: 'edit-taches', params:{id:id}})
+};
+const form = reactive({
+  project:null,
+  formErrors: {
+    project:false
+    
+  },
+});
+
+projetService.getProjetList ()
+      .then(res => {
+        const data = res.data.data
+        for (let i = 0; i < data.length; i++) {
+          projets.push( {state:data[i].name,abbr:data[i].id});
+        }   
+        
+        console.log(projets)
+    })
+    .catch((error) => {
+         if (error.status == "401") {
+            console.error(error)
+         }
+  
+     });
 
 let page = ref(1);
 const limit = 5;
 const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
-  const filter =`limit=${limit}&offset=${offset}`
-  transactionService.getAllTransactions(filter)
+  const filter =`limit=${limit}&offset=${offset}&project=${form.project}`
+  tacheService.getAllTaches(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
-        // for (let i = 0; i < data.length; i++) {
-        //   desserts.push(data[i]);
-        // } 
+        form.formErrors.project = false;
         desserts.pop()
         desserts.push(res.data)
         console.log(desserts[0].results, data)
     })
-    .catch((error: { status: string; }) => {
+    .catch((error) => {
          // error.response.status Check status code
             if(error.status ="401"){
                     //console.error(error.response.data.message);
@@ -45,14 +71,23 @@ const getAll =()=>{
                     console.error(error)
          
             }
-     
+            if(error.response.data['message']){
+
+          form.formErrors.project = true;
+
+          }else{
+
+          form.formErrors.project = false;
+
+          } 
+              
      })
 
 }
 
 
 const deleteEl = () => {
-  transactionService.deleteTransation(ids.value)
+  tacheService.deleteTache(ids.value)
       .then((res: { data: { results: any; }; }) => {
         getAll()
     })
@@ -76,7 +111,7 @@ getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
-
+const role = accountService.getDatabase()
 </script>
 
 <template>
@@ -95,37 +130,74 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
       </v-card-actions>
     </v-card>
   </v-dialog>
+  <div style="margin-left: 20px;">
+    <VBtn to="/create-tache">Ajouter</VBtn>
+      
+    </div>
 
+    <div class="flex-end" v-if="role=='true'">
+      <VForm @submit.prevent="getAll" >
+    <VRow>
+ 
 
-    <div class="flex-end">
-      <VBtn to="/create-transaction">Ajouter</VBtn>
+           <!-- 👉 Account -->
+           <VCol
+              cols="12"
+              md="6"
+            >
+            <VSelect
+        v-model="form.project"
+        label="Projets"
+        :items="projets"
+        item-title="state"
+          item-value="abbr"
+          persistent-hint
+          
+          single-line
+        :error="form.formErrors.project"
+        
+        
+      />
+      </VCol>
+      <VCol
+        cols="12"
+        class="d-flex gap-4"
+      >
+        <VBtn type="submit">
+          Fltrer
+        </VBtn>
+
+        <VBtn
+          type="reset"
+          color="secondary"
+          variant="tonal"
+        >
+          Reset
+        </VBtn>
+      </VCol>
+    </VRow>
+  </VForm>
     </div>
   <VTable density="compact">
     <thead>
       <tr>
         <th class="text-uppercase">
-          Type de transaction
+          Titre
         </th>
         <th class="text-uppercase text-center">
-          Compte
+          Début
         </th>
         <th class="text-uppercase text-center">
-          Categorie
+         Fin
         </th>
         <th class="text-uppercase text-center">
-          Date de transaction
+          Projet
         </th>
         <th class="text-uppercase text-center">
-          Description
+          Raport
         </th>
         <th class="text-uppercase text-center">
-          Fournisseur
-        </th>
-        <th class="text-uppercase text-center">
-          Type depense
-        </th>
-        <th class="text-uppercase text-center">
-          Montant
+          Progression
         </th>
         <th class="text-uppercase text-center">
           Action
@@ -139,37 +211,32 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         :key="item.id"
       >
         <td>
-          {{ item.transaction_type }}
+          {{ item.title }}
         </td>
         <td class="text-center">
-          {{ item.account.name }}
+          {{ item.start_date }}
         </td>
         <td class="text-center">
-          {{ item.transaction_category }}
+          {{ item.end_date }}
         </td>
         <td class="text-center">
-          {{ item.transaction_date }}
+          {{ item.poject }}
         </td>
         <td class="text-center">
-          {{ item.description }}
+          {{ item.rapport_task }}
         </td>
         <td class="text-center">
-          {{ item?.supplier?.name }}
+          <VProgressLinear></VProgressLinear>
+          {{ item.progess }}
         </td>
-        <td class="text-center">
-          {{ item.depense_category }}
-        </td>
-        <td class="text-center">
-          {{ item.amount }}
-        </td>
-       
-      
-        <td class="text-center">
-          <button @click="goEdit(item.id)">
+        <td class="text-center" >
+          <button 
+              @click="role ? goEdit(item.id) : goAsigne(item.id)"
+          >
             <VIcon icon="mdi-edit"></VIcon>
          
         </button>
-          <button @click="openDialog(item.id)">
+          <button @click="openDialog(item.id)" v-if="role=='true'">
           <VIcon icon="mdi-trash" style="color: red;"></VIcon>
       </button>
         </td>

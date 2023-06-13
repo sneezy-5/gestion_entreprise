@@ -1,0 +1,244 @@
+<script setup lang="ts">
+import {  compteService, grandlivreService } from '@/_services';
+import router from '@/router';
+
+
+const form = reactive({
+  start_date: new Date().toISOString().substr(0, 10),
+  end_date: new Date().toISOString().substr(0, 10),
+  account:null,
+  formErrors: {
+    start_date: false,
+    end_date: false,
+    account:false
+    
+  },
+});
+
+
+
+
+
+
+
+let ids = ref(0)
+const desserts: any[] = reactive([
+
+])
+
+
+
+let page = ref(1);
+const limit = 5;
+const getAll =()=>{
+  console.log(page)
+  const offset = (page.value - 1) * limit;
+  const filter =`limit=${limit}&offset=${offset}&start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`
+  grandlivreService.getGrandlivreByfiter(filter)
+      .then((res: { data: { results: any; }; }) => {
+        const data = res.data.data
+        form.formErrors.start_date = false;
+          form.formErrors.end_date = false;
+          form.formErrors.account = false;
+        desserts.pop()
+        desserts.push(res.data.data)
+        console.log(desserts, data)
+    })
+    .catch((error) => {
+         // error.response.status Check status code
+            if(error.status =401){
+                    //console.error(error.response.data.message);
+                   
+    if(error.response.data['message']){
+
+form.formErrors.account = true;
+
+}else{
+
+form.formErrors.account = false;
+
+} 
+         
+            }
+     
+     })
+
+}
+
+const comptes = reactive([]);
+
+compteService.getListComptes()
+      .then(res => {
+        const data = res.data.data
+        for (let i = 0; i < data.length; i++) {
+          comptes.push({ abbr: data[i].id, state: data[i].name });
+        }
+        console.log(res.data.data)
+    })
+    .catch((error) => {
+         if (error.status == "401") {
+            console.error(error)
+         }
+     });
+
+
+
+getAll()
+const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
+
+
+
+</script>
+
+<template>
+
+
+
+    <div class="flex-end">
+      <VForm @submit.prevent="getAll" >
+    <VRow>
+ 
+
+      <!-- 👉 start date -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="date"
+          v-model="form.start_date"
+          label="Debut"
+          placeholder="Debut"
+          :error="form.formErrors.start_date"
+        />
+      </VCol>
+
+      <!-- 👉 end date-->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="date"
+          v-model="form.end_date"
+          label="Fin"
+          placeholder="Fin"
+          :error="form.formErrors.end_date"
+        />
+      </VCol>
+
+
+           <!-- 👉 Account -->
+           <VCol
+              cols="12"
+              md="6"
+            >
+            <VSelect
+        v-model="form.account"
+        label="Comptes"
+        :items="comptes"
+        item-title="state"
+          item-value="abbr"
+          persistent-hint
+          
+          single-line
+        :error="form.formErrors.account"
+        
+        
+      />
+      </VCol>
+      <VCol
+        cols="12"
+        class="d-flex gap-4"
+      >
+        <VBtn type="submit">
+          Fltrer
+        </VBtn>
+
+        <VBtn
+          type="reset"
+          color="secondary"
+          variant="tonal"
+        >
+          Reset
+        </VBtn>
+      </VCol>
+    </VRow>
+  </VForm>
+    </div>
+  <VTable density="compact">
+    <thead>
+      <tr>
+
+        <th class="text-uppercase text-center">
+          Date de transaction
+        </th>
+        <th class="text-uppercase text-center">
+          Description
+        </th>
+        <th class="text-uppercase text-center">
+          Debit
+        </th>
+        <th class="text-uppercase text-center">
+          Crédit
+        </th>
+        <th class="text-uppercase text-center">
+          Balance
+        </th>
+        <!-- <th class="text-uppercase text-center">
+          Action
+        </th> -->
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts[0]"
+        :key="item.id"
+      >
+        <td>
+          {{ item.date }}
+        </td>
+        <td class="text-center">
+          {{ item.description }}
+        </td>
+        <td class="text-center">
+          {{ item.debit }}
+        </td>
+        <td class="text-center">
+          {{ item.credit }}
+        </td>
+        <td class="text-center">
+          {{ item.balance }}
+        </td>
+       
+       
+      
+        <!-- <td class="text-center">
+          <button @click="goEdit(item.id)">
+            <VIcon icon="mdi-edit"></VIcon>
+         
+        </button>
+          <button @click="openDialog(item.id)">
+          <VIcon icon="mdi-trash" style="color: red;"></VIcon>
+      </button>
+        </td> -->
+      </tr>
+    </tbody>
+  </VTable>
+
+      <div class="text-xs-center">
+
+    <v-pagination v-model="page" :length="numPages" circle  @click="getAll" />
+  </div>
+</template>
+
+
+<style scoped>
+/* stylelint-disable-next-line block-opening-brace-space-before */
+.flex-end{
+  display: flex;
+  justify-content: end;
+  margin-right: 10px;
+}
+</style>

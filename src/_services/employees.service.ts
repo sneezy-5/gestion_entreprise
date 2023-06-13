@@ -6,7 +6,10 @@ let getAllEmployees = (filter?) => {
 
     return Axios.get('/employees/?'+filter)
 }
+let getList = () => {
 
+    return Axios.get('/employe-list/')
+}
 
 let getlEmploye  = (cid:number) => {
     return Axios.get('/employees/'+cid+'/')
@@ -27,6 +30,7 @@ let deleteEmploye = (cid:number) => {
 
 export const employeesService = {
     getAllEmployees,
+    getList ,
     getlEmploye,
     updateEmploye,
     createEmploye,

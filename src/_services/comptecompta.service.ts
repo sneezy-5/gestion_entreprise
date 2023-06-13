@@ -1,11 +1,14 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
+let getListComptes= () => {
+
+    return Axios.get('/compte-list/')
+}
 let getAllComptes= (filter) => {
 
     return Axios.get('/comptes/?'+filter)
 }
-
 
 let getCompte= (cid:number) => {
     return Axios.get('/comptes/'+cid+'/')
@@ -25,6 +28,7 @@ let deleteCompte = (cid:number) => {
 
 export const compteService = {
     getAllComptes,
+    getListComptes,
     getCompte,
     updateCompte,
     createCompte,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DemoFormLayoutEmployee from '@/views/pages/form-layouts/DemoFormLayoutEmployee.vue'
+import DemoFormLayoutTache from '@/views/pages/form-layouts/DemoFormLayoutTache.vue';
 
 
 </script>
@@ -12,9 +12,9 @@ import DemoFormLayoutEmployee from '@/views/pages/form-layouts/DemoFormLayoutEmp
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Créé un employé">
+        <VCard title="Ajouter Tache">
           <VCardText>
-            <DemoFormLayoutEmployee />
+            <DemoFormLayoutTache />
           </VCardText>
         </VCard>
       </VCol>

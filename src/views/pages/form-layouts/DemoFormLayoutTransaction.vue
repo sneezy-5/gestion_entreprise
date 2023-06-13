@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { compteService, transactionService, fournisseurService } from '@/_services';
+import {  transactionService, compteService, fournisseurService } from '@/_services';
 import { useMainStore } from '@/stores/main';
 
 const toast = ref({
@@ -7,44 +7,40 @@ const toast = ref({
   text: '',
   color: '',
 });
-
 const comptes = reactive([]);
+const fournisseurs = reactive([]);
 
 
-compteService.getAllComptes()
+
+compteService.getListComptes()
       .then(res => {
-        const data = res.data.results
+        const data = res.data.data
         for (let i = 0; i < data.length; i++) {
-          employe.push( {state:data[i].firstName,abbr:data[i].id});
-        }   
-        
-        console.log(employe)
+          comptes.push({ abbr: data[i].id, state: data[i].name });
+        }
+        console.log(res.data.data)
     })
     .catch((error) => {
          if (error.status == "401") {
             console.error(error)
          }
-  
      });
 
-     const fournisseurs = reactive([]);
 
-
-fournisseurService.getAllFournisseurs()
+     fournisseurService.getAllFournisseurs()
       .then(res => {
         const data = res.data.results
         for (let i = 0; i < data.length; i++) {
-          fournisseurs.push( {state:data[i].firstName,abbr:data[i].id});
-        }   
-        
-        console.log(fournisseurs)
+          fournisseurs.push({ abbr: data[i].id, state: data[i].name });
+        }
+        console.log(res.data.results)
     })
     .catch((error) => {
          if (error.status == "401") {
             console.error(error)
          }
-  
      });
+
 
 const form = reactive({
   transaction_type: null,
@@ -52,6 +48,7 @@ const form = reactive({
   transaction_category: null,
   transaction_date:null,
   description:null,
+  depense_category:null,
   supplier:null,
   amount:null,
 
@@ -63,6 +60,7 @@ const form = reactive({
       description: false,
       supplier: false,
       amount: false,
+      depense_category:false
     
   },
 });
@@ -79,8 +77,9 @@ const submit = () => {
           form.formErrors.transaction_category = false;
           form.formErrors.transaction_date = false;
           form.formErrors.description = false;
-          form.formErrors.amount = false;
           form.formErrors.supplier = false;
+          form.formErrors.amount = false;
+          form.formErrors.depense_category = false;
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
@@ -89,7 +88,19 @@ const submit = () => {
     })
     .catch((error) => {
 
+if(error.response.data['amount']){
 
+form.formErrors.amount = true;
+toast.value = {
+show: true,
+text: error.response.data['amount'],
+color: 'red', 
+};
+}else{
+
+form.formErrors.amount = false;
+
+} 
 if(error.response.data['transaction_type']){
 
 form.formErrors.transaction_type = true;
@@ -139,27 +150,27 @@ color: 'red',
 
 form.formErrors.transaction_date = false;
 
-}if(error.response.data['description']){
+}if(error.response.data['account']){
 
-form.formErrors.description = false;
+form.formErrors.account = false;
 
 } else{
 
-form.formErrors.description = false;
+form.formErrors.account = false;
 
-} if(error.response.data['amount']){
+} if(error.response.data['description']){
 
-form.formErrors.amount = true;
+form.formErrors.description = true;
 toast.value = {
 show: true,
-text: error.response.data['amount'],
+text: error.response.data['description'],
 color: 'red', 
 };
 } else{
 
-form.formErrors.amount = false;
+form.formErrors.description = false;
 
-} if(error.response.data['supplier']){
+}  if(error.response.data['supplier']){
 
 form.formErrors.supplier = true;
 toast.value = {
@@ -170,6 +181,18 @@ color: 'red',
 } else{
 
 form.formErrors.supplier = false;
+
+}  if(error.response.data['depense_category']){
+
+form.formErrors.depense_category = true;
+toast.value = {
+show: true,
+text: error.response.data['depense_category'],
+color: 'red', 
+};
+} else{
+
+form.formErrors.depense_category = false;
 
 } 
          console.log(error)
@@ -184,53 +207,8 @@ form.formErrors.supplier = false;
     <VRow>
 
 
-      
-    
-      <!-- 👉 transaction_type -->
-      <VCol
-        cols="12"
-        md="6"
-      >
-      <VSelect
-                  v-model="form.transaction_type"
-                  label="Civilité"
-                  :items="['Achat', 'Transfert','Décaissements','Vente']"
-                  :error="form.formErrors.civility"
-                />
-  
-      </VCol>
-
-      <!-- 👉 amount request-->
-      <VCol
-        cols="12"
-        md="6"
-      >
-        <VTextField
-          type="date"
-          v-model="form.transaction_date"
-          label="Date de la transaction"
-          placeholder="MDate de la transaction"
-          :error="form.formErrors.transaction_date"
-        />
-      </VCol>
-
-      <!-- 👉 amount -->
-      <VCol
-        cols="12"
-        md="6"
-      >
-      <VTextField
-          type="number"
-          v-model="form.amount"
-          label="Montant"
-          placeholder="Montant"
-          :error="form.formErrors.amount"
-        />
-      </VCol>
-
-      <!-- 👉 account -->
-            
-              <VCol
+        <!-- 👉 Account -->
+        <VCol
         cols="12"
         md="6"
       >
@@ -248,25 +226,112 @@ form.formErrors.supplier = false;
   
 />
 
-            <!-- 👉 fournisseur -->
-            <VCol
+      </VCol>
+    
+  <!-- 👉 transaction_type -->
+  <VCol
         cols="12"
         md="6"
       >
       <VSelect
-  v-model="form.supplier"
-  label="Fournisseur"
-  :items="fournisseurs"
-  item-title="state"
-    item-value="abbr"
-    persistent-hint
-    
-    single-line
-  :error="form.formErrors.supplier"
+                  v-model="form.transaction_type"
+                  label="Type de transaction"
+                  :items="['Dépense', 'Revenu','Autre']"
+                  :error="form.formErrors.transaction_type"
+                />
   
-  
-/>
+      </VCol>
 
+<!-- 👉type depense -->
+<VCol
+        cols="12"
+        md="6"
+        v-if="form.transaction_type=='Dépense'" >
+      <VSelect
+                  v-model="form.depense_category"
+                  label="Type de depense"
+                  :items="['Charge Fixe', 'Charge Variable','Charge directe','Charge indirecte']"
+                  :error="form.formErrors.transaction_category"
+                />
+  
+      </VCol>
+
+ <!-- 👉 categorie de depense -->
+ <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="text"
+          v-model="form.transaction_category"
+          label="Catégorie depense"
+          placeholder="Caégorie de depense"
+          :error="form.formErrors.depense_category"
+        />
+      </VCol>
+        <!-- 👉 fournisseur -->
+        <VCol
+        cols="12"
+        md="6"
+        v-if="form.transaction_type=='Dépense'">
+      <VSelect
+        v-model="form.supplier"
+        label="Fournisseurs"
+        :items="fournisseurs"
+        item-title="state"
+          item-value="abbr"
+          persistent-hint
+          
+          single-line
+        :error="form.formErrors.supplier"
+        
+        
+      />
+
+      </VCol>
+      <!-- 👉 amount -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+        <VTextField
+          type="number"
+          v-model="form.amount"
+          label="Montant "
+          placeholder="Montant "
+          :error="form.formErrors.account"
+        />
+      </VCol>
+
+      <!-- 👉 description -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="text"
+          v-model="form.description"
+          label="Description"
+          placeholder="Description"
+          :error="form.formErrors.description"
+        />
+      </VCol>
+
+      <!-- 👉 date-->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="date"
+          v-model="form.transaction_date"
+          label="Date"
+          placeholder="ate"
+          :error="form.formErrors.transaction_date"
+        />
+      </VCol>
+
+    
      
         
  <!--shoxw toats message-->

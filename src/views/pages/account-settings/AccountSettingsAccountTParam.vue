@@ -230,6 +230,7 @@ form.formErrors.contact = false;
                 <VTextField
                   v-model="form.prime_transport"
                   label="Prime de transport"
+                  :error="form.formErrors.prime_transport"
                 />
               </VCol>
 
@@ -239,6 +240,7 @@ form.formErrors.contact = false;
             md="6"
           >
           <VSelect
+                      type="number"
                       v-model="form.method_pay"
                       label="Methode depayement des salaires"
                       :items="['Espèce', 'Virement']"

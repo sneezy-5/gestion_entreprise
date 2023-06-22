@@ -1,0 +1,1 @@
+import{A as a}from"./caller.service-afc094da.js";let t=e=>a.get("/paydays/?"+e),r=e=>a.get("/paydays/"+e),n=e=>a.put("/paydays/"+e.id+"/",e),s=e=>a.post("/paydays/",e),c=e=>a.delete("/paydays/"+e);const l={getAllAvance:t,getAvance:r,updateAvance:n,createAvance:s,deleteAvance:c};export{l as a};

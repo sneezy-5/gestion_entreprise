@@ -1,0 +1,1 @@
+import{A as r}from"./caller.service-afc094da.js";let t=e=>r.get("/primes/?"+e),i=e=>r.get("/primes/"+e+"/"),m=e=>r.put("/primes/"+e.id+"/",e),s=e=>r.post("/primes/",e),p=e=>r.delete("/primes/"+e);const u={getPrimes:t,getPrime:i,updatePrime:m,createPrime:s,deletePrime:p};export{u as p};

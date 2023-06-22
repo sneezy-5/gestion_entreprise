@@ -1,0 +1,1 @@
+import{A as t}from"./caller.service-afc094da.js";let o=()=>t.get("/compte-list/"),p=e=>t.get("/comptes/?"+e),m=e=>t.get("/comptes/"+e+"/"),r=e=>t.put("/comptes/"+e.id+"/",e),s=e=>t.post("/comptes/",e),c=e=>t.delete("/comptes/"+e+"/");const u={getAllComptes:p,getListComptes:o,getCompte:m,updateCompte:r,createCompte:s,deleteCompte:c};export{u as c};

@@ -1,0 +1,1 @@
+import{A as r}from"./caller.service-afc094da.js";let s=e=>r.get("/fournisseurs/?"+e),u=e=>r.get("/fournisseurs/"+e+"/"),t=e=>r.put("/fournisseurs/"+e.id+"/",e),n=e=>r.post("/fournisseurs/",e),i=e=>r.delete("/fournisseurs/"+e+"/");const l={getAllFournisseurs:s,getFournisseur:u,updateFournisseur:t,createFournisseur:n,deleteFOurnisseur:i};export{l as f};

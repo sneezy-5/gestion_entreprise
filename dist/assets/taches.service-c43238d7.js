@@ -1,0 +1,1 @@
+import{A as t}from"./caller.service-afc094da.js";let a=e=>t.get("/taks/?"+e),r=e=>t.get("/taks/"+e),s=e=>t.put("/taks/"+e.id+"/",e),c=e=>t.post("/taks/",e),l=e=>t.delete("/taks/"+e);const h={getAllTaches:a,getTache:r,updateTache:s,createtache:c,deleteTache:l};export{h as t};

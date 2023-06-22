@@ -1,0 +1,1 @@
+import{A as n}from"./caller.service-afc094da.js";let a=t=>n.get("/transactions/?"+t),e=t=>n.get("/transactions/"+t+"/"),r=t=>n.put("/transactions/"+t.id+"/",t),s=t=>n.post("/transactions/",t),o=t=>n.delete("/transactions/"+t+"/");const c={getAllTransactions:a,getTransaction:e,updateTransaction:r,createTransation:s,deleteTransation:o};export{c as t};

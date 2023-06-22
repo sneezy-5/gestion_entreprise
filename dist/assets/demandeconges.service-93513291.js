@@ -1,0 +1,1 @@
+import{A as n}from"./caller.service-afc094da.js";let d=e=>n.get("/demandeconges/?"+e),o=e=>n.get("/demandeconges/"+e),a=(e,t)=>n.patch("/demandeconges/"+t+"/",e),g=e=>n.post("/demandeconges/",e),r=e=>n.delete("/demandeconges/"+e);const s={getAllDeamndeConges:d,deleteDemandeConge:r,getDemandeConge:o,updateDemandeConge:a,createDemandeConge:g};export{s as d};

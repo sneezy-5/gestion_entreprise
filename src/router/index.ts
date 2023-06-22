@@ -18,6 +18,7 @@ const router = createRouter({
         },
         {
           path: 'account-settings',
+          name: 'account-settings',
           component: () => import('../pages/account-settings.vue'),
         },
         {
@@ -135,6 +136,14 @@ const router = createRouter({
           path: "/edit-conge/:id(\\d+)",
           name: "edit-conge",
           component: () => import("../pages/conges/congeEdit.vue"),
+        },
+        {
+          path: 'demande-conge',
+          component: () => import('../pages/demandeconge/demandeconges.vue'),
+        },
+        {
+          path: 'create-demande-conge',
+          component: () => import('../pages/demandeconge/createDemandeConge.vue'),
         },
         {
           path: 'payslips',
@@ -269,6 +278,14 @@ const router = createRouter({
           path: "/edit-user/:id(\\d+)",
           name: "edit-user",
           component: () => import("../pages/users/userEdit.vue"),
+        },
+        {
+          meta: {
+            title: "Edit user tache",
+          },
+          path: "/edit-taches/:id(\\d+)",
+          name: "edit-taches",
+          component: () => import("../pages/taches/tacheEditUser.vue"),
         },
       ],
     },

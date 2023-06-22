@@ -80,6 +80,14 @@ const submit = () => {
           form.formErrors.supplier = false;
           form.formErrors.amount = false;
           form.formErrors.depense_category = false;
+
+          //vider la form
+          form.account = null
+          form.amount = null,
+          form.depense_category = null,
+          form.description = null,
+          form.transaction_category = null,
+          form.transaction_date = null
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
@@ -228,7 +236,9 @@ form.formErrors.depense_category = false;
 
       </VCol>
     
-  <!-- 👉 transaction_type -->
+
+       <!-- 👉 transaction_type -->
+ 
   <VCol
         cols="12"
         md="6"
@@ -236,7 +246,21 @@ form.formErrors.depense_category = false;
       <VSelect
                   v-model="form.transaction_type"
                   label="Type de transaction"
-                  :items="['Dépense', 'Revenu','Autre']"
+                  :items="['Achat', 'Vente','Transfert','Virement']"
+                  :error="form.formErrors.transaction_type"
+                />
+  
+      </VCol>
+     <!-- 👉 categorie trasaction -->
+
+  <VCol
+        cols="12"
+        md="6"
+      >
+      <VSelect
+                  v-model="form.transaction_category"
+                  label="Catégorie de transaction"
+                  :items="['Dépense', 'Révenu']"
                   :error="form.formErrors.transaction_type"
                 />
   
@@ -246,34 +270,21 @@ form.formErrors.depense_category = false;
 <VCol
         cols="12"
         md="6"
-        v-if="form.transaction_type=='Dépense'" >
+        v-if="form.transaction_category=='Dépense'" >
       <VSelect
                   v-model="form.depense_category"
                   label="Type de depense"
                   :items="['Charge Fixe', 'Charge Variable','Charge directe','Charge indirecte']"
-                  :error="form.formErrors.transaction_category"
+                  :error="form.formErrors.depense_category"
                 />
   
       </VCol>
 
- <!-- 👉 categorie de depense -->
- <VCol
-        cols="12"
-        md="6"
-      >
-      <VTextField
-          type="text"
-          v-model="form.transaction_category"
-          label="Catégorie depense"
-          placeholder="Caégorie de depense"
-          :error="form.formErrors.depense_category"
-        />
-      </VCol>
         <!-- 👉 fournisseur -->
         <VCol
         cols="12"
         md="6"
-        v-if="form.transaction_type=='Dépense'">
+        v-if="form.transaction_category=='Dépense'">
       <VSelect
         v-model="form.supplier"
         label="Fournisseurs"

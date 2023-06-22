@@ -78,7 +78,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -90,7 +90,7 @@ form.formErrors.title = true;
 toast.value = {
 show: true,
 text: error.response.data['title'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -102,20 +102,20 @@ form.formErrors.start_date = true;
 toast.value = {
 show: true,
 text: error.response.data['start_date'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
 
 form.formErrors.start_date = false;
 }
- if(error.response.data['tekanDay']){
+ if(error.response.data['end_date']){
 
 form.formErrors.end_date = true;
 toast.value = {
 show: true,
 text: error.response.data['end_date'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -127,7 +127,7 @@ form.formErrors.user = true;
 toast.value = {
 show: true,
 text: error.response.data['user'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -239,7 +239,6 @@ form.formErrors.user = false;
           type="date"
           v-model="form.end_date"
           label="Fin"
-          placeholder="Fin"
           :error="form.formErrors.end_date"
         />
       </VCol>

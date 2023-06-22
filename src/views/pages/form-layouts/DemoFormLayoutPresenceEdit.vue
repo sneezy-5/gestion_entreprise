@@ -71,7 +71,7 @@ presenceService.getPresence(routeParam)
     form.periodStart = res.data.periodStart;
     form.periodEnd = res.data.periodEnd;
     form.absentdays = res.data.absentdays;
-    form.presentdays = res.data.extrapay;
+    form.presentdays = res.data.presentdays;
     form.delays = res.data.delays;
     form.normalHours = res.data.normalHours;
     form.normalHoursComplementary = res.data.normalHoursComplementary;
@@ -109,7 +109,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Modifié avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -121,7 +121,7 @@ form.formErrors.periodStart = true;
 toast.value = {
 show: true,
 text: error.response.data['periodStart'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -133,7 +133,7 @@ form.formErrors.periodEnd = true;
 toast.value = {
 show: true,
 text: error.response.data['periodEnd'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -146,7 +146,7 @@ form.formErrors.absentdays = true;
 toast.value = {
 show: true,
 text: error.response.data['absentdays'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -158,7 +158,7 @@ form.formErrors.presentdays = true;
 toast.value = {
 show: true,
 text: error.response.data['presentdays'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -178,7 +178,7 @@ form.formErrors.normalHours = true;
 toast.value = {
 show: true,
 text: error.response.data['normalHours'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -190,7 +190,7 @@ form.formErrors.normalHoursComplementary = true;
 toast.value = {
 show: true,
 text: error.response.data['normalHoursComplementary'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -202,7 +202,7 @@ form.formErrors.Overtime_15 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_15'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -214,7 +214,7 @@ form.formErrors.Overtime_50 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_50'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -226,7 +226,7 @@ form.formErrors.Overtime_15 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_75'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -238,7 +238,7 @@ form.formErrors.Overtime_100 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_100'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -250,7 +250,7 @@ form.formErrors.employee = true;
 toast.value = {
 show: true,
 text: error.response.data['employee'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 

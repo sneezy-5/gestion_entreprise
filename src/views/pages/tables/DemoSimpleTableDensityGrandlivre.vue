@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  compteService, grandlivreService } from '@/_services';
+import {  accountService, compteService, grandlivreService } from '@/_services';
 import router from '@/router';
 
 
@@ -33,15 +33,15 @@ const limit = 5;
 const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
-  const filter =`limit=${limit}&offset=${offset}&start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`
+  const filter =`limit=${limit}&page=${page.value}&start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`
   grandlivreService.getGrandlivreByfiter(filter)
       .then((res: { data: { results: any; }; }) => {
-        const data = res.data.data
+        const data = res.data.results
         form.formErrors.start_date = false;
           form.formErrors.end_date = false;
           form.formErrors.account = false;
         desserts.pop()
-        desserts.push(res.data.data)
+        desserts.push(res.data)
         console.log(desserts, data)
     })
     .catch((error) => {
@@ -86,15 +86,51 @@ compteService.getListComptes()
 getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
+const downloadExcel = () => {
+
+
+  const url = `http://127.0.0.1:8000/api/v0/grand-livre/download-excel/?start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`;
+
+  fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer'+accountService.getToken(), 
+      'database': accountService.getDatabase(),
+    },
+  })
+  .then(response => response.blob())
+  .then(blob => {
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'grand_livre.xlsx';
+    link.click();
+    URL.revokeObjectURL(downloadUrl);
+  })
+  .catch(error => {
+    console.error('Erreur lors du téléchargement du fichier :', error);
+  });
+};
+
 
 
 </script>
 
 <template>
 
+<div class="flex-start">
+     
+     <VBtn @click="downloadExcel" color="success">
+       <VIcon icon="mdi-cloud-download"></VIcon>
+       <VIcon icon="mdi-microsoft-excel"></VIcon>
+       </VBtn>
+</div>
+
 
 
     <div class="flex-end">
+     
+      
       <VForm @submit.prevent="getAll" >
     <VRow>
  
@@ -183,7 +219,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
           Crédit
         </th>
         <th class="text-uppercase text-center">
-          Balance
+          Montant
         </th>
         <!-- <th class="text-uppercase text-center">
           Action
@@ -193,7 +229,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
     <tbody>
       <tr
-        v-for="item in desserts[0]"
+        v-for="item in desserts[0]?.results"
         :key="item.id"
       >
         <td>
@@ -240,5 +276,11 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
   display: flex;
   justify-content: end;
   margin-right: 10px;
+}
+
+.flex-start{
+  display: flex;
+  justify-content: start;
+  margin-left: 30px;
 }
 </style>

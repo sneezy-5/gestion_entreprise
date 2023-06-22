@@ -74,10 +74,11 @@ tacheService.getTache(routeParam)
     form.id =res.data.id  
     form.title = res.data.title;
     form.description = res.data.description;
-    form.end_date = res.data.start_date;
-    form.start_date = res.data.end_date;
-    form.project = res.data.projet.id;
-    form.user = res.data.user.name;
+    form.end_date = res.data.end_date;
+    form.start_date = res.data.start_date;
+    form.project = res.data.project.id;
+    form.user = res.data.user;
+    console.log(res)
     })
     .catch((error) => {
          if (error.status == 401) {
@@ -90,7 +91,7 @@ const submit = () => {
   //
   console.log(form)
 
-  tacheService.createtache(form)
+  tacheService.updateTache(form)
       .then((res: any) => {
         form.formErrors.title = false;
           form.formErrors.description = false;
@@ -100,8 +101,8 @@ const submit = () => {
           form.formErrors.project = false;
         toast.value = {
         show: true,
-        text: 'Enregistré avec succès',
-        color: 'green',
+        text: 'modifié avec succès',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -113,7 +114,7 @@ form.formErrors.title = true;
 toast.value = {
 show: true,
 text: error.response.data['title'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -125,7 +126,7 @@ form.formErrors.start_date = true;
 toast.value = {
 show: true,
 text: error.response.data['start_date'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -138,7 +139,7 @@ form.formErrors.end_date = true;
 toast.value = {
 show: true,
 text: error.response.data['end_date'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -150,7 +151,7 @@ form.formErrors.user = true;
 toast.value = {
 show: true,
 text: error.response.data['user'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -248,7 +249,6 @@ form.formErrors.user = false;
           type="date"
           v-model="form.start_date"
           label="Debut"
-          placeholder="Debut"
           :error="form.formErrors.start_date"
         />
       </VCol>
@@ -262,7 +262,6 @@ form.formErrors.user = false;
           type="date"
           v-model="form.end_date"
           label="Fin"
-          placeholder="Fin"
           :error="form.formErrors.end_date"
         />
       </VCol>

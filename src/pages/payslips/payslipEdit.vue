@@ -12,7 +12,7 @@ import DemoFormLayoutPayslipEdit from '@/views/pages/form-layouts/DemoFormLayout
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Editer congé">
+        <VCard title="Editer Bullétin">
           <VCardText>
             <DemoFormLayoutPayslipEdit />
           </VCardText>

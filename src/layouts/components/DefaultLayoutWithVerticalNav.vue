@@ -20,7 +20,11 @@ const vuetifyTheme = useTheme()
 const upgradeBanner = computed(() => {
   return vuetifyTheme.global.name.value === 'light' ? upgradeBannerLight : upgradeBannerDark
 })
-const role = accountService.getDatabase()
+const role = accountService.getRole()
+const groups = accountService.getGroups()
+const groupsArray = [groups];
+const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
+console.log(formattedArray,formattedArray.includes('admin'))
 </script>
 
 <template>
@@ -75,6 +79,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
+      v-if="role === 'true' || formattedArray.includes('admin')"
         :item="{
           title: 'Profil',
           icon: 'mdi-account-cog-outline',
@@ -84,11 +89,28 @@ const role = accountService.getDatabase()
 
       <!-- 👉 Pages -->
       <VerticalNavSectionTitle
-       v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin')"
         :item="{
           heading: 'Utilisateurs',
         }"
       />
+      <VerticalNavLink
+      v-if="role === 'true' || formattedArray.includes('admin')"
+        :item="{
+          title: 'démande de congé',
+          icon: 'mdi-gamepad-round-down',
+          to: '/demande-conge',
+        }"
+      />
+      <VerticalNavLink
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+        :item="{
+          title: 'Modèle de contrat',
+          icon: 'mdi-file-document-edit',
+          to: '/contrat-model',
+        }"
+      />
+
       <!-- <VerticalNavLink
         :item="{
           title: 'Login',
@@ -97,7 +119,7 @@ const role = accountService.getDatabase()
         }"
       /> -->
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Utilisateurs',
           icon: 'mdi-account-group',
@@ -114,14 +136,14 @@ const role = accountService.getDatabase()
 
       <!-- 👉 User Interface -->
       <VerticalNavSectionTitle
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           heading: 'Gestion de paie',
         }"
       />
 
       <VerticalNavLink 
-        v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Employes',
           icon: 'mdi-account-tie',
@@ -129,7 +151,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Contrats',
           icon: 'mdi-file-document-edit',
@@ -137,7 +159,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Présences',
           icon: 'mdi-note-plus',
@@ -145,7 +167,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Avances',
           icon: 'mdi-notebook',
@@ -153,7 +175,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Primes',
           icon: 'mdi-square-edit-outline',
@@ -161,7 +183,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Congés',
           icon: 'mdi-camera-document',
@@ -169,7 +191,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Bulletin de paie',
           icon: 'mdi-clipboard-file',
@@ -179,22 +201,30 @@ const role = accountService.getDatabase()
 
        <!-- 👉 Commptabilité -->
        <VerticalNavSectionTitle
-       v-if="role=='true'"
+       v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
           heading: 'Commptabilité',
         }"
       />
 
-      <VerticalNavLink
-      v-if="role=='true'"
+      <!-- <VerticalNavLink
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
-          title: 'Etat Financié',
+          title: 'Les Etats Financiés',
           icon: 'mdi-wallet',
           to: '/etat-financie',
         }"
+      /> -->
+      <VerticalNavLink
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
+        :item="{
+          title: 'Balance',
+          icon: 'mdi-book',
+          to: '/balances',
+        }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
           title: 'Grand livre',
           icon: 'mdi-book',
@@ -202,7 +232,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
           title: 'journal',
           icon: 'mdi-square-edit-outline',
@@ -210,7 +240,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
           title: 'Fournisseurs',
           icon: 'mdi-square-edit-outline',
@@ -218,7 +248,7 @@ const role = accountService.getDatabase()
         }"
       />
       <VerticalNavLink
-      v-if="role=='true'"
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
           title: 'Comptes',
           icon: 'mdi-wallet-travel',
@@ -229,12 +259,14 @@ const role = accountService.getDatabase()
 
        <!-- 👉 Projet -->
        <VerticalNavSectionTitle
+       v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') || formattedArray.includes('editeur')"
         :item="{
           heading: 'Projets',
         }"
       />
 
       <VerticalNavLink
+      v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') || formattedArray.includes('editeur')"
         :item="{
           title: 'Projets',
           icon: 'mdi-inbox-arrow-down',

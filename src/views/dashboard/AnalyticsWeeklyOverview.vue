@@ -78,13 +78,13 @@ const options = controlledComputed(() => vuetifyTheme.name.value, () => {
   }
 })
 
-const series = [{ data: [37, 57, 45, 75, 57, 40, 65] }]
+const series = [{ data: [157, 57, 45, 75, 57, 40, 65] }]
 </script>
 
 <template>
   <VCard>
     <VCardItem>
-      <VCardTitle>Weekly Overview</VCardTitle>
+      <VCardTitle>Semaine</VCardTitle>
 
       <template #append>
         <div class="me-n3">
@@ -106,13 +106,13 @@ const series = [{ data: [37, 57, 45, 75, 57, 40, 65] }]
           45%
         </h5>
         <p>
-          Your sales performance is 45% 😎 better compared to last month
+          l'évolution de votre chiffre d'affaire de ce mois
         </p>
       </div>
 
-      <VBtn block>
+      <!-- <VBtn block>
         Details
-      </VBtn>
+      </VBtn> -->
     </VCardText>
   </VCard>
 </template>

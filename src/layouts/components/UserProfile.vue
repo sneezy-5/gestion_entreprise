@@ -11,14 +11,19 @@ const logout =()=>{
 
 
 
-const role = accountService.getDatabase()
-const admin = role=='true'?'Admin':''
+const role = accountService.getRole()
+const superadmin = role=='true'?'SuperAdmin':''
+const groups = accountService.getGroups()
+const groupsArray = [groups];
+const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
+const admin =formattedArray.includes('admin')== true? 'Admin': ''
 const form=reactive({
   userName:'',
   userEmail:'',
   userAvatar:'',
   lastLogin:'',
-  is_admin: admin
+  is_admin: admin,
+  is_superadmin:superadmin==''?admin:superadmin
 })
 userService.getProfile()
   .then(res => {
@@ -87,25 +92,26 @@ userService.getProfile()
             <VListItemTitle class="font-weight-semibold">
               {{form.userName}}
             </VListItemTitle>
-            <VListItemSubtitle>{{form.is_admin}}</VListItemSubtitle>
+            <VListItemSubtitle>{{form.is_superadmin}}</VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 
           <!-- 👉 Profile -->
-          <VListItem link>
+          <VListItem link >
             <template #prepend>
               <VIcon
                 class="me-2"
                 icon="mdi-account-outline"
                 size="22"
+                
               />
             </template>
 
-            <VListItemTitle>Profile</VListItemTitle>
+            <VListItemTitle>Profil</VListItemTitle>
           </VListItem>
 
           <!-- 👉 Settings -->
-          <VListItem link>
+          <VListItem link to="/account-settings">
             <template #prepend>
               <VIcon
                 class="me-2"
@@ -114,34 +120,9 @@ userService.getProfile()
               />
             </template>
 
-            <VListItemTitle>Settings</VListItemTitle>
+            <VListItemTitle>Paramètre</VListItemTitle>
           </VListItem>
 
-          <!-- 👉 Pricing -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-currency-usd"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Pricing</VListItemTitle>
-          </VListItem>
-
-          <!-- 👉 FAQ -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-help-circle-outline"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>FAQ</VListItemTitle>
-          </VListItem>
 
           <!-- Divider -->
           <VDivider class="my-2" />
@@ -157,7 +138,7 @@ userService.getProfile()
               />
             </template>
 
-            <VListItemTitle>Logout</VListItemTitle>
+            <VListItemTitle>Deconexion</VListItemTitle>
           </VListItem>
         </VList>
       </VMenu>

@@ -19,6 +19,9 @@ let getProfile = () => {
     return Axios.get('/account/profile/')
 }
 
+let getParameter = () => {
+    return Axios.get('/parameter/')
+}
 let updateUserProfile = (user) => {
     return Axios.put('/profile/'+user.id+'/', user,{ headers })
 }
@@ -26,7 +29,9 @@ let updateUserProfile = (user) => {
 let updateUser = (user) => {
     return Axios.put('/user/'+user.id+'/', user)
 }
-
+let updateParameter = (user) => {
+    return Axios.put('/parameter/'+user.id+'/', user,{headers})
+}
 
 let changePasswordUser = (user,id) => {
     return Axios.put('/change-password/'+id, user)
@@ -49,6 +54,8 @@ export const userService = {
     getList ,
     getUser,
     getProfile,
+    getParameter,
+    updateParameter,
     changePasswordUser,
     changeProfilePasswordUser,
     updateUserProfile ,

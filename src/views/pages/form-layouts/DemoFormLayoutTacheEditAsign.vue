@@ -15,7 +15,7 @@ const routeParam = router.currentRoute.value.params.id;
 
 
 
-
+const slider = ref(0)
 const form = reactive({
     title: "",
     description:"",
@@ -24,7 +24,7 @@ const form = reactive({
     user: null,
     project: null,
     rapport_task:null,
-
+    status:null,
     formErrors: {
       title: false,
       description: false,
@@ -32,7 +32,8 @@ const form = reactive({
       end_date: false,
       user:false,
       project:false,
-      rapport_task:false
+      rapport_task:false,
+      status:null
     
   },
 });
@@ -60,7 +61,7 @@ const submit = () => {
   //
   console.log(form)
 
-  tacheService.createtache(form)
+  tacheService.updateTache(form)
       .then((res: any) => {
         form.formErrors.title = false;
           form.formErrors.description = false;
@@ -72,7 +73,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -84,7 +85,7 @@ form.formErrors.title = true;
 toast.value = {
 show: true,
 text: error.response.data['title'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -96,7 +97,7 @@ form.formErrors.start_date = true;
 toast.value = {
 show: true,
 text: error.response.data['start_date'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -109,7 +110,7 @@ form.formErrors.end_date = true;
 toast.value = {
 show: true,
 text: error.response.data['end_date'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -121,7 +122,7 @@ form.formErrors.user = true;
 toast.value = {
 show: true,
 text: error.response.data['user'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -133,7 +134,7 @@ form.formErrors.rapport_task = true;
 toast.value = {
 show: true,
 text: error.response.data['rapport_task'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -156,13 +157,14 @@ form.formErrors.rapport_task = false;
       <!-- 👉 description -->
       <VCol
         cols="12"
-        md="6"
+      
       >
-        <VTextField
-          type="text"
+        <VTextarea
+        prepend-inner-icon="mdi-email-outline"
+          type="textarea"
           v-model="form.rapport_task"
-          label="Description"
-          placeholder="Description"
+          label="Rapport"
+          placeholder="Rapprt"
           :error="form.formErrors.rapport_task"
         />
       </VCol>
@@ -172,15 +174,16 @@ form.formErrors.rapport_task = false;
          <!-- 👉 fin -->
          <VCol
         cols="12"
-        md="6"
+  
       >
-      <VTextField
-          type="date"
-          v-model="form.end_date"
-          label="Fin"
-          placeholder="Fin"
-          :error="form.formErrors.end_date"
-        />
+      <v-flex xs12>
+
+        <v-subheader   class="pl-0">Progrèssion</v-subheader>
+        <v-slider
+          v-model="slider"
+          thumb-label="always"
+        ></v-slider>
+      </v-flex>
       </VCol>
  <!--shoxw toats message-->
  <VSnackbar 

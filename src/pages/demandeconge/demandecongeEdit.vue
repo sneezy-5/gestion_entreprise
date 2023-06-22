@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DemoFormLayoutContract from '@/views/pages/form-layouts/DemoFormLayoutContract.vue';
+import DemoFormLayoutCongeEdit from '@/views/pages/form-layouts/DemoFormLayoutCongeEdit.vue';
 
 
 </script>
@@ -12,9 +12,9 @@ import DemoFormLayoutContract from '@/views/pages/form-layouts/DemoFormLayoutCon
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Ajouter contrat">
+        <VCard title="Editer congé">
           <VCardText>
-            <DemoFormLayoutContract />
+            <DemoFormLayoutCongeEdit />
           </VCardText>
         </VCard>
       </VCol>

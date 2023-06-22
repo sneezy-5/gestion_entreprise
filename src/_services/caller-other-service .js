@@ -6,7 +6,7 @@ import router from '@/router'
 
 
 const Axiosss = axios.create({
-    baseURL:  'http://127.0.0.1:8000/'
+    baseURL:  'http://127.0.0.1:8000/api/v1/'
 })
 
 
@@ -15,7 +15,7 @@ Axiosss.interceptors.request.use(request => {
     // Si connecté on ajoute le token dans l'entête
     if(accountService.isLogged()){
         request.headers.Authorization = 'Bearer '+ accountService.getToken()
-       // request.headers['database'] = accountService.getDatabase();
+        request.headers['database'] = accountService.getDatabase();
     }
 
     /**

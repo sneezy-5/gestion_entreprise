@@ -111,11 +111,11 @@ const submit = () => {
           form.formErrors.NbrOfParts = false;
           form.formErrors.hiringDate = false;
           form.formErrors.CMUnumber = false;
-       // useMainStore().fetchAllEmployees()
+
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -127,7 +127,7 @@ form.formErrors.firstName = true;
 toast.value = {
 show: true,
 text: error.response.data['firstName'],
-color: 'red', 
+color: 'danger', 
 };
 } if(error.response.data['lastName']){
 
@@ -135,7 +135,7 @@ form.formErrors.lastName = true;
 toast.value = {
 show: true,
 text: error.response.data['lastName'],
-color: 'red', 
+color: 'danger', 
 };
 }  if(error.response.data['email']){
 
@@ -143,7 +143,7 @@ form.formErrors.email = true;
 toast.value = {
 show: true,
 text: error.response.data['email'],
-color: 'red', 
+color: 'danger', 
 };
 } if(error.response.data['street']){
 
@@ -151,7 +151,7 @@ form.formErrors.street = true;
 toast.value = {
 show: true,
 text: error.response.data['street'],
-color: 'red', 
+color: 'danger', 
 };
 } if(error.response.data['matricule']){
 
@@ -159,7 +159,7 @@ form.formErrors.matricule = true;
 toast.value = {
 show: true,
 text: error.response.data['matricule'],
-color: 'red', 
+color: 'danger', 
 };
 } if(error.response.data['maritalStatus']){
 
@@ -167,7 +167,7 @@ form.formErrors.maritalStatus = true;
 toast.value = {
 show: true,
 text: error.response.data['maritalStatus'],
-color: 'red', 
+color: 'danger', 
 };
 } if(error.response.data['phonenumbers']){
 
@@ -175,7 +175,7 @@ form.formErrors.phonenumbers = true;
 toast.value = {
 show: true,
 text: error.response.data['phonenumbers'],
-color: 'red', 
+color: 'danger', 
 };
 }  if(error.response.data['CNPSnumber']){
 
@@ -183,7 +183,7 @@ form.formErrors.CNPSnumber = true;
 toast.value = {
 show: true,
 text: error.response.data['CNPSnumber'],
-color: 'red', 
+color: 'danger', 
 };
 }  if(error.response.data['currentPosition']){
 
@@ -191,7 +191,7 @@ form.formErrors.currentPosition = true;
 toast.value = {
 show: true,
 text: error.response.data['currentPosition'],
-color: 'red', 
+color: 'danger', 
 };
 } if(error.response.data['numberOfDependents']){
 
@@ -199,7 +199,7 @@ form.formErrors.numberOfDependents = true;
 toast.value = {
 show: true,
 text: error.response.data['numberOfDependents'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['birthdate']){
 
@@ -207,7 +207,7 @@ form.formErrors.birthdate = true;
 toast.value = {
 show: true,
 text: error.response.data['birthdate'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['birthplace']){
 
@@ -215,7 +215,7 @@ form.formErrors.birthplace = true;
 toast.value = {
 show: true,
 text: error.response.data['birthplace'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['city']){
 
@@ -223,7 +223,7 @@ form.formErrors.city = true;
 toast.value = {
 show: true,
 text: error.response.data['city'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['country']){
 
@@ -231,7 +231,7 @@ form.formErrors.country = true;
 toast.value = {
 show: true,
 text: error.response.data['country'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['exitDate']){
 
@@ -239,7 +239,7 @@ form.formErrors.exitDate = true;
 toast.value = {
 show: true,
 text: error.response.data['exitDate'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['civility']){
 
@@ -247,7 +247,7 @@ form.formErrors.civility = true;
 toast.value = {
 show: true,
 text: error.response.data['civility'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['seniority']){
 
@@ -255,7 +255,7 @@ form.formErrors.seniority = true;
 toast.value = {
 show: true,
 text: error.response.data['seniority'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['neighborhood']){
 
@@ -263,7 +263,7 @@ form.formErrors.neighborhood = true;
 toast.value = {
 show: true,
 text: error.response.data['neighborhood'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['NbrOfParts']){
 
@@ -271,7 +271,7 @@ form.formErrors.NbrOfParts = true;
 toast.value = {
 show: true,
 text: error.response.data['NbrOfParts'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['pictureURL']){
 
@@ -279,7 +279,7 @@ form.formErrors.pictureURL = true;
 toast.value = {
 show: true,
 text: error.response.data['pictureURL'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['CMUnumber']){
 
@@ -287,7 +287,7 @@ form.formErrors.CMUnumber = true;
 toast.value = {
 show: true,
 text: error.response.data['CMUnumber'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['hiringDate']){
 
@@ -295,7 +295,7 @@ form.formErrors.hiringDate = true;
 toast.value = {
 show: true,
 text: error.response.data['hiringDate'],
-color: 'red', 
+color: 'danger', 
 };
 }if(error.response.data['nationality']){
 
@@ -303,7 +303,7 @@ form.formErrors.nationality = true;
 toast.value = {
 show: true,
 text: error.response.data['nationality'],
-color: 'red', 
+color: 'danger', 
 };
 }
          console.log(error)
@@ -323,8 +323,8 @@ color: 'red',
       >
         <VTextField
           v-model="form.firstName"
-          label="First Name"
-          placeholder="First Name"
+          label="Nom"
+          placeholder="Nom"
           :error="form.formErrors.firstName"
         />
       </VCol>
@@ -336,8 +336,8 @@ color: 'red',
       >
         <VTextField
           v-model="form.lastName"
-          label="Last Name"
-          placeholder="Last Name"
+          label="Prénom"
+          placeholder="Prénom"
           :error="form.formErrors.lastName"
         />
       </VCol>
@@ -362,8 +362,8 @@ color: 'red',
       >
         <VTextField
           v-model="form.city"
-          label="City"
-          placeholder="City"
+          label="Ville"
+          placeholder="Ville"
           :error="form.formErrors.city"
         />
       </VCol>
@@ -375,8 +375,8 @@ color: 'red',
       >
         <VTextField
           v-model="form.country"
-          label="Country"
-          placeholder="Country"
+          label="Pays"
+          placeholder="Pays"
           :error="form.formErrors.country"
         />
       </VCol>
@@ -514,9 +514,9 @@ color: 'red',
         md="6"
       >
       <VTextField
-      label="Depense"
+      label="Charge"
     v-model="form.numberOfDependents"
-      placeholder="Depense"
+      placeholder="Nombre de charge"
       type="number"
       :error="form.formErrors.numberOfDependents"
 

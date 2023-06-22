@@ -12,7 +12,7 @@ let getPayslips= (cid:number) => {
 }
 
 let updatePayslips = (property:object) => {
-    return Axios.put('/payslips/'+property.id, property)
+    return Axios.put('/payslips/'+property.id+'/', property)
 }
 
 let createPayslips = (property:object) => {

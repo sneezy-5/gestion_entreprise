@@ -1,9 +1,9 @@
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 
-let getAllDeamndeConges= () => {
+let getAllDeamndeConges= (filter?) => {
 
-    return Axios.get('/demandeconges/')
+    return Axios.get('/demandeconges/?'+filter)
 }
 
 

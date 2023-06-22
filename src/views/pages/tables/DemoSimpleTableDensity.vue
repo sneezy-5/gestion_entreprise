@@ -102,17 +102,71 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
     <thead>
       <tr>
         <th class="text-uppercase">
-          Nom
-        </th>
+         Matricule
+        </th> 
+        <th class="text-uppercase">
+         Nom
+        </th> 
         <th class="text-uppercase text-center">
           Prénom
         </th>
         <th class="text-uppercase text-center">
-          Salaire de base
+          Civilité
         </th>
         <th class="text-uppercase text-center">
           Poste
         </th>
+        <th class="text-uppercase">
+         Date de naissance
+        </th> 
+        <th class="text-uppercase">
+         Lieu de naissance
+        </th> 
+        <th class="text-uppercase">
+         Nationnalité
+        </th> 
+        <th class="text-uppercase">
+         Phone
+        </th> 
+        <th class="text-uppercase">
+         CMU
+        </th>
+        <th class="text-uppercase">
+         CNPS
+        </th>  
+        <th class="text-uppercase">
+         Rue
+        </th>
+        <th>
+          Quartier
+        </th> 
+        <th>
+          ville
+        </th> 
+        <th>
+          Pays
+        </th> 
+        <th class="text-uppercase">
+         Stutus Matrimonial
+        </th> 
+        <th class="text-uppercase">
+         Nombre de part
+        </th> 
+        <th class="text-uppercase">
+         Nombre de charge
+        </th>
+        <th class="text-uppercase">
+         Ancièneté
+        </th> 
+        <th class="text-uppercase">
+         Date d'embauche
+        </th> 
+        <th class="text-uppercase">
+         Départ
+        </th> 
+        <th class="text-uppercase">
+         Email
+        </th> 
         <th class="text-uppercase text-center">
           Action
         </th>
@@ -125,16 +179,70 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         :key="item.id"
       >
         <td>
+          {{ item.matricule }}
+        </td>
+        <td>
           {{ item.firstName }}
         </td>
         <td class="text-center">
           {{ item.lastName }}
         </td>
         <td class="text-center">
-          {{ item.base_salary }}
+          {{ item.civility }}
         </td>
         <td class="text-center">
-          {{ item.position }}
+          {{ item.currentPosition }}
+        </td>
+        <td>
+          {{ item.birthdate }}
+        </td>
+        <td>
+          {{ item.birthplace }}
+        </td>
+        <td>
+          {{ item.nationality}}
+        </td>
+        <td>
+          {{ item.phonenumbers }}
+        </td>
+        <td>
+          {{ item.CMUnumber }}
+        </td>
+        <td>
+          {{ item.CNPSnumber }}
+        </td>
+        <td>
+          {{ item.street }}
+        </td>
+        <td>
+          {{ item.neighborhood }}
+        </td>
+        <td>
+          {{ item.city }}
+        </td>
+        <td>
+          {{ item.country }}
+        </td>
+        <td>
+          {{ item.maritalStatus }}
+        </td>
+        <td>
+          {{ item.NbrOfParts }}
+        </td>
+        <td>
+          {{ item.numberOfDependents }}
+        </td>
+        <td>
+          {{ item.seniority }}
+        </td>
+        <td>
+          {{ item.hiringDate }}
+        </td>
+        <td>
+          {{ item.exitDate }}
+        </td>
+        <td>
+          {{ item.email }}
         </td>
         <td class="text-center">
           <button @click="goEdit(item.id)">

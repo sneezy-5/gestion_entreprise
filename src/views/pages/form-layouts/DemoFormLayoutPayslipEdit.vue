@@ -22,10 +22,10 @@ const form = reactive({
     TotalPayDeduction: null,
     daysWorked: null,
     hoursWorked: null,
-    grossIncomeDetails: null,
-    nonDeductibleIncome: null,
-    companyDeductions: null,
-    employeeDeductions: {IS:null,cn:null},
+    grossIncomeDetails: {hs15: "", hs50: "", hs75: "", conge: "", hs100: "", sursal: "", hstotal: "", seniority: "", salairBase: "", sommeprime: "", sursalaire: "", ancienneteInYR: "", brutImposableFiscal: "", brutImposableSocial: ""},
+    nonDeductibleIncome: {totalprime: "", primetransport: ""},
+    companyDeductions: {is: "", total: "", cnpsPat: "", taxForm: "", taxtApp: ""},
+    employeeDeductions: {IS:"", cn: "", IGR:"", cmu:"", cnps: "", payday: 0, totret:""},
     matricule: null,
 
     formErrors: {
@@ -57,9 +57,10 @@ payslipsService.getPayslips(routeParam)
     form.grossIncome = res.data.grossIncome;
     form.companyDeductions = res.data.companyDeductions;
     form.nonDeductibleIncome = res.data.nonDeductibleIncome;
-    form.employeeDeductions.IS = res.data.employeeDeductions.IS;
+    form.employeeDeductions = res.data.employeeDeductions;
+    form.grossIncomeDetails = res.data.grossIncomeDetails
     form.matricule = res.data.matricule;
-        console.log(res)
+        console.log(res,form)
     })
     .catch((error) => {
          if (error.status == 401) {
@@ -71,7 +72,7 @@ const submit = () => {
   //
   console.log(form)
 
-  payslipsService.updateConge(form)
+  payslipsService.updatePayslips(form)
       .then((res: any) => {
         form.formErrors.issuanceDate = false;
           form.formErrors.paymentMethod = false;
@@ -84,7 +85,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Modifé avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -215,7 +216,7 @@ form.formErrors.employeeDeductions = false;
         />
       </VCol>
 
-      <!-- 👉 amount -->
+      <!-- 👉 Révznu brut -->
       <VCol
         cols="12"
         md="6"
@@ -223,13 +224,13 @@ form.formErrors.employeeDeductions = false;
         <VTextField
           type="number"
           v-model="form.grossIncome"
-          label="Gross In Come"
-          placeholder="Gross In come"
+          label="Révenu brut"
+          placeholder="Révenu"
           :error="form.formErrors.grossIncome"
         />
       </VCol>
 
-      <!-- 👉 code -->
+      <!-- 👉 date de payement -->
       <VCol
         cols="12"
         md="6"
@@ -237,13 +238,414 @@ form.formErrors.employeeDeductions = false;
       <VTextField
           type="date"
           v-model="form.paymentDate"
-          label="Jour pris"
-          placeholder="Jour pris"
+          label="Date de payement"
           :error="form.formErrors.paymentDate"
         />
       </VCol>
 
-    
+      <!-- 👉 Total deduction -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.TotalPayDeduction"
+          label="Total deduction"
+          :error="form.formErrors.TotalPayDeduction"
+        />
+      </VCol>
+
+    <!-- 👉 Payement method -->
+    <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="text"
+          v-model="form.paymentMethod"
+          label="Method de payement"
+          :error="form.formErrors.paymentMethod"
+        />
+      </VCol>
+
+          <!-- 👉 issuance date -->
+          <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="date"
+          v-model="form.issuanceDate"
+          label="Issuance date"
+          :error="form.formErrors.issuanceDate"
+        />
+      </VCol>
+
+            <!-- 👉 CNPS Patronal -->
+            <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.companyDeductions.cnpsPat"
+          label="Employeur CNPS Patronal"
+          :error="form.formErrors.companyDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 is -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.companyDeductions.is"
+          label="Deduction employeur IS"
+          :error="form.formErrors.companyDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 CNPS Patronal -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.companyDeductions.taxForm"
+          label="Deduction employeur tax"
+          :error="form.formErrors.companyDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 taxtapp -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.companyDeductions.taxtApp"
+          label="Deduction employeur taxtapp"
+          :error="form.formErrors.companyDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 total -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.companyDeductions.total"
+          label="Deduction employeur total"
+          :error="form.formErrors.companyDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 IGR -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.employeeDeductions.IGR"
+          label="employé deduction IGR"
+          :error="form.formErrors.employeeDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 Employé deduction  IS-->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.employeeDeductions.IS"
+          label="employé deduction IS"
+          :error="form.formErrors.employeeDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 CMU -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.employeeDeductions.cmu"
+          label="Employé CMU"
+          :error="form.formErrors.employeeDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 CN -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.employeeDeductions.cn"
+          label="Employé CN"
+          :error="form.formErrors.employeeDeductions"
+        />
+      </VCol>
+      
+       <!-- 👉 CNPS  -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.employeeDeductions.cnps"
+          label="employé CNPS "
+          :error="form.formErrors.companyDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 payday -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.employeeDeductions.payday"
+          label="Avance Sur Salaire"
+          :error="form.formErrors.employeeDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 totret -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="text"
+          v-model="form.employeeDeductions.totret"
+          label="Employé total rétenu"
+          :error="form.formErrors.employeeDeductions"
+        />
+      </VCol>
+
+       <!-- 👉 prime transport -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.nonDeductibleIncome.primetransport"
+          label="prime transport"
+          :error="form.formErrors.nonDeductibleIncome"
+        />
+      </VCol>
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.nonDeductibleIncome.totalprime"
+          label="Total prime"
+          :error="form.formErrors.nonDeductibleIncome"
+        />
+      </VCol>
+
+       <!-- 👉 heure sub 15-->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.hs15"
+          label="Heure sup 15"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.hs50"
+          label="Heure sup 50"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Heure sup 50 -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.hs75"
+          label="Heure sup 75"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Heure sup 100 -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.hs100"
+          label="Heure sup 100"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 annciennete  -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.ancienneteInYR"
+          label="Anciènneté en année"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 brutimposable -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.brutImposableFiscal"
+          label="Brut imposable Fiscal"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 brut impo social -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.brutImposableSocial"
+          label="Brut Imposable Social"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.conge"
+          label="Congé"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.hstotal"
+          label="Heure sup Total"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.salairBase"
+          label="Salaire de base"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.seniority"
+          label="anciennete"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Total prime -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.sommeprime"
+          label="Somme prime"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 sur sal -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.sursal"
+          label="Sur salaire"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
+
+       <!-- 👉 Sur salaire -->
+       <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.grossIncomeDetails.sursalaire"
+          label="Sur salaire"
+          :error="form.formErrors.grossIncomeDetails"
+        />
+      </VCol>
  <!--shoxw toats message-->
  <VSnackbar 
       v-model="toast.show" 

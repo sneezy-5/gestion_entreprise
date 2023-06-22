@@ -3,6 +3,9 @@ import { useRoute } from 'vue-router'
 import AccountSettingsAccount from '@/views/pages/account-settings/AccountSettingsAccount.vue'
 import AccountSettingsNotification from '@/views/pages/account-settings/AccountSettingsNotification.vue'
 import AccountSettingsSecurity from '@/views/pages/account-settings/AccountSettingsSecurity.vue'
+import AccountSettingsSecurityT from '@/views/pages/account-settings/AccountSettingsSecurityT.vue';
+import AccountSettingsAccountT from '@/views/pages/account-settings/AccountSettingsAccountT.vue';
+import AccountSettingsAccountTParam from '@/views/pages/account-settings/AccountSettingsAccountTParam.vue';
 
 const route = useRoute()
 
@@ -12,7 +15,8 @@ const activeTab = ref(route.params.tab)
 const tabs = [
   { title: 'Account', icon: 'mdi-account-outline', tab: 'account' },
   { title: 'Security', icon: 'mdi-lock-open-outline', tab: 'security' },
-  { title: 'Notifications', icon: 'mdi-bell-outline', tab: 'notification' },
+  { title: 'Parametre', icon: 'mdi-cog-outline', tab: 'parametre' },
+  // { title: 'Notifications', icon: 'mdi-bell-outline', tab: 'notification' },
 ]
 </script>
 
@@ -43,18 +47,22 @@ const tabs = [
     >
       <!-- Account -->
       <VWindowItem value="account">
-        <AccountSettingsAccount />
+        <AccountSettingsAccountT />
       </VWindowItem>
 
       <!-- Security -->
       <VWindowItem value="security">
-        <AccountSettingsSecurity />
+        <AccountSettingsSecurityT />
       </VWindowItem>
 
-      <!-- Notification -->
-      <VWindowItem value="notification">
-        <AccountSettingsNotification />
+      <!-- parameter -->
+      <VWindowItem value="parametre">
+        <AccountSettingsAccountTParam/>
       </VWindowItem>
+      <!-- Notification -->
+      <!-- <VWindowItem value="notification">
+        <AccountSettingsNotification />
+      </VWindowItem> -->
     </VWindow>
   </div>
 </template>

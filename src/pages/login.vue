@@ -23,13 +23,15 @@ const form = reactive({
 const submit = () => {
     console.log(form)
             accountService.login(form)
-                .then((res: { data: { access: any; role: any } }) => {
+                .then((res: { data: { access: any; role: any,database:any,groups:any} }) => {
                     accountService.saveToken('access',res.data.access)
                     accountService.saveToken('role',res.data.role)
-                    console.log(res)
+                    accountService.saveToken('groups',res.data.groups)
+                    accountService.saveToken('database',res.data.database)
+                    console.log(res.data.groups)
                     router.push('/dashboard')
                 })
-                .catch((error: { status: number }) => {
+                .catch((error) => {
                    
                   errors.value =''
                         if(error.status =403){
@@ -37,9 +39,12 @@ const submit = () => {
                                
                               
                      console.error("votre Email/mot de passe est incorrect");
+                     errors.value ="votre Email/mot de passe est incorrect"
+                        }else if(error.status==401){
+                          errors.value ="Votre abonnement à expiré"
                         }
                         
-                  errors.value ="votre Email/mot de passe est incorrect"
+                  
                  });
 };
 

@@ -4,7 +4,7 @@ import router from '@/router';
 import { useMainStore } from '@/stores/main';
 
 
-const routeParam = router.currentRoute.value.params.id;
+
 
 const toast = ref({
   show: false,
@@ -14,27 +14,8 @@ const toast = ref({
 const employe = reactive([]);
 
 
-contractService.getContracts(routeParam)
-      .then(res => {
-    form.id =res.data.id  
-    form.contract_type = res.data.contract_type;
-    form.position = res.data.position;
-    form.baseSalary = res.data.baseSalary;
-    form.extrapay = res.data.extrapay;
-    form.transportationAllowance = res.data.transportationAllowance;
-    form.signingDate = res.data.signingDate;
-    form.startDate = res.data.startDate;
-    form.endDate = res.data.endDate;
-    form.prime = res.data.prime;
-    form.employee = res.data.employee.id;
-        console.log(res)
-    })
-    .catch((error) => {
-         if (error.status == 401) {
-            console.error(error)
-         }
-     });
 
+const routeParam = router.currentRoute.value.params.id;
 employeesService.getAllEmployees()
       .then(res => {
         const data = res.data.results
@@ -57,9 +38,9 @@ const form = reactive({
     baseSalary: "",
     extrapay: "",
     transportationAllowance: "",
-    signingDate: null,
-    startDate: null,
-    endDate: null,
+    signingDate: "",
+    startDate: "",
+    endDate: "",
     employee:'',
 
     formErrors: {
@@ -76,7 +57,27 @@ const form = reactive({
   },
 });
 
+contractService.getContracts(routeParam)
+      .then(res => {
+    form.id =res.data.id  
+    form.contract_type = res.data.contract_type;
+    form.position = res.data.position;
+    form.baseSalary = res.data.baseSalary;
+    form.extrapay = res.data.extrapay;
+    form.transportationAllowance = res.data.transportationAllowance;
+    form.signingDate = res.data.signingDate;
+    form.startDate = res.data.startDate;
+    form.endDate = res.data.endDate;
+    form.employee = res.data.employee.id;
+        console.log(res)
+    })
+    .catch((error) => {
+         if (error.status == 401) {
+            console.error(error)
+         }
+     });
 
+     
 const submit = () => {
   //
   console.log(form)
@@ -92,121 +93,131 @@ const submit = () => {
           form.formErrors.startDate = false;
           form.formErrors.endDate = false;
           form.formErrors.employee = false;
-        toast.value = {
+          toast.value = {
         show: true,
         text: 'Modifié avec succès',
-        color: 'green',
+        color: 'success',
       };
+
+    form.contract_type = "";
+    form.position = "";
+    form.baseSalary = "";
+    form.extrapay = "";
+    form.transportationAllowance = "";
+    form.signingDate = "";
+    form.startDate = "";
+    form.endDate = "";
+    form.employee = "";
     })
     .catch((error) => {
 
 
-if(error.response.data['contract_type']){
+  if(error.response.data['contract_type']){
 
-form.formErrors.contract_type = true;
-toast.value = {
-show: true,
-text: error.response.data['contract_type'],
-color: 'red', 
-};
-}else{
+  form.formErrors.contract_type = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['contract_type'],
+  color: 'danger', 
+  };
+  }else{
 
-form.formErrors.contract_type = false;
+  form.formErrors.contract_type = false;
 
-} if(error.response.data['position']){
+  } if(error.response.data['position']){
 
-form.formErrors.position = true;
-toast.value = {
-show: true,
-text: error.response.data['position'],
-color: 'red', 
-};
-} 
-else{
+  form.formErrors.position = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['position'],
+  color: 'danger', 
+  };
+  } 
+  else{
 
-form.formErrors.position = false;
-}
- if(error.response.data['baseSalary']){
+  form.formErrors.position = false;
+  }
+  if(error.response.data['baseSalary']){
 
-form.formErrors.baseSalary = true;
-toast.value = {
-show: true,
-text: error.response.data['baseSalary'],
-color: 'red', 
-};
-} else{
+  form.formErrors.baseSalary = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['baseSalary'],
+  color: 'danger', 
+  };
+  } else{
 
-form.formErrors.baseSalary = false;
+  form.formErrors.baseSalary = false;
 
-} if(error.response.data['extrapay']){
+  } if(error.response.data['extrapay']){
 
-form.formErrors.extrapay = true;
-toast.value = {
-show: true,
-text: error.response.data['extrapay'],
-color: 'red', 
-};
-} else{
+  form.formErrors.extrapay = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['extrapay'],
+  color: 'danger', 
+  };
+  } else{
 
-form.formErrors.extrapay = false;
+  form.formErrors.extrapay = false;
 
-}if(error.response.data['transportationAllowance']){
+  }if(error.response.data['transportationAllowance']){
 
-form.formErrors.transportationAllowance = false;
+  form.formErrors.transportationAllowance = false;
 
-} else{
+  } else{
 
-form.formErrors.transportationAllowance = false;
+  form.formErrors.transportationAllowance = false;
 
-}if(error.response.data['signingDate']){
+  }if(error.response.data['signingDate']){
 
-form.formErrors.signingDate = true;
-toast.value = {
-show: true,
-text: error.response.data['signingDate'],
-color: 'red', 
-};
-}else{
+  form.formErrors.signingDate = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['signingDate'],
+  color: 'danger', 
+  };
+  }else{
 
-form.formErrors.signingDate = false;
+  form.formErrors.signingDate = false;
 
-}if(error.response.data['startDate']){
+  }if(error.response.data['startDate']){
 
-form.formErrors.startDate = true;
-toast.value = {
-show: true,
-text: error.response.data['startDate'],
-color: 'red', 
-};
-} else{
+  form.formErrors.startDate = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['startDate'],
+  color: 'danger', 
+  };
+  } else{
 
-form.formErrors.startDate = false;
+  form.formErrors.startDate = false;
 
-} if(error.response.data['endDate']){
+  } if(error.response.data['endDate']){
 
-form.formErrors.endDate = true;
-toast.value = {
-show: true,
-text: error.response.data['endDate'],
-color: 'red', 
-};
-}else{
+  form.formErrors.endDate = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['endDate'],
+  color: 'danger', 
+  };
+  }else{
 
-form.formErrors.endDate = false;
+  form.formErrors.endDate = false;
 
-}   if(error.response.data['employee']){
+  }   if(error.response.data['employee']){
 
-form.formErrors.employee = true;
-toast.value = {
-show: true,
-text: error.response.data['employee'],
-color: 'red', 
-};
-} else{
+  form.formErrors.employee = true;
+  toast.value = {
+  show: true,
+  text: error.response.data['employee'],
+  color: 'danger', 
+  };
+  } else{
 
-form.formErrors.employee = false;
+  form.formErrors.employee = false;
 
-} 
+  } 
          console.log(error)
         
      });

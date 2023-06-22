@@ -26,7 +26,7 @@ let goAsigne = (id: number)=>{
   router.push({name: 'edit-taches', params:{id:id}})
 };
 const form = reactive({
-  project:null,
+  project:'',
   formErrors: {
     project:false
     
@@ -111,7 +111,34 @@ getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
-const role = accountService.getDatabase()
+const role = accountService.getRole()
+const models = 20
+
+const downloadExcel = () => {
+
+
+const url = `http://127.0.0.1:8000/api/v0/taches/download-excel/?start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`;
+
+fetch(url, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer'+accountService.getToken(), 
+    'database': accountService.getDatabase(),
+  },
+})
+.then(response => response.blob())
+.then(blob => {
+  const downloadUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = downloadUrl;
+  link.download = 'taches.xlsx';
+  link.click();
+  URL.revokeObjectURL(downloadUrl);
+})
+.catch(error => {
+  console.error('Erreur lors du téléchargement du fichier :', error);
+});
+};
 </script>
 
 <template>
@@ -130,12 +157,19 @@ const role = accountService.getDatabase()
       </v-card-actions>
     </v-card>
   </v-dialog>
-  <div style="margin-left: 20px;">
-    <VBtn to="/create-tache">Ajouter</VBtn>
-      
-    </div>
 
+    <div class="flex-start">
+
+      <VBtn  to="/create-tache" style="margin-right: 10px;">Ajouter</VBtn>
+      <VBtn @click="downloadExcel" color="success">
+        <VIcon icon="mdi-cloud-download"></VIcon>
+        <VIcon icon="mdi-microsoft-excel"></VIcon>
+        </VBtn>
+  </div>
     <div class="flex-end" v-if="role=='true'">
+ 
+
+
       <VForm @submit.prevent="getAll" >
     <VRow>
  
@@ -220,18 +254,27 @@ const role = accountService.getDatabase()
           {{ item.end_date }}
         </td>
         <td class="text-center">
-          {{ item.poject }}
+          {{ item?.project?.name }}
         </td>
         <td class="text-center">
-          {{ item.rapport_task }}
+          {{ item.rapport_taks }}
         </td>
         <td class="text-center">
-          <VProgressLinear></VProgressLinear>
+        <!-- <v-progress-circular
+      :rotate="360"
+      :size="100"
+      :width="15"
+      :value="item.progress"
+      color="success"
+    >
+      {{ item.progress }}
+    </v-progress-circular> -->
+    <v-progress-linear v-model="item.progress" color="success"></v-progress-linear>
           {{ item.progess }}
         </td>
         <td class="text-center" >
           <button 
-              @click="role ? goEdit(item.id) : goAsigne(item.id)"
+              @click="role=='true' ? goEdit(item.id) : goAsigne(item.id)"
           >
             <VIcon icon="mdi-edit"></VIcon>
          

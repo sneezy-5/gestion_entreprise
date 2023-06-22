@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  transactionService } from '@/_services';
+import {  accountService, transactionService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
@@ -21,18 +21,30 @@ let goEdit = (id: number)=>{
 };
 
 
+const form = reactive({
+  start_date: new Date().toISOString().substr(0, 10),
+  end_date: new Date().toISOString().substr(0, 10),
+  account:null,
+  formErrors: {
+    start_date: false,
+    end_date: false,
+    account:false
+    
+  },
+});
+
+
+
 let page = ref(1);
 const limit = 5;
 const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
-  const filter =`limit=${limit}&offset=${offset}`
+  const filter =`limit=${limit}&offset=${offset}&start_date=${form.start_date}&end_date=${form.end_date}`
   transactionService.getAllTransactions(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
-        // for (let i = 0; i < data.length; i++) {
-        //   desserts.push(data[i]);
-        // } 
+   
         desserts.pop()
         desserts.push(res.data)
         console.log(desserts[0].results, data)
@@ -76,7 +88,31 @@ getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
+const downloadExcel = () => {
 
+
+const url = `http://127.0.0.1:8000/api/v0/transaction/download-excel/?start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`;
+
+fetch(url, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer'+accountService.getToken(), 
+    'database': accountService.getDatabase(),
+  },
+})
+.then(response => response.blob())
+.then(blob => {
+  const downloadUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = downloadUrl;
+  link.download = 'transactions.xlsx';
+  link.click();
+  URL.revokeObjectURL(downloadUrl);
+})
+.catch(error => {
+  console.error('Erreur lors du téléchargement du fichier :', error);
+});
+};
 </script>
 
 <template>
@@ -96,10 +132,71 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
     </v-card>
   </v-dialog>
 
+    <div class="flex-start">
+      <VBtn to="/create-transaction" style="margin-right: 10px;">Ajouter</VBtn>
+      <VBtn @click="downloadExcel" color="success">
+        <VIcon icon="mdi-cloud-download"></VIcon>
+        <VIcon icon="mdi-microsoft-excel"></VIcon>
+        </VBtn>
+  </div>
 
-    <div class="flex-end">
-      <VBtn to="/create-transaction">Ajouter</VBtn>
-    </div>
+  <div class="flex-end">
+     
+      
+     <VForm @submit.prevent="getAll" >
+   <VRow>
+
+
+     <!-- 👉 start date -->
+     <VCol
+       cols="12"
+       md="6"
+     >
+     <VTextField
+         type="date"
+         v-model="form.start_date"
+         label="Debut"
+         placeholder="Debut"
+         :error="form.formErrors.start_date"
+       />
+     </VCol>
+
+     <!-- 👉 end date-->
+     <VCol
+       cols="12"
+       md="6"
+     >
+     <VTextField
+         type="date"
+         v-model="form.end_date"
+         label="Fin"
+         placeholder="Fin"
+         :error="form.formErrors.end_date"
+       />
+     </VCol>
+
+
+     <VCol
+       cols="12"
+       class="d-flex gap-4"
+     >
+       <VBtn type="submit">
+         Fltrer
+       </VBtn>
+
+       <VBtn
+         type="reset"
+         color="secondary"
+         variant="tonal"
+       >
+         Reset
+       </VBtn>
+     </VCol>
+   </VRow>
+   
+ </VForm>
+   </div>
+
   <VTable density="compact">
     <thead>
       <tr>
@@ -190,5 +287,11 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
   display: flex;
   justify-content: end;
   margin-right: 10px;
+}
+
+.flex-start{
+  display: flex;
+  justify-content: start;
+  margin-left: 30px;
 }
 </style>

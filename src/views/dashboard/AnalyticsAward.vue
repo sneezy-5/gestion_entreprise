@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { dashboardService, tresorieService } from '@/_services';
 import triangleDark from '@images/misc/triangle-dark.png'
 import triangleLight from '@images/misc/triangle-light.png'
 import trophy from '@images/misc/trophy.png'
@@ -6,22 +7,98 @@ import { useTheme } from 'vuetify'
 
 const { global } = useTheme()
 const triangleBg = computed(() => global.name.value === 'light' ?  triangleLight : triangleDark)
+
+
+const form = reactive({
+  start_date: new Date().toISOString().substr(0, 10),
+  end_date: new Date().toISOString().substr(0, 10),
+  chffre_affaire: 0,
+});
+
+
+const updateTresorerie = () =>{
+  tresorieService.getTresorerie(form.start_date, form.end_date)
+      .then(res => {
+        
+        console.log(res.data)
+        const data = res.data
+        form.chffre_affaire = data.chffre_affaire
+    })
+}
+updateTresorerie()
+const submit = () => {
+  //
+updateTresorerie()
+};
 </script>
 
 <template>
+
   <VCard
-    title="Congratulations John! 🎉"
-    subtitle="Best seller of the month"
+    title="Chiffre d'affaire"
+    subtitle="Chiffre d'affaire du mois"
     class="position-relative"
   >
     <VCardText>
+      <VForm @submit.prevent="submit" >
+    <VRow>
+ 
+
+      <!-- 👉 start date -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="date"
+          v-model="form.start_date"
+          label="Debut"
+          placeholder="Debut"
+    
+        />
+      </VCol>
+
+      <!-- 👉 end date-->
+      <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="date"
+          v-model="form.end_date"
+          label="Fin"
+          placeholder="Fin"
+     
+        />
+      </VCol>
+
+
+        
+      <VCol
+        cols="12"
+        class="d-flex gap-4"
+      >
+        <VBtn type="submit">
+          Fltrer
+        </VBtn>
+
+        <VBtn
+          type="reset"
+          color="secondary"
+          variant="tonal"
+        >
+          Reset
+        </VBtn>
+      </VCol>
+    </VRow>
+  </VForm>
       <h5 class="text-2xl font-weight-medium text-primary">
-        $42.8k
+        {{ form.chffre_affaire }}
       </h5>
-      <p>78% of target 🚀</p>
-      <VBtn size="small">
+      <p>🚀</p>
+      <!-- <VBtn size="small">
         View Sales
-      </VBtn>
+      </VBtn> -->
     </VCardText>
 
     <!-- Triangle Background -->

@@ -12,7 +12,7 @@ import DemoFormLayoutEmployee from '@/views/pages/form-layouts/DemoFormLayoutEmp
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Créé un employé">
+        <VCard title="Ajouter employé">
           <VCardText>
             <DemoFormLayoutEmployee />
           </VCardText>

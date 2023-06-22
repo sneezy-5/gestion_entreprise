@@ -32,9 +32,9 @@ const form = reactive({
     baseSalary: "",
     extrapay: "",
     transportationAllowance: "",
-    signingDate: null,
-    startDate: null,
-    endDate: null,
+    signingDate: "",
+    startDate: "",
+    endDate: "",
     employee:'',
 
     formErrors: {
@@ -70,8 +70,18 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
+
+    form.contract_type = "";
+    form.position = "";
+    form.baseSalary = "";
+    form.extrapay = "";
+    form.transportationAllowance = "";
+    form.signingDate = "";
+    form.startDate = "";
+    form.endDate = "";
+    form.employee = "";
     })
     .catch((error) => {
 
@@ -82,7 +92,7 @@ form.formErrors.contract_type = true;
 toast.value = {
 show: true,
 text: error.response.data['contract_type'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -94,7 +104,7 @@ form.formErrors.position = true;
 toast.value = {
 show: true,
 text: error.response.data['position'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -107,7 +117,7 @@ form.formErrors.baseSalary = true;
 toast.value = {
 show: true,
 text: error.response.data['baseSalary'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -119,7 +129,7 @@ form.formErrors.extrapay = true;
 toast.value = {
 show: true,
 text: error.response.data['extrapay'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -139,7 +149,7 @@ form.formErrors.signingDate = true;
 toast.value = {
 show: true,
 text: error.response.data['signingDate'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -151,7 +161,7 @@ form.formErrors.startDate = true;
 toast.value = {
 show: true,
 text: error.response.data['startDate'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -163,7 +173,7 @@ form.formErrors.endDate = true;
 toast.value = {
 show: true,
 text: error.response.data['endDate'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -175,7 +185,7 @@ form.formErrors.employee = true;
 toast.value = {
 show: true,
 text: error.response.data['employee'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -290,7 +300,7 @@ form.formErrors.employee = false;
       <VTextField
           type="date"
           v-model="form.startDate"
-          label="Debut"
+          label="Debut contrat"
           placeholder="Debut"
           :error="form.formErrors.startDate"
         />
@@ -304,7 +314,7 @@ form.formErrors.employee = false;
       <VTextField
           type="date"
           v-model="form.endDate"
-          label="Fin"
+          label="Fin contrat"
           placeholder="Fin"
           :error="form.formErrors.endDate"
         />

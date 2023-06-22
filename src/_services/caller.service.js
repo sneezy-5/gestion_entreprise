@@ -18,7 +18,7 @@ Axios.interceptors.request.use(request => {
     // Si connecté on ajoute le token dans l'entête
     if(accountService.isLogged()){
         request.headers.Authorization = 'Bearer '+ accountService.getToken()
-        //request.headers['database'] = accountService.getDatabase();
+        request.headers['database'] = accountService.getDatabase();
     }
   
     return request

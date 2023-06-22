@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  payslipsService } from '@/_services';
+import {  accountService, demandeCongeService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
@@ -17,7 +17,7 @@ const closeDialog = () => {
 
 
 let goEdit = (id: number)=>{
-  router.push({name: 'edit-payslip', params:{id:id}})
+  router.push({name: 'edit-demande-conge', params:{id:id}})
 };
 
 
@@ -27,7 +27,7 @@ const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
   const filter =`limit=${limit}&offset=${offset}`
-  payslipsService.getAllPayslips(filter)
+  demandeCongeService.getAllDeamndeConges(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
         // for (let i = 0; i < data.length; i++) {
@@ -52,7 +52,7 @@ const getAll =()=>{
 
 
 const deleteEl = () => {
-  payslipsService.deletePayslips(ids.value)
+  demandeCongeService.deleteDemandeConge(ids.value)
       .then((res: { data: { results: any; }; }) => {
         getAll()
     })
@@ -71,16 +71,47 @@ const deleteEl = () => {
 
 };
 
-const openBulletin = (id) => {
-      const url = `/src/assets/formulairePAIE.html?id=${id}`;
-      window.open(url);
-    }
 
 getAll()
+
+
+const accept = (ids) => {
+  demandeCongeService.updateDemandeConge({status:"Accorder"},ids)
+      .then(res => {
+        console.log(res)
+        getAll()
+    })
+    .catch((error) => {
+         if (error.status == 401) {
+            console.error(error)
+         }
+     });
+
+ 
+
+};
+
+
+const decline = (ids) => {
+  demandeCongeService.updateDemandeConge({status:"Refuser"},ids)
+      .then(res => {
+        console.log(res)
+        getAll()
+    })
+    .catch((error) => {
+         if (error.status == 401) {
+            console.error(error)
+         }
+     });
+
+ 
+
+};
+
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
-
+const role = accountService.getRole()
 </script>
 
 <template>
@@ -101,9 +132,8 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
   </v-dialog>
 
 
-    <div class="flex-end">
-      <VBtn to="/create-payslip" style="margin-right: 10px;">Ajouter</VBtn>
-      <VBtn to="/payslip-generate">Générer</VBtn>
+    <div class="flex-end" v-if="role=='false'">
+      <VBtn to="/create-demande-conge">Faire une demande</VBtn>
     </div>
   <VTable density="compact">
     <thead>
@@ -112,14 +142,13 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
           Employe
         </th>
         <th class="text-uppercase text-center">
-          Net a payer
-        </th>
-       
-        <th class="text-uppercase text-center">
-          Methode de payement
+          Debut
         </th>
         <th class="text-uppercase text-center">
-          Date de payement
+          Fin
+        </th>
+        <th class="text-uppercase text-center">
+          Status
         </th>
         <th class="text-uppercase text-center">
           Action
@@ -136,26 +165,29 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
           {{ item.employee?.firstName }}
         </td>
         <td class="text-center">
-          {{ item.netToPay }}
+          {{ item.start_date }}
         </td>
         <td class="text-center">
-          {{ item.paymentMethod }}
+          {{ item.end_date }}
         </td>
-        <td class="text-center">
-          {{ item.paymentDate }}
+        <td  >
+          {{ item.status  }}
         </td>
        
-       
         <td class="text-center">
-          <button @click="openBulletin(item.id)">
-            <VIcon icon="mdi-eye"></VIcon>
-         
+          <button @click="accept(item.id)"
+          v-if="item.status!=='Accorder' && item.status!=='Refuser' && role=='true'"
+          style="color: rgb(9, 179, 37); margin: 10px;">
+            <!-- <VIcon icon="mdi-edit"></VIcon> -->
+         Accepter
         </button>
-          <button @click="goEdit(item.id)">
-            <VIcon icon="mdi-edit"></VIcon>
-         
+        <button @click="decline(item.id)"
+          v-if="item.status!=='Accorder' && item.status!=='Refuser' && role=='true'"
+          style="color: red;">
+            <!-- <VIcon icon="mdi-edit"></VIcon> -->
+         Refuser
         </button>
-          <button @click="openDialog(item.id)">
+          <button    v-if="item.status!=='Accorder' && item.status!=='Refuser'&& role=='false'" @click="openDialog(item.id)">
           <VIcon icon="mdi-trash" style="color: red;"></VIcon>
       </button>
         </td>

@@ -26,14 +26,15 @@ employeesService.getList ()
      });
 
 
+    const items= ['admin', 'comptable', 'drh', 'editeur']
 
 
 const form = reactive({
     username: "",
     email:"",
-    password:null,
-    role:null,
-    employee: null,
+    password:"",
+    role:"",
+    employee: "",
 
     formErrors: {
       username: false,
@@ -60,7 +61,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -72,7 +73,7 @@ form.formErrors.username = true;
 toast.value = {
 show: true,
 text: error.response.data.data['username'],
-color: 'red', 
+color: 'error', 
 };
 }else{
 
@@ -84,7 +85,7 @@ form.formErrors.email = true;
 toast.value = {
 show: true,
 text: error.response.data.data['email'],
-color: 'red', 
+color: 'error', 
 };
 } 
 else{
@@ -97,7 +98,7 @@ form.formErrors.employee = true;
 toast.value = {
 show: true,
 text: error.response.data.data['employee'],
-color: 'red', 
+color: 'error', 
 };
 } else{
 
@@ -109,7 +110,7 @@ form.formErrors.password = true;
 toast.value = {
 show: true,
 text: error.response.data.data['password'],
-color: 'red', 
+color: 'error', 
 };
 } 
 else{
@@ -192,7 +193,21 @@ form.formErrors.password = false;
         />
       </VCol>
 
+           <!-- 👉 role -->
+           <VCol
+        cols="12"
+        md="6"
+      >
 
+          <v-select
+            v-model="form.role"
+            :items="items"
+            attach
+            chips
+            label="Rôle"
+            multiple
+          ></v-select>
+    </VCol>
  <!--shoxw toats message-->
  <VSnackbar 
       v-model="toast.show" 

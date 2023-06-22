@@ -109,7 +109,9 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         <th class="text-uppercase text-center">
           Description
         </th>
-       
+        <th class="text-uppercase text-center">
+          Progression
+        </th>
         <th class="text-uppercase text-center">
           Action
         </th>
@@ -127,7 +129,17 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         <td class="text-center">
           {{ item.description }}
         </td>
-     
+        <td>
+          <v-progress-circular
+      :rotate="360"
+      :size="100"
+      :width="15"
+      :value="item.progression"
+      color="teal"
+    >
+      {{ item.progression }}
+    </v-progress-circular>
+        </td>
         <td class="text-center">
           <button @click="goEdit(item.id)">
             <VIcon icon="mdi-edit"></VIcon>

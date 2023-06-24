@@ -104,22 +104,34 @@ const submit = () => {
           form.formErrors.supplier = false;
           form.formErrors.amount = false;
           form.formErrors.depense_category = false;
-        toast.value = {
+          toast.value = {
         show: true,
-        text: 'Modifié avec succès',
-        color: 'green',
+        text: 'Enregistré avec succès',
+        color: 'success',
       };
     })
     .catch((error) => {
 
+if(error.response.data['amount']){
 
+form.formErrors.amount = true;
+toast.value = {
+show: true,
+text: error.response.data['amount'],
+color: 'danger', 
+};
+}else{
+
+form.formErrors.amount = false;
+
+} 
 if(error.response.data['transaction_type']){
 
 form.formErrors.transaction_type = true;
 toast.value = {
 show: true,
 text: error.response.data['transaction_type'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -131,7 +143,7 @@ form.formErrors.account = true;
 toast.value = {
 show: true,
 text: error.response.data['account'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -144,23 +156,23 @@ form.formErrors.transaction_category = true;
 toast.value = {
 show: true,
 text: error.response.data['transaction_category'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
 form.formErrors.transaction_category = false;
 
-} if(error.response.data['transaction_category']){
+} if(error.response.data['transaction_date']){
 
-form.formErrors.transaction_category = true;
+form.formErrors.transaction_date = true;
 toast.value = {
 show: true,
-text: error.response.data['transaction_category'],
-color: 'red', 
+text: error.response.data['transaction_date'],
+color: 'danger', 
 };
 } else{
 
-form.formErrors.transaction_category = false;
+form.formErrors.transaction_date = false;
 
 }if(error.response.data['account']){
 
@@ -176,7 +188,7 @@ form.formErrors.description = true;
 toast.value = {
 show: true,
 text: error.response.data['description'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -188,7 +200,7 @@ form.formErrors.supplier = true;
 toast.value = {
 show: true,
 text: error.response.data['supplier'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -200,7 +212,7 @@ form.formErrors.depense_category = true;
 toast.value = {
 show: true,
 text: error.response.data['depense_category'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 

@@ -2,8 +2,8 @@ import router from '@/router'
 
 export function authGuard(){
     let token = localStorage.getItem('access')
-
-    if(token){
+    let subscription = localStorage.getItem('subscription')
+    if(token && subscription ){
         return true
     }
 

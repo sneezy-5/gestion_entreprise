@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { employeesService } from '@/_services';
+import { accountService, employeesService } from '@/_services';
 import { useMainStore } from '@/stores/main';
 import avatar1 from '@images/avatars/avatar-1.png';
 const toast = ref({
@@ -7,6 +7,10 @@ const toast = ref({
   text: '',
   color: '',
 });
+
+const dataform = reactive({
+  file:null
+})
 const form = reactive({
     matricule: "",
     civility: "Femme",
@@ -31,6 +35,7 @@ const form = reactive({
     exitDate: null,
     phonenumbers: null,
     email: null,
+    avatar1 : avatar1,
 
     formErrors: {
     matricule: false,
@@ -56,29 +61,110 @@ const form = reactive({
     exitDate: false,
     phonenumbers: false,
     email: false,
+    
     // ...
   },
 });
-// const refInputEl = ref<HTMLElement>()
 
-// // changeAvatar function
-// const changeAvatar = (file: Event) => {
-//   const fileReader = new FileReader()
-//   const { files } = file.target as HTMLInputElement
+const refInputEl = ref<HTMLElement>()
 
-//   if (files && files.length) {
-//     fileReader.readAsDataURL(files[0])
-//     fileReader.onload = () => {
-//       if (typeof fileReader.result === 'string')
-//         form.pictureURL = fileReader.result
-//     }
-//   }
-// }
+const accountDataLocal = ref(form)
+const isAccountDeactivated = ref(false)
 
-// // reset avatar image
-// const resetAvatar = () => {
-//   form.pictureURL = form.pictureURL
-// }
+
+
+// changeAvatar function
+const changeAvatar = (file: Event) => {
+  const fileReader = new FileReader()
+  const { files } = file.target as HTMLInputElement
+
+  if (files && files.length) {
+    fileReader.readAsDataURL(files[0])
+    fileReader.onload = () => {
+      if (typeof fileReader.result === 'string')
+        accountDataLocal.value.pictureURL = files[0]
+        accountDataLocal.value.avatar1 = fileReader.result
+    }
+  }
+}
+
+
+const resetAvatar = () => {
+  accountDataLocal.value.avatar1 = avatar1
+}
+
+
+const importDataLocal = ref(dataform)
+// change file function
+const changeImorpt = (event) => {
+  const fileInput = event.target;
+      const file = fileInput.files[0];
+      if (file) {
+        const fileName = file.name.split('\\').pop(); 
+        dataform.file = file;
+      } else {
+        dataform.file = null;
+      }
+}
+
+
+// Fonction pour télécharger le fichier Excel
+function downloadExcelFile(url) {
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer'+accountService.getToken(), 
+    'database': accountService.getDatabase(),
+    },
+    body: JSON.stringify({ /* Données à envoyer si nécessaire */ })
+  })
+  .then(response => response.blob())
+  .then(blob => {
+    // Créer un lien temporaire pour télécharger le fichier
+    const downloadLink = document.createElement('a');
+    const url = window.URL.createObjectURL(blob);
+    downloadLink.href = url;
+    downloadLink.download = 'invalid_employees.xlsx';
+    downloadLink.click();
+    window.URL.revokeObjectURL(url);
+  })
+  .catch(error => {
+    console.error('Erreur lors du téléchargement du fichier :', error);
+    // Gérer l'erreur de téléchargement
+  });
+}
+
+
+
+const submitFile = () => {
+  console.log(dataform);
+
+  employeesService.importEmploye(dataform)
+    .then((res) => {
+      console.log(res);
+
+      if (res.status === 200) {
+      // Vérifiez si la réponse contient un fichier Excel corrigé
+      const contentDisposition = res.headers['content-type']=='application/vnd.ms-excel';
+      console.log(res.response)
+      if (contentDisposition ) {
+       
+        downloadExcelFile(res.request.responseURL);
+      }
+    }
+      toast.value = {
+        show: true,
+        text: 'Modifié avec succès',
+        color: 'success',
+      };
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+  
 
 const submit = () => {
   //
@@ -314,7 +400,37 @@ color: 'danger',
 </script>
 
 <template>
-  <VForm @submit.prevent="submit" enctype="multipart/form-data">
+<VCardText class="d-flex">
+  <!-- 👉 Avatar -->
+
+  <!-- 👉 Upload Photo -->
+  <form class="d-flex flex-column justify-center gap-5" @submit.prevent="submitFile" enctype="multipart/form-data">
+    <div class="d-flex flex-wrap gap-2">
+      <VTextField
+            type="file"
+            accept=".xlsx"
+            ref="fileInput"
+            @change="changeImorpt"
+          ></VTextField>
+      <VBtn
+        type="submit"
+        color="error"
+        variant="tonal"
+      >
+        <span class="d-none d-sm-block">Importer</span>
+        <VIcon
+          class="d-sm-none"
+        />
+      </VBtn>
+    </div>
+
+    <p class="text-body-1 mb-0">
+      Taille maximale autorisée : 2 Mo (xlsx)
+    </p>
+  </form>
+</VCardText>
+
+  <VForm @submit.prevent="submit"  enctype="multipart/form-data">
     <VRow>
       <!-- 👉 First Name -->
       <VCol
@@ -616,27 +732,20 @@ color: 'danger',
   
       </VCol>
 
-                <!-- 👉 upload-->
-                <!-- <VCol
+
+       <!-- 👉 upload-->
+      <VCol
         cols="12"
         md="6"
-      >
-      <VTextField
-      label="Image"
-    v-model="form.pictureURL"
-      type="file"
-      :error="form.formErrors.pictureURL"
-
-  />
-  
-      </VCol> -->
-      <!-- <VCardText class="d-flex"   :error="form.formErrors.pictureURL">
+      >        
+       
+      <VCardText class="d-flex"   :error="form.formErrors.pictureURL">
  
           <VAvatar
             rounded="lg"
             size="100"
             class="me-6"
-            :image="form.pictureURL"
+            :image="form.avatar1"
           />
 
  
@@ -666,12 +775,13 @@ color: 'danger',
                 type="reset"
                 color="error"
                 variant="tonal"
-                @click="resetAvatar"
+               
               >
                 <span class="d-none d-sm-block">Reset</span>
                 <VIcon
                   icon="mdi-refresh"
                   class="d-sm-none"
+                  @click="resetAvatar"
                 />
               </VBtn>
             </div>
@@ -680,8 +790,8 @@ color: 'danger',
               Allowed JPG, GIF or PNG. Max size of 800K
             </p>
           </form>
-        </VCardText> -->
-
+        </VCardText>
+      </VCol>
         
  <!--shoxw toats message-->
  <VSnackbar 

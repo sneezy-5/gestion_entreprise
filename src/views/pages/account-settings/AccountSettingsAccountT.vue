@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { userService } from '@/_services';
 import avatar1 from '@images/avatars/avatar-1.png';
+import { useMainStore } from '@/stores/main';
 
 const toast = ref({
   show: false,
@@ -19,29 +20,9 @@ const profileForm = reactive({
   }
 });
 
-userService.getProfile()
-  .then(res => {
-    const profileData = res.data.results[0];
-    if (profileData) {
-      profileForm.id = profileData.id
-      profileForm.username = profileData.username;
-      profileForm.email = profileData.email;
-      profileForm.profile_image = profileData.profile_image;
-
-      
-    }
-
-    
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
-  
 
 
-
-  const refInputEl = ref<HTMLElement>()
+const refInputEl = ref<HTMLElement>()
 
 const accountDataLocal = ref(profileForm)
 const isAccountDeactivated = ref(false)
@@ -64,10 +45,32 @@ const changeAvatar = (file: Event) => {
 }
 
 
+userService.getProfile()
+  .then(res => {
+    const profileData = res.data.results[0];
+    if (profileData) {
+      profileForm.id = profileData.id
+      profileForm.username = profileData.username;
+      profileForm.email = profileData.email;
+      //profileForm.profile_image = profileData.profile_image;
+      profileForm.avatar1 = profileData.profile_image
+      
+    }
+
+    
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+  
+
+
+
+
 
 const submit = () => {
   console.log(profileForm)
-
 
   userService.updateUserProfile(profileForm)
       .then((res: any) => {
@@ -78,6 +81,8 @@ const submit = () => {
         text: 'Modifié  avec succès',
         color: 'success',
       };
+      useMainStore().fetchAllProfile()
+      
     })
     .catch((error) => {
 

@@ -91,7 +91,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -102,7 +102,7 @@ form.formErrors.amount = true;
 toast.value = {
 show: true,
 text: error.response.data['amount'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -115,7 +115,7 @@ form.formErrors.transaction_type = true;
 toast.value = {
 show: true,
 text: error.response.data['transaction_type'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -127,7 +127,7 @@ form.formErrors.account = true;
 toast.value = {
 show: true,
 text: error.response.data['account'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -140,7 +140,7 @@ form.formErrors.transaction_category = true;
 toast.value = {
 show: true,
 text: error.response.data['transaction_category'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -152,7 +152,7 @@ form.formErrors.transaction_date = true;
 toast.value = {
 show: true,
 text: error.response.data['transaction_date'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -172,7 +172,7 @@ form.formErrors.description = true;
 toast.value = {
 show: true,
 text: error.response.data['description'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -184,7 +184,7 @@ form.formErrors.supplier = true;
 toast.value = {
 show: true,
 text: error.response.data['supplier'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -196,7 +196,7 @@ form.formErrors.depense_category = true;
 toast.value = {
 show: true,
 text: error.response.data['depense_category'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 

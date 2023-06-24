@@ -27,6 +27,9 @@ let getGroups = () => {
 let getDatabase = () => {
   return localStorage.getItem('database')
 }
+let getSubscription = () => {
+  return localStorage.getItem('subscription')
+}
 let saveToken = (name,token) => {
     localStorage.setItem(name, token)
 }
@@ -43,6 +46,7 @@ export const accountService = {
     saveToken,
     getToken,
     getDatabase,
+    getSubscription,
     getRole,
     getGroups,
     isLogged

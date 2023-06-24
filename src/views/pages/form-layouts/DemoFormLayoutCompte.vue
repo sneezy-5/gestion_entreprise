@@ -33,7 +33,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -45,7 +45,7 @@ form.formErrors.name = true;
 toast.value = {
 show: true,
 text: error.response.data['name'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -57,7 +57,7 @@ form.formErrors.balance = true;
 toast.value = {
 show: true,
 text: error.response.data['balance'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -98,8 +98,8 @@ form.formErrors.balance = false;
         <VTextField
           type="number"
           v-model="form.balance"
-          label="Balance"
-          placeholder="Balance"
+          label="Montant"
+          placeholder="Montant"
           :error="form.formErrors.balance"
         />
       </VCol>

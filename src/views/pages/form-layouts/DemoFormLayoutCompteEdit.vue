@@ -51,7 +51,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Modifié avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -63,7 +63,7 @@ form.formErrors.name = true;
 toast.value = {
 show: true,
 text: error.response.data['name'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -75,7 +75,7 @@ form.formErrors.balance = true;
 toast.value = {
 show: true,
 text: error.response.data['balance'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{

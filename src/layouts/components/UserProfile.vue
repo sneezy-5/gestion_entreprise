@@ -2,7 +2,7 @@
 import { accountService, userService } from '@/_services';
 import router from '@/router';
 import avatar1 from '@images/avatars/avatar-1.png';
-
+import { useMainStore } from '@/stores/main';
 
 const logout =()=>{
                 accountService.logout();
@@ -10,39 +10,7 @@ const logout =()=>{
         }
 
 
-
-const role = accountService.getRole()
-const superadmin = role=='true'?'SuperAdmin':''
-const groups = accountService.getGroups()
-const groupsArray = [groups];
-const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
-const admin =formattedArray.includes('admin')== true? 'Admin': ''
-const form=reactive({
-  userName:'',
-  userEmail:'',
-  userAvatar:'',
-  lastLogin:'',
-  is_admin: admin,
-  is_superadmin:superadmin==''?admin:superadmin
-})
-userService.getProfile()
-  .then(res => {
-    const profileData = res.data.results[0];
-    if (profileData) {
-     
-      form.userName = profileData.username;
-      form.userEmail = profileData.email;
-      form.userAvatar = profileData.profile_image;
-      form.lastLogin = profileData.last_login;
-      console.log(form)
-    }
-
-    
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
+console.log(useMainStore().userAvatar)
 </script>
 
 <template>
@@ -59,7 +27,7 @@ userService.getProfile()
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1" />
+      <VImg :src="useMainStore().userAvatar" />
 
       <!-- SECTION Menu -->
       <VMenu
@@ -84,15 +52,15 @@ userService.getProfile()
                     color="primary"
                     variant="tonal"
                   >
-                    <VImg :src="avatar1" />
+                    <VImg :src="useMainStore().userAvatar" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
             <VListItemTitle class="font-weight-semibold">
-              {{form.userName}}
+              {{useMainStore().userName}}
             </VListItemTitle>
-            <VListItemSubtitle>{{form.is_superadmin}}</VListItemSubtitle>
+            <VListItemSubtitle>{{useMainStore().is_superadmin}}</VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 

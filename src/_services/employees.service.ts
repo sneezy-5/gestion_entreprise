@@ -1,3 +1,4 @@
+import { importUnwrapRef } from 'vue';
 /** Import des modules nécessaires */
 import Axios from './caller.service'
 const headers = { 'Content-Type': 'multipart/form-data' };
@@ -24,6 +25,10 @@ let createEmploye = (property:object) => {
     return Axios.post('/employees/', property,{ headers })
 }
 
+let importEmploye = (property:object) => {
+     
+    return Axios.post('/employe/import-excel/', property,{ headers })
+}
 let deleteEmploye = (cid:number) => {
     return Axios.delete('/employees/'+cid)
 }
@@ -34,5 +39,6 @@ export const employeesService = {
     getlEmploye,
     updateEmploye,
     createEmploye,
+    importEmploye ,
     deleteEmploye,
 }

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { authGuard } from '@/_helpers/auth-guard';
 import {checkIfLogged} from '@/_helpers/auth-check';
 import { accountService } from '@/_services';
+import { authSubGuard } from '@/_helpers/auth-guard-sub';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -229,6 +230,14 @@ const router = createRouter({
           name: "grand-livre",
           component: () => import("../pages/compta/grandlivre.vue"),
         },
+        {
+          meta: {
+            title: "balance",
+          },
+          path: "/balances",
+          name: "balance",
+          component: () => import("../pages/compta/balance.vue"),
+        },
 
         {
           path: 'projets',
@@ -299,10 +308,11 @@ const router = createRouter({
           component: () => import('../pages/login.vue'),
         },
         
-        // {
-        //   path: 'register',
-        //   component: () => import('../pages/register.vue'),
-        // },
+        {
+          path: 'subscription',
+          name: "subscription",
+          component: () => import('../pages/subscription.vue'),
+        },
         {
           path: '/:pathMatch(.*)*',
           component: () => import('../pages/[...all].vue'),
@@ -317,6 +327,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if(to.matched[0].children[0].name == 'dashboard'){
     authGuard()
+    authSubGuard()
     //checkIfLogged();
   }
 

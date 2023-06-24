@@ -102,14 +102,14 @@ console.log(formattedArray,formattedArray.includes('admin'))
           to: '/demande-conge',
         }"
       />
-      <VerticalNavLink
+      <!-- <VerticalNavLink
       v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
         :item="{
           title: 'Modèle de contrat',
           icon: 'mdi-file-document-edit',
           to: '/contrat-model',
         }"
-      />
+      /> -->
 
       <!-- <VerticalNavLink
         :item="{

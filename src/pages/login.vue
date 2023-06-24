@@ -28,6 +28,7 @@ const submit = () => {
                     accountService.saveToken('role',res.data.role)
                     accountService.saveToken('groups',res.data.groups)
                     accountService.saveToken('database',res.data.database)
+                    accountService.saveToken('subscription',res.data.subscription)
                     console.log(res.data.groups)
                     router.push('/dashboard')
                 })

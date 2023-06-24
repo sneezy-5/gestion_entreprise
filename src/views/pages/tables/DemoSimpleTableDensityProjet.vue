@@ -130,7 +130,8 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
           {{ item.description }}
         </td>
         <td>
-          <v-progress-circular
+          <v-progress-linear v-model="item.progression" color="success"></v-progress-linear>
+          <!-- <v-progress-circular
       :rotate="360"
       :size="100"
       :width="15"
@@ -138,7 +139,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
       color="teal"
     >
       {{ item.progression }}
-    </v-progress-circular>
+    </v-progress-circular> -->
         </td>
         <td class="text-center">
           <button @click="goEdit(item.id)">

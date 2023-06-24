@@ -13,41 +13,31 @@ export const useMainStore = defineStore("main", {
     userAvatar: null,
     lastLogin:null,
     isLoggedIn: accountService.isLogged(),
+    is_admin: null,
+  is_superadmin: null,
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
 
-    /* Sample data (commonly used) */
-    clients: [],
-    history: [],
-    employes: [],
-    contracts: [],
-    payslips: [],
-    presences: [],
-    avances: [],
-    primes: [],
-    conges: [],
-    demandeconges: [],
-    projets: [],
-    taches:[],
-    users:[],
-    comptes:[],
-    dashboard:{},
-    fournisseurs:[],
-    transacions:[],
-    tresoririe:[],
+
   }),
   actions: {
-    setUser(payload) {
-      if (payload.name) {
-        this.userName = payload.username;
-      }
-      if (payload.email) {
-        this.userEmail = payload.email;
-      }
-      if (payload.avatar) {
-        this.userAvatar = payload.avatar;
-      }
-    },
+    // setUser(payload) {
+    //   if (payload.userName) {
+    //     this.userName = payload.userName;
+    //   }
+    //   if (payload.userEmail) {
+    //     this.userEmail = payload.userEmail;
+    //   }
+    //   if (payload.userAvatar) {
+    //     this.userAvatar = payload.userAvatar;
+    //   }
+    //   if (payload.is_admin) {
+    //     this.is_admin = payload.is_admin;
+    //   }
+    //   if (payload.is_superadmin) {
+    //     this.is_superadmin = payload.is_superadmin;
+    //   }
+    // },
     login(user) {
       this.isLoggedIn = true
   
@@ -60,36 +50,45 @@ export const useMainStore = defineStore("main", {
     this.isLoggedIn = false
     //router.push('/auth/login')
   },
-    fetch(sampleDataKey) {
-      axios
-        .get(`data-sources/${sampleDataKey}.json`)
-        .then((r) => {
-          if (r.data && r.data.data) {
-            this[sampleDataKey] = r.data.data;
-          }
-        })
-        .catch((  ) => {
-          alert(error.message);
-        });
-    },
-
 
 
     fetchAllProfile() {
-      userService.getProfile().
-      then(res => {
-        this.userId = res.data.results[0].id
-        this.userName = res.data.results[0].username
-        this.userEmail = res.data.results[0].email
-        this.userAvatar = res.data.results[0].profile_image
-        this.lastLogin = res.data.results[0].last_login
-    })
-    .catch((error) => {
-         if (error.status == "401") {
-            console.error(error)
-         }
-     });
-
+      const role = accountService.getRole()
+      const superadmin = role=='true'?'SuperAdmin':''
+      const groups = accountService.getGroups()
+      const groupsArray = [groups];
+      const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
+      const admin =formattedArray.includes('admin')== true? 'Admin': ''
+      const form=reactive({
+        userName:'',
+        userEmail:'',
+        userAvatar:'',
+        lastLogin:'',
+        is_admin: admin,
+        is_superadmin:superadmin==''?admin:superadmin
+      })
+      userService.getProfile()
+        .then(res => {
+          const profileData = res.data.results[0];
+          if (profileData) {
+           
+            form.userName = profileData.username;
+            form.userEmail = profileData.email;
+            form.userAvatar = profileData.profile_image;
+            form.lastLogin = profileData.last_login;
+            this.userAvatar = profileData.profile_image
+            this.userEmail = profileData.email
+            this.userName = profileData.username
+            this.is_superadmin = form.is_superadmin
+          }
+          console.log(form)
+          //useMainStore().setUser(form)
+          
+        })
+        .catch(error => {
+          console.error(error);
+        });
+     
     },
 
     fetchAllEmployees() {

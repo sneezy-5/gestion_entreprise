@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { contractService } from '@/_services';
+import { accountService, contractService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
@@ -77,6 +77,31 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
 
+const downloadExcel = () => {
+
+
+const url = `http://127.0.0.1:8000/api/v0/contrat/download-excel/`;
+
+fetch(url, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer'+accountService.getToken(), 
+    'database': accountService.getDatabase(),
+  },
+})
+.then(response => response.blob())
+.then(blob => {
+  const downloadUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = downloadUrl;
+  link.download = 'contrat.xlsx';
+  link.click();
+  URL.revokeObjectURL(downloadUrl);
+})
+.catch(error => {
+  console.error('Erreur lors du téléchargement du fichier :', error);
+});
+};
 </script>
 
 <template>
@@ -98,7 +123,12 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
     <div class="flex-end">
-      <VBtn to="/create-contract">Ajouter</VBtn>
+      <VBtn to="/create-contract" style="margin-right: 10px;">Ajouter</VBtn>
+
+<VBtn @click="downloadExcel" color="success">Importer model à remplir
+  <VIcon icon="mdi-cloud-download"></VIcon>
+  <VIcon icon="mdi-microsoft-excel"></VIcon>
+  </VBtn>
     </div>
   <VTable density="compact">
     <thead>

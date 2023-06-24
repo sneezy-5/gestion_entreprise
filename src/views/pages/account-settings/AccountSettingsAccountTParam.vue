@@ -38,10 +38,10 @@ userService.getParameter()
      form.contact = profileData.contact
      form.database = profileData.database
      form.email = profileData.email
-     form.picture = profileData.picture 
+     //form.picture = profileData.picture 
      form.method_pay = profileData.method_pay
      form.prime_transport = profileData.prime_transport
-
+     form.avatar1 = profileData.picture 
     }
     console.log(res)
     
@@ -162,7 +162,7 @@ form.formErrors.contact = false;
                   icon="mdi-cloud-upload-outline"
                   class="d-sm-none"
                 />
-                <span class="d-none d-sm-block">votre de votre entreprise</span>
+                <span class="d-none d-sm-block">Logo entreprise</span>
               </VBtn>
 
               <input

@@ -117,7 +117,7 @@ const models = 20
 const downloadExcel = () => {
 
 
-const url = `http://127.0.0.1:8000/api/v0/taches/download-excel/?start_date=${form.start_date}&end_date=${form.end_date}&account=${form.account}`;
+const url = `http://127.0.0.1:8000/api/v0/taches/download-excel/?project=${form.project}`;
 
 fetch(url, {
   headers: {

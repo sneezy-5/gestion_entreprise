@@ -16,3 +16,5 @@ export * from './tresorerie.service'
 export * from './comptecompta.service'
 export * from './transactions.service'
 export * from './grandlivre.service'
+export * from './balance.service'
+

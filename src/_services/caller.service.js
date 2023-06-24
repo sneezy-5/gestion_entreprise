@@ -5,7 +5,7 @@ import router from '@/router'
 //import store from '@/stores'
 
 const Axios = axios.create({
-    baseURL:  'http://3.83.16.194:8000/api/v0/'
+    baseURL:  'http://127.0.0.1:8000/api/v0/'
 })
 
 

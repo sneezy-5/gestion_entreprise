@@ -22,7 +22,7 @@ const form = reactive({
     TotalPayDeduction: null,
     daysWorked: null,
     hoursWorked: null,
-    grossIncomeDetails: {hs15: "", hs50: "", hs75: "", conge: "", hs100: "", sursal: "", hstotal: "", seniority: "", salairBase: "", sommeprime: "", sursalaire: "", ancienneteInYR: "", brutImposableFiscal: "", brutImposableSocial: ""},
+    grossIncomeDetails: {hs15: "", hs50: "", hs75: "", conge: "", hs100: "", sursal: "", hstotal: "", seniority: "", salairBase: "", sommeprime: "", sursalairecontra: "", ancienneteInYR: "", brutImposableFiscal: "", brutImposableSocial: ""},
     nonDeductibleIncome: {totalprime: "", primetransport: ""},
     companyDeductions: {is: "", total: "", cnpsPat: "", taxForm: "", taxtApp: ""},
     employeeDeductions: {IS:"", cn: "", IGR:"", cmu:"", cnps: "", payday: 0, totret:""},
@@ -590,7 +590,7 @@ form.formErrors.employeeDeductions = false;
       <VTextField
           type="number"
           v-model="form.grossIncomeDetails.salairBase"
-          label="Salaire de base"
+          label="Salaire de base "
           :error="form.formErrors.grossIncomeDetails"
         />
       </VCol>
@@ -641,8 +641,8 @@ form.formErrors.employeeDeductions = false;
       >
       <VTextField
           type="number"
-          v-model="form.grossIncomeDetails.sursalaire"
-          label="Sur salaire"
+          v-model="form.grossIncomeDetails.sursalairecontra"
+          label="Sur salaire du contrat"
           :error="form.formErrors.grossIncomeDetails"
         />
       </VCol>

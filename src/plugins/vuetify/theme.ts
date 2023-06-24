@@ -6,7 +6,7 @@ const theme: VuetifyOptions['theme'] = {
     light: {
       dark: false,
       colors: {
-        'primary': '#9155FD',
+        'primary': '',
         'secondary': '#8A8D93',
         'on-secondary': '#fff',
         'success': '#56CA00',

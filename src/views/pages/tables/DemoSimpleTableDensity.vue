@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { employeesService } from '@/_services';
+import { accountService, employeesService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
@@ -73,7 +73,31 @@ const deleteEl = () => {
 getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
+const downloadExcel = () => {
 
+
+const url = `http://127.0.0.1:8000/api/v0/employes/download-excel/`;
+
+fetch(url, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer'+accountService.getToken(), 
+    'database': accountService.getDatabase(),
+  },
+})
+.then(response => response.blob())
+.then(blob => {
+  const downloadUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = downloadUrl;
+  link.download = 'employee.xlsx';
+  link.click();
+  URL.revokeObjectURL(downloadUrl);
+})
+.catch(error => {
+  console.error('Erreur lors du téléchargement du fichier :', error);
+});
+};
 
 </script>
 
@@ -96,7 +120,12 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
     <div class="flex-end">
-      <VBtn to="/create-employee">Ajouter</VBtn>
+      <VBtn to="/create-employee" style="margin-right: 10px;">Ajouter</VBtn>
+
+<VBtn @click="downloadExcel" color="success">Importer model à remplir
+  <VIcon icon="mdi-cloud-download"></VIcon>
+  <VIcon icon="mdi-microsoft-excel"></VIcon>
+  </VBtn>
     </div>
   <VTable density="compact">
     <thead>

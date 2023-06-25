@@ -60,7 +60,7 @@ const logout =()=>{
       color="primary"
       variant="tonal"
     >
-      <VImg :src="useMainStore().userAvatar" />
+      <VImg :src="form.userAvatar" />
 
       <!-- SECTION Menu -->
       <VMenu

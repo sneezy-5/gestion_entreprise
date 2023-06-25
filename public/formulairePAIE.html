@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+<style>
+
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap"); 
+
+* {
+    font-family: "Fira Sans", sans-serif;
+}
+
+  @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+
+body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(12, 2, 79);
+    flex-direction: column;
+}
+
+.blocform {
+    height: 1050px;
+    width: 800px;
+
+}
+
+.bloc1 {
+    background: linear-gradient(to left, rgb(56, 52, 246), rgb(14, 13, 157));
+    height: 8%;
+    width: 100%;
+    display: flex;
+}
+
+.bloc1 .logo {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bloc1 .logo img {
+    height: 100px;
+    width: 100px;
+}
+
+.bloc1 .titre {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.bloc1 .titre h1 {
+    margin: 0px;
+    font-size: 50px;
+    font-family: sans-serif;
+}
+
+.bloc1 .titre p {
+    margin: 0px 0px 10px;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.bloc2 {
+    background-color: rgb(221, 158, 11);
+    height: 18%;
+    width: 100%;
+    display: flex;
+}
+
+.bloc2 .infoentre {
+    height: 100%;
+    width: 45%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.infoentre h3 {
+    font-family: sans-serif;
+    font-size: 12px;
+    margin: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.bloc2 .infoempl {
+    height: 100%;
+    width: 55%;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.infoempl h3 {
+    font-family: sans-serif;
+    font-size: 12px;
+    margin: 3px 0px 0px 10px;
+    line-height: 1;
+    display: flex;
+    width: 95%;
+}
+
+.bloc3 {
+    width: 100%;
+    height: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(245, 245, 220, 0.68);
+}
+
+.divisetab {
+    width: 100%;
+    background-color: gold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab1 {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+}
+
+.tab11 {
+    border-collapse: collapse;
+    width: 30%;
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+}
+
+th {
+    background-color: rgb(27, 27, 27);
+    color: rgb(255, 255, 255);
+    font-size:15px
+}
+
+th, td {
+    border-left: 1px solid rgb(0, 0, 0);
+    padding: 2px;
+}
+
+td {
+    font-size: 14px;
+}
+
+.trait {
+    border: 1px dashed rgb(0, 0, 0);
+}
+
+.traitlarge {
+    width: 40%;
+}
+
+.tabfooter {
+    background-color: aqua;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height:50px
+}
+
+.cumul {
+    border-collapse: collapse;
+    width: 70%;
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    font-size:14px
+}
+
+.gainRet {
+    width: 30%;
+    background-color: coral;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.gainRet div {
+    background: rgb(238, 238, 238);
+    height: 50%;
+    width: 100%;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gainRet div span {
+    padding: 10px;
+}
+
+.tabfooter2 {
+    background-color: aqua;
+    display: flex;
+    width: 100%;
+    height: 65px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cumul2 {
+    border-collapse: collapse;
+    width: 70%;
+    background-color: rgb(32, 0, 129);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    font-size: 14px;
+}
+
+.cumul2 .l1cn, .l2cn {
+    background: rgb(196, 196, 236);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+}
+
+.gainRet2 {
+    border-collapse: collapse;
+    width: 30%;
+    background-color: coral;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gainRet2 div {
+    background: rgb(196, 196, 236);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-width: 0px 1px 1px;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-left-color: rgb(0, 0, 0);
+    border-image: initial;
+    border-top-style: initial;
+    border-top-color: initial;
+}
+
+.gainRet2 div:nth-child(1) {
+    height: 30%;
+}
+
+.gainRet2 div:nth-child(2) {
+    height: 70%;
+}
+
+.gainRet2 div span {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.gainRet2 div span div {
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    height: 40px;
+    width: 30%;
+    margin-top: 15px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    cursor: pointer;
+    border: none;
+    background-color: #322fe9;
+    transition: all 0.5s ease 0s;
+    border: 1px solid rgb(255, 255, 255);
+    display:flex;
+    justify-content:center;
+    align-items:center
+}
+
+.btn:hover {
+    background-color: #2196F3;
+    transition: all 0.5s ease 0s;
+    transform:rotate(2deg);
+    cursor:pointer
+}
+
+.btn img{
+    height:30px;
+    width:30px
+}
+
+.pdf{
+    color:#f15642;
+    font-size:20px;
+    font-weight:600;
+    margin:3px
+}
+
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+
+    <button class="btn" onclick="btngenerateur()">
+        Générer en <span class="pdf"> pdf</span>
+      <img src="img/imgpdf.png" alt="" height="200" width="200" >
+    </button>
+
+    <div class="blocform">
+
+        <div class="bloc1">
+           <div class="logo">
+            <img src="img/logoeso.png" alt="" height="200" width="200" id="bulletin-img">
+           </div>
+           <div class="titre">
+            <h1 >Bulletin de paie</h1>
+            <p>LA PAYE DU <span id="bulletin-date-start"> 14/06/2023</span> AU <span id="bulletin-date-end"> 14/06/2023</span></p>
+           </div>
+        </div>
+        <div class="bloc2">
+    
+            <div class="infoentre">
+                <div style="display:flex;">
+                    <h3>Adrress: <span id="bulletin-address">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Siège Social :<span id="bulletin-siege"> Bingerille-cité FDFP-VILLA 67 </span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>N°CNPS :<span id="bulletin-cnps">XXXXX</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>N° Contribuable :<span id="bulletin-nbrcontru">XXXXXXX</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>E-mail :<span id="bulletin-entre-email">infos@cotedivoire.ci</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Téléphone<span id="bulletin-entre-phone">+225 0574686453</span></h3>
+                </div>
+            </div>
+    
+            <div class="infoempl">
+    
+                <div style="display:flex;">
+                    <h3>Matricule :<span id="bulletin-matri">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Nom : <span id="bulletin-nom">Bingerille cité fdo pppmmmmmmmmmm  </span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Prénoms : <span id="bulletin-prenom">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Emploi : <span id="bulletin-poste">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Catégorie : <span id="bulletin-categorie">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Nbre de Part : <span id="bulletin-nbrpart">17 BP 155 AJJ</span></h3>
+                </div>
+    
+                <div style="display:flex;">
+                    <h3>Date d'Embauche : <span id="bulletin-hiringdate">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Date de Naissance : <span id="bulletin-birthdate">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>Ville : <span id="bulletin-city">17 BP 155 AJJ</span></h3>
+                </div>
+                <div style="display:flex;">
+                    <h3>N° SECU : <span id="bulletin-nbrscu">17 BP 155 AJJ</span></h3>
+                </div>
+    
+            </div>
+    
+        </div>
+        <div class="bloc3">
+    
+            <div class="divisetab">
+    
+                <table class="tab1">
+                    <tbody><tr>
+                        <th>N° Rubrique</th>
+                        <th>Libelle</th>
+                        <th>Base</th>
+                        <th>Taux</th>
+                        <th>Gains</th>
+                        <th>Retenues</th>
+                        <th>Taux P.P</th>
+                        <th>Montant P.P</th>
+                    </tr>
+    
+                    <!---les dix colonnes-->
+                    <tr>
+                        <td style="text-align:center">01</td>
+                        <td>Salaire de Base</td>
+                        <td id="bulletin-base">120 715</td>
+                        <td id="bulletin-jour">30</td>
+                        <td id="bulletin-surla">120 715</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+      
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">02</td>
+                        <td>Avantage en nature</td>
+                        <td id="bulletin-nature-some">23 472</td>
+                        <td id="bulletin-nature-jour">30</td>
+                        <td id="bulletin-nature-some-brut">23 472</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">03</td>
+                        <td class="trait traitlarge" style="background: #2f2ce338;"><strong>SALAIRE BRUT</strong></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td style="background: #2f2ce338;border-top:1px dashed #000;"><strong id="bulletin-salire-brut">129.000</strong></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">04</td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">05</td>
+                        <td class="trait traitlarge" style="background: #2f2ce338;"><strong>BRUT IMPOSSABLE</strong></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td style="background: #2f2ce338;" class="trait"><strong id="bulletin-brut-impos">129.000</strong></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">06</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">07</td>
+                        <td style="background: #2f2ce338;">Impôt Employeur</td>
+                        <td id="bulletin-impo-empl">129 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;" id="bulletin-implo-pou">1.20%</td>
+                        <td style="background: #2f2ce338;text-align:center" id="bulletin-implo-som">1548</td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">08</td>
+                        <td style="background: #2f2ce338;">F.D.F.P/T.A</td>
+                        <td id="bulletin-fdf">129 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;" id="bulletin-fdf-pourc">0.40%</td>
+                        <td style="background: #2f2ce338;text-align:center">516</td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">09</td>
+                        <td style="background: #2f2ce338;">F.D.F.P/F.P.C</td>
+                        <td id="bulletin-fdft">129 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;" id="bulletin-fdf-pourc">0.60%</td>
+                        <td style="background: #2f2ce338;text-align:center" id="bulletin-fdf-som">774</td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">10</td>
+                        <td style="background: #2f2ce338;"><strong>Total Charge Fiscales Employeurs</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;"></td>
+                        <td style="background: #2f2ce338;text-align:center"> <strong id="bulletin-total-charge-empl-som">125 000</strong></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">11</td>
+                        <td style="background: #2f2ce338;">C.N.P.S/Prestation Familiale</td>
+                        <td id="bulletin-cnps-presta-fam">70 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;" id="bulletin-cnps-pourc">5.75%</td>
+                        <td style="background: #2f2ce338;text-align:center" id="bulletin-cnps-som">4025</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">12</td>
+                        <td style="background: #2f2ce338;">C.N.P.S/Accident de Travail</td>
+                        <td>70 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">5.00%</td>
+                        <td style="background: #2f2ce338;text-align:center">3 500</td>
+                    </tr>
+                    <!---les dix colonnes-->
+    
+                  
+                    <tr>
+                        <td style="text-align:center">13</td>
+                        <td style="background: #2f2ce338;">C.N.P.S/Caisse de Retraite</td>
+                        <td>144 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">7.70%</td>
+                        <td style="background: #2f2ce338;text-align:center">1002</td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">14</td>
+                        <td style="background: #2f2ce338;">CMU/Assurance Maladie</td>
+                        <td>1000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">50%</td>
+                        <td style="background: #2f2ce338;text-align:center">500</td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">15</td>
+                        <td style="background: #2f2ce338;">Assurance Maternité</td>
+                        <td>new 2000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">ouattara</td>
+                        <td style="background: #2f2ce338;text-align:center">600</td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">16</td>
+                        <td style="background: #2f2ce338;"><strong>Total Charges Sociales Employeurs</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;"></td>
+                        <td style="background: #2f2ce338;text-align:center"> <strong>125 000</strong></td>
+                    </tr>
+    
+           <tr>
+                        <td style="text-align:center">17</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+        </tr>         
+    
+                    <tr>
+                        <td style="text-align:center">18</td>
+                        <td><strong>Total Charges Patronales</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;text-align:center"> <strong>125 000</strong></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">19</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+        </tr>
+                    <tr>
+                        <td style="text-align:center">20</td>
+                        <td style="background: #2f2ce338;">Retenue I.S</td>
+                        <td>129 000</td>
+                        <td style="background: #2f2ce338;">ouattara</td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">15000</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">21</td>
+                        <td style="background: #2f2ce338;">Retenue C.N</td>
+                        <td>129 000</td>
+                        <td style="background: #2f2ce338;"></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">15000</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+    
+                    
+                    <tr>
+                        <td style="text-align:center">22</td>
+                        <td style="background: #2f2ce338;">Retenue I.G.R</td>
+                        <td>129 000</td>
+                        <td style="background: #2f2ce338;"></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">15000</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">23</td>
+                        <td style="background: #2f2ce338;">Retenue C.N.P.S</td>
+                        <td>129 000</td>
+                        <td style="background: #2f2ce338;">ouattara</td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">15000</td>
+                        <td></td>
+                        <td></td>                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">24</td>
+                        <td style="background: #2f2ce338;">Retenue C.M.U</td>
+                        <td>129 000</td>
+                        <td style="background: #2f2ce338;">ouattara</td>
+                        <td></td>
+                        <td style="background: #2f2ce338;">2000</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <td style="text-align:center">25</td>
+                        <td style="background: #2f2ce338;"><strong>Total Retenues</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background: #2f2ce338;"><strong>125 000</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+    <tr>
+                        <td style="text-align:center">26</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+    
+                        <td></td>
+                        <td></td>
+                        <td></td>
+    </tr>                  
+    
+                    <tr>
+                        <td style="text-align:center">27</td>
+                        <td class="trait traitlarge" style="background: #2f2ce338;"><strong>SALAIRE NET</strong></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait" style="background: #2f2ce338;"><strong>125 000</strong></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                        <td class="trait"></td>
+                    </tr>
+                    <tr>
+                        <td style="height: 40px;text-align:center">28</td>
+                        <td>Indemité de Transport non impossable</td>
+                        <td>25 000</td>
+                        <td>30</td>
+                        <td>25 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+    
+                  </tbody></table>
+    
+
+    
+    
+            </div>
+    
+    
+    
+       
+           <div class="tabfooter">
+    
+    
+            <div class="cumul">
+                <h3>CUMULE DE PAIE</h3>
+            </div>
+    
+            <div class="gainRet">
+                  <div>
+                    <span>GAINS</span>
+                    <span>15000</span>
+                  </div>
+    
+                  <div>
+                    <span>RETENUES</span>
+                    <span>15000</span>
+                  </div>
+            </div>
+    
+           </div>
+    
+    
+    
+    
+    
+    
+           <div class="tabfooter2">
+    
+    
+            <div class="cumul2">
+                <div class="l1cn">
+                    <span class="CN">
+                        <div>CN</div>
+                        <div>2</div>
+                    </span>
+    
+                    <span class="LGR">
+                        <div>I.G.R</div>
+                        <div>2</div>
+                    </span>
+    
+                    <span class="CNPS">
+                        <div>CNPS Employé</div>
+                        <div>2</div>
+                    </span>
+                </div>
+    
+                <div class="l2cn">
+                    <span class="CN">
+                        <div>Base Congé</div>
+                        <div>2</div>
+                    </span>
+    
+                    <span class="LGR">
+                        <div>Jours Fiscaux</div>
+                        <div>2</div>
+                    </span>
+    
+                    <span class="CNPS">
+                        <div>I.S</div>
+                        <div>2</div>
+                    </span>
+    
+                    <span class="CNPS">
+                        <div>Brut Impossable</div>
+                        <div>2</div>
+                    </span>
+                </div>
+            </div>
+    
+            <div class="gainRet2">
+                  <div style="border-top:1px solid #000;">
+                    <span style="padding:0px;"><strong style="padding-left:8px;">Net à payer</strong></span>
+                    <span><strong style="padding-right:8px;">150 000</strong></span>
+                  </div>
+    
+                  <div>
+                    <span>
+                        <div>Reglement</div>
+                        <div>XXX</div>
+                    </span>
+                     <span>
+                        <div>Virement</div>
+                        <div>010001 12225005544</div>
+                     </span>
+                  </div>
+            </div>
+    
+           </div>
+        
+    
+        </div>
+    
+    </div>
+
+
+    <script>
+
+function btngenerateur(){
+
+const blocform=document.querySelector(".blocform")
+var opt={
+  margin:0,
+  filename: `bulletin.pdf`,
+  image: {type: 'webp', quality:1},
+  html2canvas: {scale:1},
+  jsPDF: {unit:'in', format:'letter',putOnlyUsedFonts:true,floatPrecision: 16,orientation:'portrait'},
+  
+}
+ html2pdf()
+.from(blocform)
+.set(opt)
+.save()
+
+// const table = document.querySelector('blocform');
+//       const rows = table.rows;
+//       const doc = new jsPDF();
+
+//       let y = 20;
+
+//       doc.autoTable({ html: table });
+
+//       doc.save('bulletin.pdf');
+}
+
+    </script>
+
+<script>
+    // Fonction pour récupérer l'ID depuis l'URL
+    function getIdFromUrl() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      return urlParams.get('id');
+    }
+
+    // Récupérer l'ID et l'afficher dans la console
+    const id = getIdFromUrl();
+    console.log('ID récupéré depuis l\'URL :', id);
+  </script>
+
+
+<script>
+    // Constantes des valeurs par défaut
+const DEFAULT_TITLE = "Titre par défaut";
+const DEFAULT_CONTENT = "Contenu par défaut";
+const DEFAULT_AUTHOR = "Auteur par défaut";
+
+// Fonction pour récupérer les données de l'API
+async function fetchDataFromAPI() {
+  try {
+    
+    const response = await fetch(`http://127.0.0.1:8000/api/v0/payslips/${id}/`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer'+ localStorage.getItem('access'), 
+      'database': localStorage.getItem('database'),
+    },
+  });
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.log('Erreur lors de la récupération des données de l\'API:', error);
+    return null;
+  }
+}
+
+// Fonction pour mettre à jour les valeurs du bulletin avec les données de l'API
+async function updateBulletin() {
+  const bulletinTitle = document.getElementById('bulletin-matri');
+  const bulletinContent = document.getElementById('bulletin-nom');
+  const bulletinAuthor = document.getElementById('bulletin-base');
+
+  // Récupérer les données de l'API
+  const data = await fetchDataFromAPI();
+
+  // Mettre à jour les valeurs du bulletin avec les données de l'API ou les valeurs par défaut
+  bulletinTitle.textContent = data && data.employee ? data.employee.matricule : DEFAULT_TITLE;
+  bulletinContent.textContent = data && data.employee ? data.employee.firstName : DEFAULT_CONTENT;
+  bulletinAuthor.textContent = data && data.grossIncomeDetails ? data.grossIncomeDetails.salairBase : DEFAULT_AUTHOR;
+}
+
+// Appel initial pour mettre à jour le bulletin
+updateBulletin();
+
+</script>
+</body>
+</html>

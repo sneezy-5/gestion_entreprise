@@ -66,7 +66,7 @@ form.formErrors.account = false;
 }
 
 const openBalance = () => {
-      const url = `/src/assets/balance.html?start_date=${form.start_date}&end_date=${form.end_date}`;
+      const url = `/balance.html?start_date=${form.start_date}&end_date=${form.end_date}`;
       window.open(url);
     }
 

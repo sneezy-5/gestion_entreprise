@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balance</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+    
+    th, td {
+      border: 1px solid #000000;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    thead th {
+      background-color: #0d538df5;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    tfoot td {
+      background-color: #e6e6e6;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .btn {
+      height: 40px;
+      width: 30%;
+      margin-top: 15px;
+      border-radius: 5px;
+      color: rgb(255, 255, 255);
+      font-size: 17px;
+      cursor: pointer;
+      border: none;
+      background-color: #322fe9;
+      transition: all 0.5s ease 0s;
+      border: 1px solid rgb(255, 255, 255);
+      display:flex;
+      justify-content:center;
+      align-items:center
+    }
+
+    .btn:hover {
+      background-color: #2196F3;
+      transition: all 0.5s ease 0s;
+      transform:rotate(2deg);
+      cursor:pointer
+    }
+
+    .btn img{
+      height:30px;
+      width:30px
+    }
+
+    .pdf{
+      color:#f15642;
+      font-size:20px;
+      font-weight:600;
+      margin:3px
+    }
+
+    .blocform {
+      /* padding: 100px; */
+      height: 500px;
+      width: 70%;
+    }
+  </style>
+  
+  <button class="btn" onclick="generatePdf()">
+    Générer en <span class="pdf">pdf</span>
+    <img src="img/imgpdf.png" alt="" height="200" width="200">
+  </button>
+  
+  <div class="blocform">
+    <table>
+      <caption>Balance</caption>
+      <thead>
+        <tr>
+          <th rowspan="2">N° Compte</th>
+          <th rowspan="2">Libellé</th>
+          <th colspan="2">Solde Initial</th>
+          <th colspan="2">Solde Final</th>
+        </tr>
+        <tr>
+          <th>Débit</th>
+          <th>Crédit</th>
+          <th>Débit</th>
+          <th>Crédit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="nbcompte">101</td>
+          <td class="Libelle">Caisse</td>
+          <td class="SIC">30,000</td>
+          <td class="SID">10,000</td>
+          <td class="SFC">5,000</td>
+          <td class="SFD">2,000</td>
+        </tr>
+  
+
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">Totaux</td>
+          <td id="TSID">40,000</td>
+          <td id="TSIC">25,000</td>
+          <td id="TSFD">25,000</td>
+          <td id="TSFC">253,000</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <script>
+    function generatePdf() {
+ 
+      const table = document.querySelector('table');
+      const rows = table.rows;
+      const doc = new jsPDF();
+
+      let y = 20;
+
+      doc.autoTable({ html: table });
+
+      doc.save('balance.pdf');
+    }
+    
+
+
+  </script>
+<script>
+  // Fonction pour récupérer l'ID depuis l'URL
+  function getIdFromUrl(param) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(param);
+  }
+
+  // Récupérer l'ID et l'afficher dans la console
+  const start_date = getIdFromUrl('start_date');
+  const end_date = getIdFromUrl('end_date');
+
+</script>
+<script>
+
+
+// Fonction pour récupérer les données de l'API
+async function fetchDataFromAPI() {
+try {
+  const url = `http://127.0.0.1:8000/api/v0/balance/?start_date=${start_date}&end_date=${end_date}`;
+  const response = await fetch(url, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer'+ localStorage.getItem('access'), 
+    'database': localStorage.getItem('database'),
+  },
+});
+  const data = await response.json();
+
+  return data;
+} catch (error) {
+  console.log('Erreur lors de la récupération des données de l\'API:', error);
+  return null;
+}
+}
+
+
+
+
+// Fonction pour mettre à jour les valeurs du bulletin avec les données de l'API
+async function updateBulletin() {
+
+  const TSIC = document.getElementById('TSIC');
+const TSID = document.getElementById('TSID');
+const TSFC = document.getElementById('TSFC');
+const TSFD =  document.getElementById('TSFD');
+  // Récupérer la référence du tableau
+  const table = document.querySelector('table');
+  const tbody = table.querySelector('tbody');
+
+  // Supprimer les lignes existantes du tableau
+  while (tbody.firstChild) {
+    tbody.removeChild(tbody.firstChild);
+  }
+
+  // Récupérer les données de l'API
+  const datas = await fetchDataFromAPI();
+  console.log(datas.totaux_debit_ini, datas.totaux_credit_ini)
+  const data = datas.data
+  // Vérifier si des données ont été récupérées
+  if (data && data.length > 0) {
+    // Parcourir les données et créer les nouvelles lignes du tableau
+    data.forEach(item => {
+      const row = document.createElement('tr');
+     
+      // Ajouter les cellules avec les valeurs appropriées
+      const nbcompteCell = document.createElement('td');
+      nbcompteCell.textContent = item.numero;
+      row.appendChild(nbcompteCell);
+
+      const libelleCell = document.createElement('td');
+      libelleCell.textContent = item.account;
+      row.appendChild(libelleCell);
+
+      const sicCell = document.createElement('td');
+      sicCell.textContent = item.debits;
+      row.appendChild(sicCell);
+
+      const sidCell = document.createElement('td');
+      sidCell.textContent = item.credits;
+      row.appendChild(sidCell);
+
+      const sfcCell = document.createElement('td');
+      sfcCell.textContent = item.total_fini.total_debit;
+      row.appendChild(sfcCell);
+
+      const sfdCell = document.createElement('td');
+      sfdCell.textContent = item.total_fini.total_credit;
+      row.appendChild(sfdCell);
+
+      // Ajouter la nouvelle ligne au tableau
+      tbody.appendChild(row);
+    });
+  }
+  TSIC.textContent = datas.totaux_credit_ini
+  TSID.textContent = datas.totaux_debit_ini
+  TSFC.textContent = datas.totaux_credit_fini
+  TSFD.textContent = datas.totaux_debit_fini
+}
+updateBulletin();
+</script>
+</body>
+</html>

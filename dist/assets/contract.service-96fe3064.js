@@ -1,1 +1,0 @@
-import{A as e}from"./caller.service-afc094da.js";let r=t=>e.get("/contracts/?"+t),c=t=>e.get("/contracts/"+t+"/"),n=t=>e.put("/contracts/"+t.id+"/",t),o=t=>e.post("/contracts/",t),a=t=>e.delete("/contracts/"+t+"/");const l={getAllContracts:r,getContracts:c,updateContracts:n,createContracts:o,deleteContracts:a};export{l as c};

@@ -1,1 +1,0 @@
-import{A as t}from"./caller.service-afc094da.js";let r=e=>t.get("/projects/?"+e),o=()=>t.get("/projet-list/"),c=e=>t.get("/projects/"+e+"/"),j=e=>t.put("/projects/"+e.id+"/",e),s=e=>t.post("/projects/",e),p=e=>t.delete("/projects/"+e);const u={getProjects:r,getProjetList:o,getProject:c,updateProject:j,createProeject:s,deleteProejct:p};export{u as p};

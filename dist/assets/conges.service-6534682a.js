@@ -1,1 +1,0 @@
-import{A as t}from"./caller.service-afc094da.js";let n=e=>t.get("/conges/?"+e),o=e=>t.get("/conges/"+e),g=e=>t.put("/conges/"+e.id+"/",e),r=e=>t.post("/conges/",e),s=e=>t.delete("/conges/"+e);const l={getAllConges:n,getConge:o,updateConge:g,createConge:r,deleteConge:s};export{l as c};

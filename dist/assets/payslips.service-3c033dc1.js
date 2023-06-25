@@ -1,1 +1,0 @@
-import{A as s}from"./caller.service-afc094da.js";let t=e=>s.get("/payslips/?"+e),p=e=>s.get("/payslips/"+e),l=e=>s.put("/payslips/"+e.id+"/",e),a=e=>s.post("/generate-paye/",e),r=e=>s.post("/generate-one/",e),i=e=>s.delete("/payslips/"+e);const y={getAllPayslips:t,getPayslips:p,updatePayslips:l,createPayslips:a,createPayslipsOne:r,deletePayslips:i};export{y as p};

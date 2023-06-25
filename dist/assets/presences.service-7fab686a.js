@@ -1,1 +1,0 @@
-import{A as r}from"./caller.service-afc094da.js";let s=e=>r.get("/presences/?"+e),t=e=>r.get("/presences/"+e),n=e=>r.put("/presences/"+e.id+"/",e),c=e=>r.post("/presences/",e),p=e=>r.delete("/presences/"+e);const u={getAllPresences:s,getPresence:t,updatePresence:n,createresence:c,deletePresence:p};export{u as p};

@@ -79,7 +79,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -91,7 +91,7 @@ form.formErrors.periodStart = true;
 toast.value = {
 show: true,
 text: error.response.data['periodStart'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -103,7 +103,7 @@ form.formErrors.periodEnd = true;
 toast.value = {
 show: true,
 text: error.response.data['periodEnd'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -116,7 +116,7 @@ form.formErrors.absentdays = true;
 toast.value = {
 show: true,
 text: error.response.data['absentdays'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -128,7 +128,7 @@ form.formErrors.presentdays = true;
 toast.value = {
 show: true,
 text: error.response.data['presentdays'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -148,7 +148,7 @@ form.formErrors.normalHours = true;
 toast.value = {
 show: true,
 text: error.response.data['normalHours'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -160,7 +160,7 @@ form.formErrors.normalHoursComplementary = true;
 toast.value = {
 show: true,
 text: error.response.data['normalHoursComplementary'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -172,7 +172,7 @@ form.formErrors.Overtime_15 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_15'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -184,7 +184,7 @@ form.formErrors.Overtime_50 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_50'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -196,7 +196,7 @@ form.formErrors.Overtime_15 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_75'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -208,7 +208,7 @@ form.formErrors.Overtime_100 = true;
 toast.value = {
 show: true,
 text: error.response.data['Overtime_100'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -220,7 +220,7 @@ form.formErrors.employee = true;
 toast.value = {
 show: true,
 text: error.response.data['employee'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -294,8 +294,8 @@ form.formErrors.employee = false;
         <VTextField
           type="number"
           v-model="form.presentdays"
-          label="Presence"
-          placeholder="Presence"
+          label="Nomber de jour Present"
+          placeholder="Nombre de jour Present"
           :error="form.formErrors.presentdays"
         />
       </VCol>
@@ -308,8 +308,8 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.absentdays"
-          label="Absence"
-          placeholder="Absence"
+          label="Nombre de jour absent"
+          placeholder="Nombre de jour absent"
           :error="form.formErrors.absentdays"
         />
       </VCol>
@@ -366,7 +366,7 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.Overtime_15"
-          label="Heure sup"
+          label="Heure sup 15%"
           placeholder="Heure sup"
           :error="form.formErrors.Overtime_15"
         />
@@ -380,7 +380,7 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.Overtime_50"
-          label="Heure sup"
+          label="Heure sup 50%"
           placeholder="Heure sup"
           :error="form.formErrors.Overtime_50"
         />
@@ -394,7 +394,7 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.Overtime_75"
-          label="Heure sup 75"
+          label="Heure sup 75%"
           placeholder="Heure sup 75"
           :error="form.formErrors.Overtime_75"
         />
@@ -407,7 +407,7 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.Overtime_100"
-          label="Heure sup 100"
+          label="Heure sup 100%"
           placeholder="Heure sup 100"
           :error="form.formErrors.Overtime_100"
         />

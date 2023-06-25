@@ -95,7 +95,7 @@ console.log(formattedArray,formattedArray.includes('admin'))
         }"
       />
       <VerticalNavLink
-      v-if="role === 'true' || formattedArray.includes('admin')"
+      
         :item="{
           title: 'démande de congé',
           icon: 'mdi-gamepad-round-down',

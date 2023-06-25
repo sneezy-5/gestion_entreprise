@@ -153,7 +153,7 @@ form.formErrors.user = false;
           >
           <VSelect
       v-model="form.user"
-      label="Employés"
+      label="Compte Employé"
       :items="employe"
       item-title="state"
         item-value="abbr"
@@ -207,13 +207,18 @@ form.formErrors.user = false;
         cols="12"
         md="6"
       >
-        <VTextField
-          type="text"
+        <!-- <VTextField
+          type="textarea"
           v-model="form.description"
           label="Description"
           placeholder="Description"
           :error="form.formErrors.description"
-        />
+        /> -->
+        <VTextarea
+        v-model="form.description"
+          label="Description"
+          placeholder="Description"
+          :error="form.formErrors.description"></VTextarea>
       </VCol>
 
       <!-- 👉 debut -->

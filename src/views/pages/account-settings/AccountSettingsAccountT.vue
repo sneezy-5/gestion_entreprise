@@ -123,7 +123,7 @@ profileForm.formErrors.email = false;
 <template>
   <VRow>
     <VCol cols="12">
-      <VCard title="Account Details">
+      <VCard title="Details de compte">
         <VCardText class="d-flex" >
           <!-- 👉 Avatar -->
           <VAvatar
@@ -144,7 +144,7 @@ profileForm.formErrors.email = false;
                   icon="mdi-cloud-upload-outline"
                   class="d-sm-none"
                 />
-                <span class="d-none d-sm-block">Upload new photo</span>
+                <span class="d-none d-sm-block">Ajouter une nouvelle photo</span>
               </VBtn>
 
               <input

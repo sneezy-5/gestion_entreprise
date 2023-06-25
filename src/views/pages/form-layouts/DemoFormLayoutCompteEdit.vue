@@ -15,11 +15,13 @@ const toast = ref({
 
 const form = reactive({
     name: null,
+    number:null,
     balance: null,
    
     formErrors: {
       name: false,
       balance: false,
+      number:false,
    
   },
 });
@@ -29,6 +31,9 @@ compteService.getCompte(routeParam)
     form.id =res.data.id  
     form.name = res.data.name;
     form.balance = res.data.balance;
+    form.number = res.data.number;
+
+    form.formErrors.number = false;
         console.log(res)
     })
     .catch((error) => {
@@ -48,7 +53,7 @@ const submit = () => {
         form.formErrors.name = false;
           form.formErrors.balance = false;
        
-        toast.value = {
+          toast.value = {
         show: true,
         text: 'Modifié avec succès',
         color: 'success',
@@ -57,7 +62,7 @@ const submit = () => {
     .catch((error) => {
 
 
-if(error.response.data['RequestDate']){
+if(error.response.data['name']){
 
 form.formErrors.name = true;
 toast.value = {
@@ -81,6 +86,18 @@ color: 'danger',
 else{
 
 form.formErrors.balance = false;
+} if(error.response.data['number']){
+
+form.formErrors.number = true;
+toast.value = {
+show: true,
+text: error.response.data['number'],
+color: 'danger', 
+};
+} 
+else{
+
+form.formErrors.balance = false;
 }
        console.log(error)
         
@@ -94,34 +111,47 @@ form.formErrors.balance = false;
     <VRow>
 
     
-      <!-- 👉 Nom -->
-      <VCol
+     <!-- 👉 Nom -->
+     <VCol
         cols="12"
         md="6"
       >
         <VTextField
         type="text"
           v-model="form.name"
-          label="Nom"
-          placeholder="Nom"
-          :error="form.formErrors.balance"
+          label="Libellé"
+          placeholder="Libellé"
+          :error="form.formErrors.name"
         />
       </VCol>
 
-      <!-- 👉 amount -->
+      <!-- 👉 numero -->
       <VCol
         cols="12"
         md="6"
       >
         <VTextField
           type="number"
-          v-model="form.balance"
-          label="Balance"
-          placeholder="Balance"
-          :error="form.formErrors.balance"
+          v-model="form.number"
+          label="Numéro"
+          placeholder="Numéro"
+          :error="form.formErrors.number"
         />
       </VCol>
 
+   <!-- 👉 amount -->
+   <VCol
+        cols="12"
+        md="6"
+      >
+        <VTextField
+          type="number"
+          v-model="form.balance"
+          label="Montant"
+          placeholder="Montant"
+          :error="form.formErrors.balance"
+        />
+      </VCol>
     
  <!--shoxw toats message-->
  <VSnackbar 

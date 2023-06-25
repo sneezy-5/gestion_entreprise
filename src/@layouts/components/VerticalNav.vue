@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import logo from '@images/logo.svg?raw'
-import logos from '@images/logos.svg?raw'
+import logoeso from '@images/logoeso.svg?raw'
 
 import type { Component } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
@@ -62,7 +62,7 @@ const handleNavScroll = (evt: Event) => {
         >
           <div
             class="d-flex"
-            v-html="logos"
+            v-html="logoeso"
           />
 
           <h1 class="font-weight-medium leading-normal text-xl text-uppercase">

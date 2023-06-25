@@ -130,7 +130,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
           {{ item.description }}
         </td>
         <td>
-          <v-progress-linear v-model="item.progression" color="success"></v-progress-linear>
+          <v-progress-linear v-model="item.progresion" color="success"></v-progress-linear>
           <!-- <v-progress-circular
       :rotate="360"
       :size="100"

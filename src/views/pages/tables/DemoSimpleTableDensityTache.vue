@@ -160,8 +160,8 @@ fetch(url, {
 
     <div class="flex-start">
 
-      <VBtn  to="/create-tache" style="margin-right: 10px;">Ajouter</VBtn>
-      <VBtn @click="downloadExcel" color="success">
+      <VBtn  to="/create-tache" style="margin-right: 10px;"  v-if="role=='true'">Ajouter</VBtn>
+      <VBtn @click="downloadExcel" color="success">Exporter
         <VIcon icon="mdi-cloud-download"></VIcon>
         <VIcon icon="mdi-microsoft-excel"></VIcon>
         </VBtn>
@@ -216,6 +216,9 @@ fetch(url, {
     <thead>
       <tr>
         <th class="text-uppercase">
+          Asigné
+        </th>
+        <th class="text-uppercase">
           Titre
         </th>
         <th class="text-uppercase text-center">
@@ -244,6 +247,9 @@ fetch(url, {
         v-for="item in desserts[0]?.results"
         :key="item.id"
       >
+      <td>
+          {{ item.user.employee.firstName }}   {{ item.user.employee.lastName }}
+        </td>
         <td>
           {{ item.title }}
         </td>

@@ -22,7 +22,7 @@ const openDialog = (id:number) => {
 
 const openDialogEdtpass = (id:number) => {
   ids.value =id
-  showDialog.value = true;
+  showDialogEditPass.value = true;
 };
 const closeDialog = () => {
   showDialog.value = false;
@@ -127,7 +127,7 @@ form.formErrors.newpassword = false;
 }
      });
    
-     showDialog.value = false;
+     showDialogEditPass.value = false;
 
 };
 </script>
@@ -143,13 +143,13 @@ form.formErrors.newpassword = false;
       </v-card-text>
 
       <v-card-actions>
-        <v-btn  @click="deleteEl" style="color: red;">Confimer</v-btn>
+        <v-btn  @click="deleteEl" color="danger">Confimer</v-btn>
         <v-btn  @click="closeDialog">Annuler</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 
-  <v-dialog v-model="showDialog" max-width="500px">
+  <v-dialog v-model="showDialogEditPass" max-width="500px">
     <v-card>
       <v-card-title class="headline">Changer mot de passe</v-card-title>
       <div style="min-width: 700px; margin-left:  18px;" >
@@ -172,7 +172,7 @@ form.formErrors.newpassword = false;
      
             </VRow>
             <v-card-actions>
-        <v-btn  type="submit" style="color: red;">Confimer</v-btn>
+        <v-btn  type="submit" color="danger">Confimer</v-btn>
         <v-btn  @click="closeDialog">Annuler</v-btn>
       </v-card-actions>
           </VForm>
@@ -209,13 +209,13 @@ form.formErrors.newpassword = false;
           Employe
         </th>
         <th class="text-uppercase text-center">
-          Nom
+          Username
         </th>
         <th class="text-uppercase text-center">
           Email
         </th>
         <th class="text-uppercase text-center">
-          dernière connexion
+          Dernière connexion
         </th>
   
         <th class="text-uppercase text-center">
@@ -230,7 +230,7 @@ form.formErrors.newpassword = false;
         :key="item.id"
       >
         <td>
-          {{ item.employee?.firstName }}
+          {{ item?.employee?.firstName }}   {{ item?.employee?.lastName }}
         </td>
         <td class="text-center">
           {{ item.username }}
@@ -251,7 +251,7 @@ form.formErrors.newpassword = false;
         <button @click="openDialogEdtpass(item.id)">
           <VIcon icon="mdi-key-outline"></VIcon>
         </button>
-        <button @click="openDialog(item.id)">
+        <button @click="openDialog(item.id)" >
             <VIcon icon="mdi-trash" style="color: red;"></VIcon>
         </button>
         </td>

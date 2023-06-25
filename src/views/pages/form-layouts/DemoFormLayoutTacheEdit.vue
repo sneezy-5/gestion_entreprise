@@ -77,7 +77,7 @@ tacheService.getTache(routeParam)
     form.end_date = res.data.end_date;
     form.start_date = res.data.start_date;
     form.project = res.data.project.id;
-    form.user = res.data.user;
+    form.user = res.data.user.username;
     console.log(res)
     })
     .catch((error) => {

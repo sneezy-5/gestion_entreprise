@@ -246,7 +246,7 @@ form.formErrors.depense_category = false;
       <VSelect
                   v-model="form.transaction_type"
                   label="Type de transaction"
-                  :items="['Achat', 'Vente','Transfert','Virement']"
+                  :items="['Achats', 'Ventes','Transfert','Virement','Paiements des fournisseurs','Encaissements des clients','Salaires et traitements','Paiements des charges','Dépenses liées aux impôts','Opérations bancaires','Remboursements de prêts','Opérations de capital','Amortissement','Ajustements comptables']"
                   :error="form.formErrors.transaction_type"
                 />
   
@@ -261,7 +261,7 @@ form.formErrors.depense_category = false;
                   v-model="form.transaction_category"
                   label="Catégorie de transaction"
                   :items="['Dépense', 'Révenu']"
-                  :error="form.formErrors.transaction_type"
+                  :error="form.formErrors.transaction_category"
                 />
   
       </VCol>
@@ -310,7 +310,7 @@ form.formErrors.depense_category = false;
           v-model="form.amount"
           label="Montant "
           placeholder="Montant "
-          :error="form.formErrors.account"
+          :error="form.formErrors.amount"
         />
       </VCol>
 

@@ -48,6 +48,7 @@ const submit = () => {
 
   demandeCongeService.createDemandeConge(form)
       .then((res: any) => {
+        console.log(res)
         form.formErrors.start_date = false;
           form.formErrors.end_date = false;
           form.formErrors.user = false;

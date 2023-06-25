@@ -229,7 +229,7 @@ form.formErrors.contact = false;
               >
                 <VTextField
                   v-model="form.prime_transport"
-                  label="Prime de transport"
+                  label="Prime de transport par jour"
                   :error="form.formErrors.prime_transport"
                 />
               </VCol>

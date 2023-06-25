@@ -3,11 +3,11 @@ import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import { useTheme } from 'vuetify'
 
 import logo from '@images/logo.svg?raw'
-import logos from '@images/logos.svg?raw'
+import logoeso from '@images/logoeso.svg?raw'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
-import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
-import authV1Tree from '@images/pages/auth-v1-tree.png'
+import authV1Tree2 from '@images/pages/logoeso.png'
+import authV1Tree from '@images/pages/logoeso.png'
 import { accountService } from '@/_services'
 import router from '@/router'
 //import { reactive,ref } from "vue";
@@ -29,7 +29,7 @@ const submit = () => {
                     accountService.saveToken('groups',res.data.groups)
                     accountService.saveToken('database',res.data.database)
                     accountService.saveToken('subscription',res.data.subscription)
-                    console.log(res.data.groups)
+                    console.log(res.data)
                     router.push('/dashboard')
                 })
                 .catch((error) => {
@@ -69,7 +69,7 @@ const isPasswordVisible = ref(false)
       <VCardItem class="justify-center">
         <template #prepend>
           <div class="d-flex" >
-            <div v-html="logos"/>
+            <div v-html="logoeso"/>
           </div>
         </template>
 
@@ -200,4 +200,5 @@ const isPasswordVisible = ref(false)
 .error{
   color: red;
 }
+
 </style>

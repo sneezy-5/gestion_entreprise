@@ -65,6 +65,10 @@ form.formErrors.account = false;
 
 }
 
+const openBalance = () => {
+      const url = `/src/assets/balance.html?start_date=${form.start_date}&end_date=${form.end_date}`;
+      window.open(url);
+    }
 
 
 
@@ -105,9 +109,9 @@ const downloadExcel = () => {
 
 <div class="flex-start">
      
-     <VBtn @click="downloadExcel" color="success">Exporter
+     <VBtn @click="openBalance()" color="success">Imprimer
        <VIcon icon="mdi-cloud-download"></VIcon>
-       <VIcon icon="mdi-microsoft-excel"></VIcon>
+       <VIcon icon="mdi-pdf"></VIcon>
        </VBtn>
 </div>
 
@@ -155,7 +159,7 @@ const downloadExcel = () => {
         class="d-flex gap-4"
       >
         <VBtn type="submit">
-          Fltrer
+          Filtrer
         </VBtn>
 
         <VBtn
@@ -211,7 +215,12 @@ const downloadExcel = () => {
          <td class="text-center">
           {{ item.balance }}
         </td>
-       
+        <!-- <td class="text-center">
+          <button @click="openBalance()">
+            <VIcon icon="mdi-eye"></VIcon>
+         
+          </button>
+        </td> -->
 
       </tr>
     </tbody>

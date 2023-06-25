@@ -24,7 +24,8 @@ const form = reactive({
     user: null,
     project: null,
     rapport_task:null,
-    status:null,
+    progress:0,
+    status:false,
     formErrors: {
       title: false,
       description: false,
@@ -46,8 +47,9 @@ tacheService.getTache(routeParam)
     form.description = res.data.description;
     form.end_date = res.data.start_date;
     form.start_date = res.data.end_date;
-    form.project = res.data.projet.id;
-    form.user = res.data.user.name;
+    form.project = res.data.project.id;
+    form.user = res.data.user.id;
+    form.progress = res.data.progress
     form.rapport_task = res.data.rapport_task
     })
     .catch((error) => {
@@ -180,7 +182,7 @@ form.formErrors.rapport_task = false;
 
         <v-subheader   class="pl-0">Progrèssion</v-subheader>
         <v-slider
-          v-model="slider"
+          v-model="form.progress"
           thumb-label="always"
         ></v-slider>
       </v-flex>

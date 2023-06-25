@@ -104,7 +104,10 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
     <thead>
       <tr>
         <th class="text-uppercase">
-          Nom
+          Libellé
+        </th>
+        <th class="text-uppercase">
+          Numéro
         </th>
         <th class="text-uppercase text-center">
           Balance
@@ -124,6 +127,9 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
       >
         <td>
           {{ item.name }}
+        </td>
+        <td>
+          {{ item.number }}
         </td>
         <td class="text-center">
           {{ item.balance }}

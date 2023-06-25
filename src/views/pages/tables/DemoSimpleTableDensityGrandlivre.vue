@@ -71,7 +71,7 @@ compteService.getListComptes()
       .then(res => {
         const data = res.data.data
         for (let i = 0; i < data.length; i++) {
-          comptes.push({ abbr: data[i].id, state: data[i].name });
+          comptes.push({ abbr: data[i].id, state: data[i].number });
         }
         console.log(res.data.data)
     })
@@ -120,7 +120,7 @@ const downloadExcel = () => {
 
 <div class="flex-start">
      
-     <VBtn @click="downloadExcel" color="success">
+     <VBtn @click="downloadExcel" color="success">Exporter
        <VIcon icon="mdi-cloud-download"></VIcon>
        <VIcon icon="mdi-microsoft-excel"></VIcon>
        </VBtn>
@@ -188,7 +188,7 @@ const downloadExcel = () => {
         class="d-flex gap-4"
       >
         <VBtn type="submit">
-          Fltrer
+          Filtrer
         </VBtn>
 
         <VBtn

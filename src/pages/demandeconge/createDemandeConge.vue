@@ -12,7 +12,7 @@ import DemoFormLayoutDemandeConge from '@/views/pages/form-layouts/DemoFormLayou
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Créé congé">
+        <VCard title="Ajouter congé">
           <VCardText>
             <DemoFormLayoutDemandeConge />
           </VCardText>

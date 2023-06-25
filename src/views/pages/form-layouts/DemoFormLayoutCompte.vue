@@ -11,11 +11,13 @@ const toast = ref({
 
 const form = reactive({
     name: null,
+    number:null,
     balance: null,
    
     formErrors: {
       name: false,
       balance: false,
+      number:false,
    
   },
 });
@@ -29,6 +31,7 @@ const submit = () => {
       .then((res: any) => {
         form.formErrors.name = false;
           form.formErrors.balance = false;
+          form.formErrors.number = false;
        
         toast.value = {
         show: true,
@@ -63,6 +66,18 @@ color: 'danger',
 else{
 
 form.formErrors.balance = false;
+} if(error.response.data['number']){
+
+form.formErrors.number = true;
+toast.value = {
+show: true,
+text: error.response.data['number'],
+color: 'danger', 
+};
+} 
+else{
+
+form.formErrors.balance = false;
 }
        console.log(error)
         
@@ -84,14 +99,28 @@ form.formErrors.balance = false;
         <VTextField
         type="text"
           v-model="form.name"
-          label="Nom"
-          placeholder="Nom"
+          label="Libellé"
+          placeholder="Libellé"
           :error="form.formErrors.balance"
         />
       </VCol>
 
-      <!-- 👉 amount -->
+      <!-- 👉 numero -->
       <VCol
+        cols="12"
+        md="6"
+      >
+        <VTextField
+          type="number"
+          v-model="form.number"
+          label="Numéro"
+          placeholder="Numéro"
+          :error="form.formErrors.number"
+        />
+      </VCol>
+
+   <!-- 👉 amount -->
+   <VCol
         cols="12"
         md="6"
       >
@@ -103,7 +132,6 @@ form.formErrors.balance = false;
           :error="form.formErrors.balance"
         />
       </VCol>
-
     
  <!--shoxw toats message-->
  <VSnackbar 

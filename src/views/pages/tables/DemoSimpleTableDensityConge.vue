@@ -128,7 +128,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         :key="item.id"
       >
         <td>
-          {{ item.employee?.firstName }}
+          {{ item.user.employee.firstName }}   {{ item.user.employee.lastName }}
         </td>
         <td class="text-center">
           {{ item.montant }}

@@ -30,16 +30,14 @@ const getAll =()=>{
   demandeCongeService.getAllDeamndeConges(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
-        // for (let i = 0; i < data.length; i++) {
-        //   desserts.push(data[i]);
-        // } 
+   
         desserts.pop()
         desserts.push(res.data)
         console.log(desserts[0].results, data)
     })
     .catch((error: { status: string; }) => {
          // error.response.status Check status code
-            if(error.status ="401"){
+            if(error.status =="401"){
                     //console.error(error.response.data.message);
                    
                     console.error(error)
@@ -58,7 +56,7 @@ const deleteEl = () => {
     })
     .catch((error: { status: string; }) => {
          // error.response.status Check status code
-            if(error.status ="401"){
+            if(error.status =="401"){
                     //console.error(error.response.data.message);
                    
                     console.error(error)
@@ -162,7 +160,7 @@ const role = accountService.getRole()
         :key="item.id"
       >
         <td>
-          {{ item.employee?.firstName }}
+          {{ item?.employee.firstName }}   {{ item?.employee?.lastName }}
         </td>
         <td class="text-center">
           {{ item.start_date }}

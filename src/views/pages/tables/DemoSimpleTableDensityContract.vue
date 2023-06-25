@@ -173,7 +173,7 @@ fetch(url, {
         :key="item.id"
       >
         <td>
-          {{ item.employee?.firstName }}
+          {{ item.user.employee.firstName }}   {{ item.user.employee.lastName }}
         </td>
         <td class="text-center">
           {{ item.contract_type }}

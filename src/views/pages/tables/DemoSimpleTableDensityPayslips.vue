@@ -30,9 +30,7 @@ const getAll =()=>{
   payslipsService.getAllPayslips(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
-        // for (let i = 0; i < data.length; i++) {
-        //   desserts.push(data[i]);
-        // } 
+ 
         desserts.pop()
         desserts.push(res.data)
         console.log(desserts[0].results, data)

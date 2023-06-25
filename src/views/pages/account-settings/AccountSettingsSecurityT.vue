@@ -115,7 +115,7 @@ form.formErrors.password = false;
                   v-model="form.password_current"
                   :type="isCurrentPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isCurrentPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
-                  label="Current Password"
+                  label="Mot de passe actuel"
                   @click:append-inner="isCurrentPasswordVisible = !isCurrentPasswordVisible"
                   :error="form.formErrors.password_current"
                 />
@@ -133,7 +133,7 @@ form.formErrors.password = false;
                   v-model="form.password"
                   :type="isNewPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isNewPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
-                  label="New Password"
+                  label="Nouveau mot de passe"
                   @click:append-inner="isNewPasswordVisible = !isNewPasswordVisible"
                   :error="form.formErrors.password"
                 />
@@ -148,7 +148,7 @@ form.formErrors.password = false;
                   v-model="form.password_confirmation"
                   :type="isConfirmPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isConfirmPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
-                  label="Confirm New Password"
+                  label="Confirmer"
                   @click:append-inner="isConfirmPasswordVisible = !isConfirmPasswordVisible"
                   :error="form.formErrors.password_confirmation"
                 />

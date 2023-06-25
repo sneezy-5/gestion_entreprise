@@ -81,7 +81,7 @@ const submit = () => {
         text: 'Modifié  avec succès',
         color: 'success',
       };
-      useMainStore().fetchAllProfile()
+     // useMainStore().fetchAllProfile()
       
     })
     .catch((error) => {

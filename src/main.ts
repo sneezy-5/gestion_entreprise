@@ -28,5 +28,5 @@ app.use(pinia)
 app.mount('#app')
 
 
-const mainStore = useMainStore(pinia);
-mainStore.fetchAllProfile()
+// const mainStore = useMainStore(pinia);
+// mainStore.fetchAllProfile()

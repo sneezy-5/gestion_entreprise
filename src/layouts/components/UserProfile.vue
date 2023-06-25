@@ -9,8 +9,41 @@ const logout =()=>{
                 router.push('/auth/login')
         }
 
+        const role = accountService.getRole()
+      const superadmin = role=='true'?'SuperAdmin':''
+      const groups = accountService.getGroups()
+      const groupsArray = [groups];
+      const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
+      const admin =formattedArray.includes('admin')== true? 'Admin': ''
+      const form=reactive({
+        userName:'',
+        userEmail:'',
+        userAvatar:'',
+        lastLogin:'',
+        is_admin: admin,
+        is_superadmin:superadmin==''?admin:superadmin
+      })
 
-console.log(useMainStore().userAvatar)
+
+      userService.getProfile()
+        .then(res => {
+          const profileData = res.data.results[0];
+          if (profileData) {
+           
+            form.userName = profileData.username;
+            form.userEmail = profileData.email;
+            form.userAvatar = profileData.profile_image;
+            form.lastLogin = profileData.last_login;
+          }
+          console.log(form)
+          //useMainStore().setUser(form)
+          
+        })
+        .catch(error => {
+          console.error(error);
+        });
+     
+//console.log(useMainStore().userAvatar)
 </script>
 
 <template>
@@ -52,15 +85,15 @@ console.log(useMainStore().userAvatar)
                     color="primary"
                     variant="tonal"
                   >
-                    <VImg :src="useMainStore().userAvatar" />
+                    <VImg :src="form.userAvatar" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
             <VListItemTitle class="font-weight-semibold">
-              {{useMainStore().userName}}
+              {{form.userName}}
             </VListItemTitle>
-            <VListItemSubtitle>{{useMainStore().is_superadmin}}</VListItemSubtitle>
+            <VListItemSubtitle>{{form.is_superadmin}}</VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 

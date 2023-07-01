@@ -773,8 +773,8 @@
     // Fonction pour mettre à jour les valeurs du bulletin avec les données de l'API
   
     async function updateBulletin() {
-        const payslipurl = `http://127.0.0.1:8000/api/v0/payslips/${id}/`
-        const companyurl = `http://127.0.0.1:8000/api/v0/parameter/`
+        const payslipurl = `http://3.83.16.194:8000/api/v0/payslips/${id}/`
+        const companyurl = `http://3.83.16.194:8000/api/v0/parameter/`
              // Récupérer les données de l'API
       const data = await fetchDataFromAPI(payslipurl);
       const parameter = await fetchDataFromAPI(companyurl);

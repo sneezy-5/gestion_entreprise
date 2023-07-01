@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { projetService } from '@/_services';
+import { accountService, projetService } from '@/_services';
 import router from '@/router';
 
 let ids = ref(0)
@@ -76,6 +76,10 @@ getAll()
 const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
+const role = accountService.getRole()
+const groups = accountService.getGroups()
+const groupsArray = [groups];
+const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
 
 </script>
 
@@ -97,7 +101,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
   </v-dialog>
 
 
-    <div class="flex-end">
+    <div class="flex-end"  v-if="role === 'true' || formattedArray.includes('admin')">
       <VBtn to="/create-projet">Ajouter</VBtn>
     </div>
   <VTable density="compact">

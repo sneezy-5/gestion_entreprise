@@ -14,9 +14,9 @@ const toast = ref({
 const employe = reactive([]);
 
 
-employeesService.getAllEmployees()
+employeesService.getList()
       .then(res => {
-        const data = res.data.results
+        const data = res.data.data
         for (let i = 0; i < data.length; i++) {
           employe.push( {state:data[i].firstName,abbr:data[i].id});
         }   
@@ -71,7 +71,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'modifié avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -83,7 +83,7 @@ form.formErrors.title = true;
 toast.value = {
 show: true,
 text: error.response.data['title'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -95,7 +95,7 @@ form.formErrors.amount = true;
 toast.value = {
 show: true,
 text: error.response.data['amount'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -108,7 +108,7 @@ form.formErrors.code = true;
 toast.value = {
 show: true,
 text: error.response.data['code'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -119,6 +119,7 @@ form.formErrors.code = false;
         
      });
 };
+
 
 </script>
 

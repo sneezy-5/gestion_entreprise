@@ -32,7 +32,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Généré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -43,7 +43,7 @@ form.formErrors.start_date = true;
 toast.value = {
 show: true,
 text: error.response.data['message'],
-color: 'red', 
+color: 'danger', 
 };
 }
 
@@ -53,7 +53,7 @@ form.formErrors.start_date = true;
 toast.value = {
 show: true,
 text: error.response.data['start_date'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -65,7 +65,7 @@ form.formErrors.end_date = true;
 toast.value = {
 show: true,
 text: error.response.data['end_date'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{

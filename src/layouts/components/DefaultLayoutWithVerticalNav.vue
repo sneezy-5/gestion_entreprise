@@ -203,7 +203,7 @@ console.log(formattedArray,formattedArray.includes('admin'))
        <VerticalNavSectionTitle
        v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
-          heading: 'Commptabilité',
+          heading: 'Comptabilité',
         }"
       />
 

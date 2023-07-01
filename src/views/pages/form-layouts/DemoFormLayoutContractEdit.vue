@@ -16,9 +16,9 @@ const employe = reactive([]);
 
 
 const routeParam = router.currentRoute.value.params.id;
-employeesService.getAllEmployees()
+employeesService.getList()
       .then(res => {
-        const data = res.data.results
+        const data = res.data.data
         for (let i = 0; i < data.length; i++) {
           employe.push( {state:data[i].firstName,abbr:data[i].id});
         }   

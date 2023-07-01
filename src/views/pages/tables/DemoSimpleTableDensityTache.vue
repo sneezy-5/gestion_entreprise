@@ -112,7 +112,11 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
 
 
 const role = accountService.getRole()
-const models = 20
+const groups = accountService.getGroups()
+const groupsArray = [groups];
+const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
+
+
 
 const downloadExcel = () => {
 
@@ -160,7 +164,7 @@ fetch(url, {
 
     <div class="flex-start">
 
-      <VBtn  to="/create-tache" style="margin-right: 10px;"  v-if="role=='true'">Ajouter</VBtn>
+      <VBtn  to="/create-tache" style="margin-right: 10px;"  v-if="role=='true' || formattedArray.includes('admin')">Ajouter</VBtn>
       <VBtn @click="downloadExcel" color="success">Exporter
         <VIcon icon="mdi-cloud-download"></VIcon>
         <VIcon icon="mdi-microsoft-excel"></VIcon>

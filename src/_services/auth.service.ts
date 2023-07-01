@@ -11,6 +11,8 @@ let logout = () => {
     localStorage.removeItem('access')
     localStorage.removeItem('role')
     localStorage.removeItem('database')
+    localStorage.removeItem('subscription')
+    localStorage.removeItem('groups')
 }
 
 let getToken = () => {

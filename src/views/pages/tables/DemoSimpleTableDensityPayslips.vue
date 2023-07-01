@@ -70,7 +70,7 @@ const deleteEl = () => {
 };
 
 const openBulletin = (id) => {
-      const url = `/src/assets/formulairePAIE.html?id=${id}`;
+      const url = `Formulaire de paie/formulairePAIE2.html?id=${id}`;
       window.open(url);
     }
 
@@ -107,6 +107,9 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
     <thead>
       <tr>
         <th class="text-uppercase">
+          Date d'émisstion
+        </th>
+        <th class="text-uppercase">
           Employe
         </th>
         <th class="text-uppercase text-center">
@@ -130,6 +133,9 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
         v-for="item in desserts[0]?.results"
         :key="item.id"
       >
+      <td>
+          {{ item.issuanceDate }}
+        </td>
         <td>
           {{ item.employee?.firstName }}
         </td>

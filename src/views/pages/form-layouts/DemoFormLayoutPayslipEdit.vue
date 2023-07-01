@@ -97,7 +97,7 @@ form.formErrors.issuanceDate = true;
 toast.value = {
 show: true,
 text: error.response.data['issuanceDate'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -109,7 +109,7 @@ form.formErrors.paymentMethod = true;
 toast.value = {
 show: true,
 text: error.response.data['paymentMethod'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -122,7 +122,7 @@ form.formErrors.TotalPayDeduction = true;
 toast.value = {
 show: true,
 text: error.response.data['TotalPayDeduction'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -135,7 +135,7 @@ form.formErrors.netToPay = true;
 toast.value = {
 show: true,
 text: error.response.data['netToPay'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -147,7 +147,7 @@ form.formErrors.grossIncome = true;
 toast.value = {
 show: true,
 text: error.response.data['grossIncome'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -159,7 +159,7 @@ form.formErrors.companyDeductions = true;
 toast.value = {
 show: true,
 text: error.response.data['companyDeductions'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -171,7 +171,7 @@ form.formErrors.nonDeductibleIncome = true;
 toast.value = {
 show: true,
 text: error.response.data['nonDeductibleIncome'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -183,7 +183,7 @@ form.formErrors.employeeDeductions = true;
 toast.value = {
 show: true,
 text: error.response.data['employeeDeductions'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -264,7 +264,7 @@ form.formErrors.employeeDeductions = false;
       <VTextField
           type="text"
           v-model="form.paymentMethod"
-          label="Method de payement"
+          label="Methode de payement"
           :error="form.formErrors.paymentMethod"
         />
       </VCol>
@@ -277,7 +277,7 @@ form.formErrors.employeeDeductions = false;
       <VTextField
           type="date"
           v-model="form.issuanceDate"
-          label="Issuance date"
+          label="Date d'émission"
           :error="form.formErrors.issuanceDate"
         />
       </VCol>

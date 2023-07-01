@@ -122,10 +122,10 @@ fetch(url, {
     <div class="flex-end">
       <VBtn to="/create-employee" style="margin-right: 10px;">Ajouter</VBtn>
 
-<VBtn @click="downloadExcel" color="success">Importer model à remplir
+<!-- <VBtn @click="downloadExcel" color="success">Importer model à remplir
   <VIcon icon="mdi-cloud-download"></VIcon>
   <VIcon icon="mdi-microsoft-excel"></VIcon>
-  </VBtn>
+  </VBtn> -->
     </div>
   <VTable density="compact">
     <thead>

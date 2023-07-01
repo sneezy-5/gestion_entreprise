@@ -10,9 +10,9 @@ const toast = ref({
 const employe = reactive([]);
 
 
-employeesService.getAllEmployees()
+employeesService.getList()
       .then(res => {
-        const data = res.data.results
+        const data = res.data.data
         for (let i = 0; i < data.length; i++) {
           employe.push( {state:data[i].firstName,abbr:data[i].id});
         }   
@@ -30,7 +30,7 @@ const form = reactive({
     RequestDate: null,
     amountRequested: null,
     paymentDate: null,
-    paymentMethod: "",
+    paymentMethod: null,
     ReimbursmentDate: null,
     employee:null,
 
@@ -61,7 +61,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -73,7 +73,7 @@ form.formErrors.RequestDate = true;
 toast.value = {
 show: true,
 text: error.response.data['RequestDate'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -85,7 +85,7 @@ form.formErrors.amountRequested = true;
 toast.value = {
 show: true,
 text: error.response.data['amountRequested'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -98,7 +98,7 @@ form.formErrors.paymentDate = true;
 toast.value = {
 show: true,
 text: error.response.data['paymentDate'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -110,7 +110,7 @@ form.formErrors.paymentMethod = true;
 toast.value = {
 show: true,
 text: error.response.data['paymentMethod'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -130,7 +130,7 @@ form.formErrors.employee = true;
 toast.value = {
 show: true,
 text: error.response.data['employee'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 

@@ -400,10 +400,8 @@ color: 'danger',
 </script>
 
 <template>
-<VCardText class="d-flex">
-  <!-- 👉 Avatar -->
+<!-- <VCardText class="d-flex">
 
-  <!-- 👉 Upload Photo -->
   <form class="d-flex flex-column justify-center gap-5" @submit.prevent="submitFile" enctype="multipart/form-data">
     <div class="d-flex flex-wrap gap-2">
       <VTextField
@@ -428,7 +426,7 @@ color: 'danger',
       Taille maximale autorisée : 2 Mo (xlsx)
     </p>
   </form>
-</VCardText>
+</VCardText> -->
 
   <VForm @submit.prevent="submit"  enctype="multipart/form-data">
     <VRow>

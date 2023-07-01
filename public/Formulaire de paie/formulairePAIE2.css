@@ -1,0 +1,510 @@
+@import url("https://fonts.googleapis.com/css2?family=Pathway+Extreme:wght@200&display=swap"); * {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 70, 104);
+    flex-direction: column;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+}
+
+.zoom {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(0, 70, 104);
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.23) 1px 1px 50px 10px;
+}
+
+.zoom .btnzoom{
+    height:100%;
+    display:flex;
+   
+}
+
+.zoom .zoomMoins {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 69, 103);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 30px;
+}
+
+.zoomMoins:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease 0s;
+    background: rgb(7, 107, 155);
+    box-shadow: rgba(0, 0, 0, 0.23) 1px 1px 10px 2px;
+    color: rgb(255, 255, 255);
+}
+
+.zoom .zoomPlus {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 30px;
+    color: rgb(0, 70, 104);
+}
+
+.zoomPlus:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease 0s;
+    background: rgb(7, 107, 155);
+    box-shadow: rgba(0, 0, 0, 0.23) 1px 1px 10px 2px;
+    color: rgb(255, 255, 255);
+}
+
+.GenPDF {
+    height: 40px;
+    width: 100%;
+    background-color: rgb(0 70 104);
+    position: fixed;
+    z-index: 10;
+    bottom: 0px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: rgba(0, 0, 0, 0.23) 1px 1px 50px 10px;
+}
+
+.GenPDF .btngene{
+    border:none;
+    height:80%;
+    width:150px;
+    background-color: #e81e1e;
+    color:white;
+    cursor:pointer;
+    transition:0.5s;
+    border-radius:3px;
+ 
+}
+
+.GenPDF .btngene:hover{
+    background-color:#f50000;
+    transition:0.5s;
+    box-shadow:inset 1px 1px 10px 1px  #0f0f0f96
+}
+
+.tableInfo {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+
+.tableInfo tr th {
+    height: 20%;
+}
+
+.tableInfo tr td {
+    height: 80%;
+}
+
+th {
+    background-color: rgb(27, 27, 27);
+    color: rgb(255, 255, 255);
+}
+
+th, td {
+    text-align: center;
+}
+
+.blocPdf {
+    height: 1025px;
+    width: 800px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: all 1s ease 0s;
+}
+
+.blocPdf .infoEntre {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+}
+
+.infoEntre .logo {
+    height: 45%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.logo img {
+    height: 60px;
+    width: 70px;
+}
+
+.infoEntre .descr1 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 9px;
+    height: 55%;
+}
+
+.blocPdf .infobulletin {
+    height: 6%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.infobulletin .titrebull {
+    height: 40%;
+    width: 100%;
+    background-color: rgb(0, 70, 104);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
+.infobulletin .descr2 {
+    height: 60%;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+.descr2 .descr2bloc1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.descr2 .descr2bloc2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.blocPdf .IdentTrav {
+    height: 12%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.IdentTrav .titreIden {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+    background-color: rgb(0, 70, 104);
+    color: rgb(255, 255, 255);
+    font-size: 11px;
+}
+
+.IdentTrav .INFOTRAV {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    border: 1px solid rgb(185, 185, 185);
+}
+
+.INFOTRAV .identravbloc {
+    width: 35%;
+    height: 100%;
+    font-size: 12px;
+    display: flex;
+}
+
+.identravbloc .tabIden {
+    height: 100%;
+    width: 100%;
+}
+
+.INFOTRAV .infoTravbloc {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    font-size: 10px;
+}
+
+.infoTravbloc .infoTravbloc1 {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.infoTravbloc1 label {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+
+.infoTravbloc .infoTravbloc2 {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.infoTravbloc2 label {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.blocPdf .Tab1 {
+    height: 64%;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.blocPdf .Tab2 {
+    height: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Tab2 .bordtoptab2 {
+    background-color: rgb(0, 70, 104);
+    width: 100%;
+    height: 30px;
+}
+
+.Tab2 .tabTab2 {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 70%;
+    border-collapse: collapse;
+}
+
+.tabTab2 th {
+    padding:3px;
+    max-width: 110px !important;
+}
+
+.tabTab2 td{
+    padding:5px;
+    
+}
+
+.tabTab3 th {
+    padding: 3px;
+    max-width: 110px !important;
+}
+
+.tabTab3 td{
+    padding:5px;
+    
+}
+
+.blocPdf .Tab3 {
+    height: 5%;
+    width: 100%;
+    /* background-color: rgb(255, 0, 140); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Tab3 .bordtoptab3 {
+    background-color: rgb(0, 70, 104);
+    width: 100%;
+    height: 30px;
+}
+
+.Tab3 .tabTab3 {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 70%;
+    border-collapse: collapse;
+}
+
+.bloc3 {
+    width: 100%;
+    height: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(245, 245, 220, 0.68);
+}
+
+.divisetab {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab1 {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+
+.tab11 {
+    border-collapse: collapse;
+    width: 30%;
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+}
+
+th {
+    background-color: rgb(247, 247, 247);
+    color: rgb(0, 0, 0);
+    font-size: 11px;
+}
+
+th, td {
+    border-left-width: 1px;
+    border-left-style: solid;
+    padding: 2px;
+    border-color: rgb(185, 185, 185) !important;
+}
+
+td {
+    font-size: 10px;
+}
+
+.trait {
+    border: 1px dashed rgb(0, 0, 0);
+}
+
+.traitlarge {
+    width: 40%;
+}
+
+.tabfooter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.cumul {
+    border-collapse: collapse;
+    width: 70%;
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    font-size: 14px;
+}
+
+.gainRet {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gainRet div {
+    background: rgb(238, 238, 238);
+    height: 50%;
+    width: 100%;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gainRet div span {
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.bubble-right {
+    position: relative;
+    display: flex;
+    background-color: #e81e1e;
+    border-radius: 10px;
+    height:70%;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:14px;
+    padding:2px;
+    transition:0.5s;
+    display: none;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px;
+    border-color: transparent transparent transparent #e81e1e;
+    z-index:2
+  }
+  

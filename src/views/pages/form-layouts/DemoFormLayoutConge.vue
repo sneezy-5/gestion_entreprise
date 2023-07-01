@@ -10,9 +10,9 @@ const toast = ref({
 const employe = reactive([]);
 
 
-employeesService.getAllEmployees()
+employeesService.getList()
       .then(res => {
-        const data = res.data.results
+        const data = res.data.data
         for (let i = 0; i < data.length; i++) {
           employe.push( {state:data[i].firstName,abbr:data[i].id});
         }   
@@ -55,7 +55,7 @@ const submit = () => {
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
-        color: 'green',
+        color: 'success',
       };
     })
     .catch((error) => {
@@ -67,7 +67,7 @@ form.formErrors.montant = true;
 toast.value = {
 show: true,
 text: error.response.data['montant'],
-color: 'red', 
+color: 'danger', 
 };
 }else{
 
@@ -79,7 +79,7 @@ form.formErrors.cumulativeDay = true;
 toast.value = {
 show: true,
 text: error.response.data['cumulativeDay'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{
@@ -92,7 +92,7 @@ form.formErrors.tekanDay = true;
 toast.value = {
 show: true,
 text: error.response.data['tekanDay'],
-color: 'red', 
+color: 'danger', 
 };
 } else{
 
@@ -104,7 +104,7 @@ form.formErrors.employee = true;
 toast.value = {
 show: true,
 text: error.response.data['employee'],
-color: 'red', 
+color: 'danger', 
 };
 } 
 else{

@@ -3,6 +3,7 @@ import misc404 from '@images/pages/404.png'
 import miscMaskDark from '@images/pages/misc-mask-dark.png'
 import miscMaskLight from '@images/pages/misc-mask-light.png'
 import tree from '@images/pages/tree.png'
+import trees from '@images/pages/logoeso.png'
 import { useTheme } from 'vuetify'
 
 const vuetifyTheme = useTheme()
@@ -39,7 +40,7 @@ const authThemeMask = computed(() => {
 
     <!-- 👉 Footer -->
     <VImg
-      :src="tree"
+      :src="trees"
       class="misc-footer-tree d-none d-md-block"
     />
 

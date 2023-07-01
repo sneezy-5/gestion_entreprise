@@ -10,9 +10,9 @@ const toast = ref({
 const employe = reactive([]);
 
 
-employeesService.getAllEmployees()
+employeesService.getList()
       .then(res => {
-        const data = res.data.results
+        const data = res.data.data
         for (let i = 0; i < data.length; i++) {
           employe.push( {state:data[i].firstName,abbr:data[i].id});
         }   
@@ -322,8 +322,8 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.delays"
-          label="Delay"
-          placeholder="Delay"
+          label="Nombre de retard"
+          placeholder="retard"
           :error="form.formErrors.delays"
         />
       </VCol>
@@ -350,8 +350,8 @@ form.formErrors.employee = false;
       <VTextField
           type="number"
           v-model="form.normalHoursComplementary"
-          label="Heure normal complementaire"
-          placeholder="Heure normal complementaire"
+          label="Heure normal complémentaire"
+          placeholder="Heure normal complémentaire"
           :error="form.formErrors.normalHoursComplementary"
         />
       </VCol>

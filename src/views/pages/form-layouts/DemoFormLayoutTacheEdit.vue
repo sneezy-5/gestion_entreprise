@@ -231,13 +231,11 @@ form.formErrors.user = false;
         cols="12"
         md="6"
       >
-        <VTextField
-          type="text"
-          v-model="form.description"
+      <VTextarea
+        v-model="form.description"
           label="Description"
           placeholder="Description"
-          :error="form.formErrors.description"
-        />
+          :error="form.formErrors.description"></VTextarea>
       </VCol>
 
       <!-- 👉 debut -->

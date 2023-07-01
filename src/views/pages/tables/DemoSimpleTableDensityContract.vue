@@ -125,10 +125,10 @@ fetch(url, {
     <div class="flex-end">
       <VBtn to="/create-contract" style="margin-right: 10px;">Ajouter</VBtn>
 
-<VBtn @click="downloadExcel" color="success">Importer model à remplir
+<!-- <VBtn @click="downloadExcel" color="success">Importer model à remplir
   <VIcon icon="mdi-cloud-download"></VIcon>
   <VIcon icon="mdi-microsoft-excel"></VIcon>
-  </VBtn>
+  </VBtn> -->
     </div>
   <VTable density="compact">
     <thead>
@@ -173,7 +173,7 @@ fetch(url, {
         :key="item.id"
       >
         <td>
-          {{ item.user.employee.firstName }}   {{ item.user.employee.lastName }}
+          {{ item.employee.firstName }}   {{ item.employee.lastName }}
         </td>
         <td class="text-center">
           {{ item.contract_type }}

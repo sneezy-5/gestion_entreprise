@@ -119,13 +119,13 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
           Présence
         </th>
         <th class="text-uppercase text-center">
-          Delay
+          retard
         </th>
         <th class="text-uppercase text-center">
           Heure normal
         </th>
         <th class="text-uppercase text-center">
-          Heure normal complementaire
+          Heure normal complémentaire
         </th>
         <th class="text-uppercase text-center">
           Heure sup 15

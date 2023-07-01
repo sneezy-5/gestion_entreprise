@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+
+    <link rel="stylesheet" href="formulairePAIE2.css">
+</head>
+<body>
+
+    <div class="zoom">
+        <div class="bubble-right">
+            <div class="arrow"></div>
+            <p>Dézoomer avant de générer le PDF</p>
+          </div>
+
+          <div class="btnzoom">
+            <div class="zoomMoins">-</div>
+            <div class="zoomPlus">+</div>
+          </div>
+
+    </div>
+
+
+    <div class="parent">
+
+
+        <div class="blocPdf">
+            <!--INFO ENTETE-->
+           <div class="infoEntre">
+            <div class="logo">
+                <img src="img/logoeso.png" alt="" height="100" width="100" id="logo">
+            </div>
+            <div class="descr1">
+                <label><strong>Addresse: </strong> <span id="address">Label</span></label>
+                <label><strong>EMAIL: </strong> <span id="email">Label</span></label>
+                <label><strong>TEL: </strong> <span id="tel">Label</span></label>
+                <label><strong>N° CNPS: </strong> <span id="nbrCnpscomagny">Label</span></label>
+            </div>
+           </div>
+        
+           <div class="infobulletin">
+        
+            <div class="titrebull">
+                <h3>BULLETIN DE PAIE</h3>
+            </div>
+            
+        
+            <div class="descr2">
+        
+                <div class="descr2bloc1">
+                <label><strong>PERIODE: </strong> <span id="periode">Label</span></label>
+                <label><strong>METHODE DE PAIEMENT: </strong> <span id="payement_methode">Label</span></label>
+                </div>
+        
+                <div class="descr2bloc1">
+                <label><strong>JOURS TRAVAILLES: </strong> <span id="jour_travailler">Label</span></label>
+                <label><strong>retenus D'ABSENCES: </strong> <span id="jour_absence">Label</span></label>
+                <label><strong>retenus DE RETARDS: </strong> <span id="nbr_retard">Label</span></label>
+                </div>
+        
+            </div>
+           </div>
+        
+           <div class="IdentTrav">
+        
+            <div class="titreIden">
+                <h4>Identification du Travailleur</h4>
+            </div>
+        
+            <div class="INFOTRAV">
+        
+                <div class="identravbloc">
+        
+                    <div class="tabIden">
+                        <table class="tableInfo">
+                            <tbody><tr>
+                                <th style="border: 1px solid rgb(0, 0, 0);border-top:0;border-left:0">Nom et Prénoms</th>
+                            </tr>
+        
+                            <tr>
+                                <td style="font-size:15px;border:1px solid #000;border-left:0;border-bottom:0"><strong class="nomTravailleur" id="nomTravailleur">Ouattara Wilfried</strong></td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </div>
+        
+                <div class="infoTravbloc">
+        
+                   <div class="infoTravbloc1">
+        
+                    <label><strong>Emploie: </strong> <span id="poste">Label</span></label>
+                    <label><strong>Categorie: </strong> <span id="categorie">Label</span></label>
+                    <label><strong>Nbre d'Enfants: </strong> <span id="nbr_enfant">Label</span></label>
+                    <label><strong>Situtation Maritale: </strong> <span id="situation_marital">Label</span></label>
+                    <label><strong>N°CNPS: </strong> <span id="nbr_cnps">Label</span></label>
+                    <label><strong>N°CMU: </strong> <span id="br_cmu">Label</span></label>
+                    <label><strong>Date d'EMBAUCHE: </strong> <span id="date_embauche">Label</span></label>
+                    <label><strong>Date de Paiement:</strong>  <span id="date_paie">Label</span></label>
+        
+                   </div>
+        
+                   <div class="infoTravbloc2">
+        
+                    <label><strong>Matricule: </strong> <span id="matricule">Label</span></label>
+                    <label><strong>Nbr de parts IGR: </strong> <span id="nbr_part_igr">Label</span></label>
+                    <label><strong>Dernier Conge: </strong> <span id="nbr_conge">Label</span></label>
+                    <label><strong>Anciennete: </strong> <span id="anciennete">Label</span></label>
+        
+                </div>
+        
+                </div>
+            </div>
+        
+         </div>
+        
+        
+        
+           <!--GRAND TABLEAU-->
+           <div class="Tab1">
+        
+        
+        
+        
+            <div class="bloc3">
+        
+                <div class="divisetab">
+        
+                    <table class="tab1">
+                        <tbody><tr>
+                            <th style="border: 1px solid rgb(0, 0, 0);">CODE</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">LIBELLES/RUBRIQUES</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">BASE</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">TAUX</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">GAINS</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">RETENUS</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">TAUX.PAT</th>
+                            <th style="border: 1px solid rgb(0, 0, 0);">MONT.PAT</th>
+                            
+                        </tr>
+        
+                        <!---les dix colonnes-->
+                        <tr>
+                            <td style="text-align:center">00</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                <tr>
+                            <td style="text-align:center">01</td>
+                            <td style="text-align:start">Salaire de Base</td>
+                            <td id="base_sal_base"></td>
+                            <td id="base_sal_taux"></td>
+                            <td id="base_sal_montant"></td>
+                            <td id="base_sal_retenus"></td>
+                            <td id="base_sal_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+          
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">02</td>
+                            <td style="text-align:start" >Sursalaire</td>
+                            <td id="sur_base"></td>
+                            <td  id="sur_taux"></td>
+                            <td  id="sur_montant"></td>
+                            <td  id="sur_retenus"></td>
+                            <td  id="sur_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"  id="montant_pat_sur"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">03</td>
+                            <td style="text-align:start">Conges Payes</td>
+                            <td  id="conge_base"></td>
+                            <td  id="conge_taux"></td>
+                            <td  id="conge_montant"></td>
+                            <td  id="conge_retenus"></td>
+                            <td  id="conge_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">04</td>
+                            <td style="text-align:start">Gratifications</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">05</td>
+                            <td style="text-align:start"  >Primes diverses</td>
+                            <td id="prime_base" ></td>
+                            <td id="prime_taux" ></td>
+                            <td id="prime_montant"></td>
+                            <td  id="prime_retenus"></td>
+                            <td  id="prime_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">06</td>
+                            <td style="text-align:start">Autres Indemnites Imposable</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">07</td>
+                            <td style="text-align:start"><strong>Heures supplementaires :</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">08</td>
+                            <td style="text-align:start;padding-left:30px;">Heure a 15%</td>
+                            <td id="heur_sup_15_base"></td>
+                            <td id="heur_sup_15_taux"></td>
+                            <td id="heur_sup_15_montant"></td>
+                            <td id="heur_sup_15_retenus"></td>
+                            <td id="heur_sup_15_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">09</td>
+                            <td style="text-align:start;padding-left:30px;">Heure a 50%</td>
+                            <td id="heur_sup_50_base"></td>
+                            <td id="heur_sup_50_taux"></td>
+                            <td id="heur_sup_50_montant"></td>
+                            <td id="heur_sup_50_retenus"></td>
+                            <td id="heur_sup_50_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">10</td>
+                            <td style="text-align:start;padding-left:30px;">Heure a 75%</td>
+                            <td id="heur_sup_75_base"></td>
+                            <td id="heur_sup_75_taux"></td>
+                            <td id="heur_sup_75_montant"></td>
+                            <td id="heur_sup_75_retenus"></td>
+                            <td id="heur_sup_75_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">11</td>
+                            <td style="text-align:start;padding-left:30px;">Heure a 100%</td>
+                            <td id="heur_sup_100_base"></td>
+                            <td id="heur_sup_100_taux"></td>
+                            <td id="heur_sup_100_montant"></td>
+                            <td id="heur_sup_100_retenus"></td>
+                            <td id="heur_sup_100_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">12</td>
+                            <td style="text-align:start;">Primes d'anciennete</td>
+                            <td id="anciennete_prime_base"></td>
+                            <td id="anciennete_prime_taux"></td>
+                            <td id="anciennete_prime_montant"></td>
+                            <td id="anciennete_prime_retenus"></td>
+                            <td id="anciennete_prime_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+                        <!---les dix colonnes-->
+        
+                      
+                        <tr>
+                            <td style="text-align:center">13</td>
+                                <td style="text-align:start;"><strong>Brut imposable fiscal</strong></td>
+                            <td id="fiscal_base"></td>
+                            <td id="fiscal_taux"></td>
+                            <td ><strong id="fiscal_montant"></strong></td>
+                            <td id="fiscal_retenus"></td>
+                            <td id="fiscal_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">14</td>
+                                <td style="text-align:start;"><strong>Brut imposable Social</strong></td>
+                                <td id="social_base"></td>
+                                <td id="soacial_taux"></td>
+                                <td > <strong id="social_montant"></strong></td>
+                                <td id="social_retenus"></td>
+                                <td id="social_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">15</td>
+                            <td style="text-align:start; "><strong>SALAIRE BRUT</strong></td>
+                            <td id="sal_brut_base"></td>
+                            <td id="sal_brut_taux"></td>
+                            <td ><strong id="sal_brut_montant" ></strong></td>
+                            <td id="sal_brut_retenus"></td>
+                            <td id="sal_brut_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">16</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+               <tr>
+                            <td style="text-align:center">17</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+            </tr>         
+        
+                        <tr>
+                            <td style="text-align:center">18</td>
+                            <td style="text-align:start;">Impots sur les salaires</td>
+                            <td id="impot_sal_base"></td>
+                            <td id="impot_sal_taux"></td>
+                            <td id="impot_sal_montant"></td>
+                            <td id="impot_sal_retenus"></td>
+                            <td id="impot_sal_tauxp">1.2%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"  id="impot_sal_montantpat"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">19</td>
+                            <td style="text-align:start;">Contribution nationale</td>
+                            <td id="contri_n_base"></td>
+                            <td id="contri_n_taux"></td>
+                            <td id="contri_n_montant"></td>
+                            <td id="contri_n_retenus"></td>
+                            <td id="contri_n_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);" id="contri_n_montantpat"></td>
+                            
+            </tr>
+                        <tr>
+                            <td style="text-align:center">20</td>
+                            <td style="text-align:start;">Impots Generale sur les Revenues</td>
+                            <td id="impot_general_base"></td>
+                            <td id="impot_general_taux"></td>
+                            <td id="impot_general_montant"></td>
+                            <td id="impot_general_retenus"></td>
+                            <td id="impot_general_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"  id="impot_general_montantpat"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">21</td>
+                            <td style="text-align:start;">Cotisation de Retraite</td>
+                            <td id="contisation_retraite_base"></td>
+                            <td id="contisation_retraite_taux"> 6,3% </td>
+                            <td id="contisation_retraite_montant"></td>
+                            <td id="contisation_retraite_retenus"></td>
+                            <td id="contisation_retraite_tauxp">7.7%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"  id="contisation_retraite_montantpat">0</td>
+                            
+                        </tr>
+        
+        
+                        
+                        <tr>
+                            <td style="text-align:center">22</td>
+                            <td style="text-align:start;">Couverture Maladie Universelle</td>
+                            <td id="cmu_base">1000</td>
+                            <td id="cmu_taux"></td>
+                            <td id="cmu_montant"></td>
+                            <td id="cmu_retenus"></td>
+                            <td id="cmu_tauxp">50%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"  id="cmu_montantpat"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">23</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                        </tr>
+        
+                        <tr>
+                            <td style="text-align:center">24</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <!-- <tr>
+                            <td style="text-align:center">25</td>
+                            <td style="text-align:start;">Contribution Employeur (CE)</td>
+                            <td id="ce_base">0</td>
+                            <td id="ce_taux"></td>
+                            <td id="ce_montant"></td>
+                            <td id="ce_retenus"></td>
+                            <td id="ce_tauxp">1.2%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);">0</td>
+                            
+                        </tr> -->
+        
+                        <tr>
+                            <td style="text-align:center">26</td>
+                            <td style="text-align:start;">Taxe d'apprentissage</td>
+                            <td id="taxe_apprentiassage_base"></td>
+                            <td id="taxe_apprentissage_taux"></td>
+                            <td id="taxe_apprentissage_montant"></td>
+                            <td id="taxe_apprentissage_taux"></td>
+                            <td id="taxe_apprentissage_tauxp">0.4%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);" id="taxe_apprentissage_montantpat">0</td>
+                            
+                        </tr>                  
+        
+                        <tr>
+                            <td style="text-align:center">27</td>
+                            <td style="text-align:start;">Formaton Prof Continue</td>
+                            <td id="formation_continue_base"></td>
+                            <td id="formation_continue_taux"></td>
+                            <td id="formation_continue_montant"></td>
+                            <td id="formation_continue_retenus"></td>
+                            <td id="formation_continue_tauxp">0.6%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"  id="formation_continue_montantpat">0</td>
+                            
+                      
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td style="text-align:start;">Prestation Familiale</td>
+                            <td id="presta_family_base"></td>
+                            <td id="presta_family_taux"></td>
+                            <td id="presta_family_montant"></td>
+                            <td id="presta_family_retenus"></td>
+                            <td id="presta_family_tauxp">5.75%</td>
+                          <td style="border-right:1px solid #000">0</td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td>29</td>
+                            <td style="text-align:start;">Accident de Travail</td>
+                            <td id="accident_travail_base"></td>
+                            <td id="accident_travail_taux"></td>
+                            <td id="accident_travail_montant"></td>
+                            <td id="accident_travail_revenus"></td>
+                            <td id="accident_travail_tauxp">5.0%</td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);">0</td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td>30</td>
+                            <td style="text-align:start;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                        </tr>
+        
+                        <tr>
+                            <td>30</td>
+                            <td style="text-align:start;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                        </tr>
+        
+                        <tr>
+                            <td>31</td>
+                            <td style="text-align:start;">Avances sur Salaires</td>
+                            <td id="avance_sur_salaire_base"></td>
+                            <td id="avance_sur_salaire_taux"></td>
+                            <td id="avance_sur_salaire_montant">0</td>
+                            <td id="avance_sur_salaire_revenus"></td>
+                            <td id="avance_sur_salaire_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td>32</td>
+                            <td style="text-align:start;">Prets Scolaires</td>
+                            <td id="pres_scolaire_base"></td>
+                            <td id="pres_scolaire_taux"></td>
+                            <td id="pres_scolaire_montant"></td>
+                            <td id="pres_scolaire_revenus"></td>
+                            <td id="pres_scolaire_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td>33</td>
+                            <td style="text-align:start;">Prets Ordinaires</td>
+                            <td id="pres_ordinaire_base"></td>
+                            <td id="pres_ordinaire_taux"></td>
+                            <td id="pres_oridinaire_montant"></td>
+                            <td id="pres_ordnaire_revenus"></td>
+                            <td id="pres_ordnaire_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <tr>
+                            <td>34</td>
+                            <td style="text-align:start;"><strong>TOTAL REVENUES</strong></td>
+                            <td id="total_rev_base"></td>
+                            <td id="total_rev_taux"></td>
+                            <td ><strong id="total_rev_montant"></strong></td>
+                            <td ><strong id="total_rev_revenus"></strong></td>
+                            <td id="total_rev_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);" ><strong id="total_rev_montantpat">0</strong></td>
+                            
+                        </tr>
+<!--         
+                        <tr>
+                            <td>35</td>
+                            <td style="text-align:start;"><strong>BRUT IMPOSABLE</strong></td>
+                            <td id="brut_imposable_base"></td>
+                            <td id="brut_imposable_taux"></td>
+                            <td ><strong id="brut_imposable_montant">0</strong></td>
+                            <td id="brut_imposable_revenus"></td>
+                            <td id="brut_imposable_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr> -->
+        
+                        <!-- <tr>
+                            <td>36</td>
+                            <td style="text-align:start;"><strong>NET IMPOSABLE</strong></td>
+                            <td id="net_imposable_base"></td>
+                            <td id="net_imposable_taux"></td>
+                            <td id="net_imposable_montant"><strong>0</strong></td>
+                            <td id="net_imposable_revenus"></td>
+                            <td id="net_imposable_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr> -->
+        
+                        <tr>
+                            <td>37</td>
+                            <td style="text-align:start;"><strong>TRANSPORT</strong></td>
+                            <td id="transport_base"></td>
+                            <td id="transport_taux"></td>
+                            <td><strong id="transport_montant">0</strong></td>
+                            <td id="transort_revenus"></td>
+                            <td id="transort_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+                        <!-- <tr>
+                            <td>38</td>
+                            <td style="text-align:start;">Autres Ind. non impossable</td>
+                            <td></td>
+                            <td></td>
+                            <td>0</td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+         -->
+                        <!-- <tr>
+                            <td>39</td>
+                            <td style="text-align:start;"><strong>Arrondi</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>0</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr> -->
+        
+                        <tr>
+                            <td></td>
+                            <td style="text-align:start;"><strong>NET A PAYER</strong></td>
+                            <td id="net_a_payer_base"></td>
+                            <td id="net_a_payer_taux"></td>
+                            <td ><strong id="net_a_payer_montant">0</strong></td>
+                            <td id="net_a_payer_revenus"></td>
+                            <td id="net_a_payer_tauxp"></td>
+                            <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
+                            
+                        </tr>
+        
+        
+                      </tbody></table>
+        
+        
+        
+        
+                </div>
+        
+        
+        
+        
+            </div>
+        
+        
+        
+        
+           </div>
+        
+           <!--PETIT 1 TABLEAU-->
+           <div class="Tab2">
+            <div class="bordtoptab2"></div>
+            <table class="tabTab2">
+                <tbody><tr>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">CUMUL</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">SAL.BRUT</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">SAL.BRUT IMP.</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">CHARGES SAL.</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">CHARGES PAT.</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">NET</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);background-color:#fff;width:100px">MONT.PAT</th>
+                </tr>
+        
+                <tr>
+                    <td style="border: 1px solid rgb(0, 0, 0);"><strong>PERIODE</strong></td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="sal_brut">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="sal_brut_imposable">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="charge_sal">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="charge_pat">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="net">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="montant_pat">0</td>
+                </tr>
+            </tbody></table>
+           </div>
+        
+            <!--PETIT 2 TABLEAU-->
+           <div class="Tab3">
+        
+            <div class="bordtoptab3"></div>
+            <table class="tabTab3">
+                <tbody><tr>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;background-color: white;">COTISATION</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;background-color: white;">IS</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;background-color: white;">CN</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;background-color: white;">IGR</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;background-color: white;">CNPS</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;text-align:start;background-color: white;">BASE CONGES</th>
+                    <th style="border: 1px solid rgb(0, 0, 0);width:150px;background-color: white;"><strong><span id="conges_base">0</span> JOURS</strong></th>
+                </tr>
+        
+                <tr>
+                    <td style="border: 1px solid rgb(0, 0, 0);"><strong>PERIODE</strong></td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="is">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="cn">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="igr">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);" id="cnps">0</td>
+                    <td style="border: 1px solid rgb(0, 0, 0);text-align:start"><strong>CONGES ACQUIS</strong></td>
+                    <td style="border: 1px solid rgb(0, 0, 0);"><strong><span id="conge_acquis">0</span> JOURS</strong></td>
+                </tr>
+            </tbody></table>
+        
+           </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="GenPDF">
+        <button class="btngene" onclick="convertHTMLtoPDF()">Générer en PDF</button>
+    </div>
+
+
+    <script src="formulairePAIE2.js"></script>
+
+
+    <script>
+        // Fonction pour récupérer l'ID depuis l'URL
+        function getIdFromUrl() {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          return urlParams.get('id');
+        }
+    
+        // Récupérer l'ID et l'afficher dans la console
+        const id = getIdFromUrl();
+        console.log('ID récupéré depuis l\'URL :', id,localStorage.getItem('database'));
+      </script>
+    
+    
+    <script>
+
+    // Fonction pour récupérer les données de l'API
+    async function fetchDataFromAPI(url) {
+      try {
+        
+        const response = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer'+ localStorage.getItem('access'), 
+          'database': localStorage.getItem('database'),
+        },
+      });
+        const data = await response.json();
+        console.log(data)
+        return data;
+      } catch (error) {
+        console.log('Erreur lors de la récupération des données de l\'API:', error);
+        return null;
+      }
+    }
+    
+
+
+    // Fonction pour mettre à jour les valeurs du bulletin avec les données de l'API
+  
+    async function updateBulletin() {
+        const payslipurl = `http://127.0.0.1:8000/api/v0/payslips/${id}/`
+        const companyurl = `http://127.0.0.1:8000/api/v0/parameter/`
+             // Récupérer les données de l'API
+      const data = await fetchDataFromAPI(payslipurl);
+      const parameter = await fetchDataFromAPI(companyurl);
+      
+      const start_payement_date = document.getElementById('periode');
+      const payement_methode = document.getElementById('payement_methode');
+      const jour_travailler = document.getElementById('jour_travailler');
+      const jour_absence = document.getElementById('jour_absence');
+      const nbr_retard = document.getElementById('nbr_retard');
+      const poste = document.getElementById('poste');
+      const nomTravailleur = document.getElementById('nomTravailleur');
+      const matricule = document.getElementById('matricule');
+      matricule.textContent = data.employee.matricule
+      const nbr_part_igr = document.getElementById('nbr_part_igr');
+      const nbr_conge = document.getElementById('nbr_conge');
+      const anciennete = document.getElementById('anciennete');
+      const nbrCnpscomagny = document.getElementById('nbrCnpscomagny');
+      nbrCnpscomagny.textContent = parameter.results[0].cnps
+      const address = document.getElementById('address');
+      address.textContent = parameter.results[0].address
+      const email = document.getElementById('email');
+      email.textContent = parameter.results[0].email
+      const tel = document.getElementById('tel');
+      tel.textContent = parameter.results[0].contact
+      const logo = document.getElementById('logo')
+      logo.src = parameter.results[0].picture;
+
+      const categorie = document.getElementById('categorie');
+      const nbr_enfant = document.getElementById('nbr_enfant');
+      nbr_enfant.textContent = data.employee.numberOfDependents
+      const situation_marital = document.getElementById('situation_marital');
+      const nbr_cnps = document.getElementById('nbr_cnps');
+      nbr_cnps.textContent = data.employee.CNPSnumber
+      const br_cmu =  document.getElementById('br_cmu');
+      const date_embauche = document.getElementById('date_embauche');
+      date_embauche.textContent = data.employee.hiringDate
+      const date_paie = document.getElementById('date_paie');
+      date_paie.textContent = data.paymentDate
+      start_payement_date.textContent = data.start_payement_date + ' Au ' + data.end_payement_date;
+      payement_methode.textContent = data.paymentMethod;
+      jour_travailler.textContent = data.daysWorked ;
+      jour_absence.textContent = data.absence ;
+      nbr_retard.textContent = data.retart ;
+      poste.textContent = data.employee.currentPosition ;
+      nomTravailleur.textContent = data.employee.firstName + ' ' + data.employee.lastName  ;
+      nbr_part_igr.textContent = data.employee.NbrOfParts ;
+      anciennete.textContent = data.employee.seniority;
+      situation_marital.textContent = data.employee.maritalStatus;
+      br_cmu.textContent = data.employee.CMUnumber
+
+      const base_sal_retenus  = document.getElementById('base_sal_retenus');
+      const base_sal_base  = document.getElementById('base_sal_base');
+      const base_sal_montant  = document.getElementById('base_sal_montant');
+      const base_sal_taux  = document.getElementById('base_sal_taux');
+        base_sal_taux.textContent = data.daysWorked
+        base_sal_base.textContent =  data.grossIncomeDetails.basesalary
+        base_sal_montant.textContent =  data.grossIncomeDetails.salairBase
+        //base_sal_retenus.textContent =  data.grossIncomeDetails.salairBase
+
+      const sur_retenus  = document.getElementById('sur_retenus');
+      const sur_base  = document.getElementById('sur_base');
+      const sur_montant  = document.getElementById('sur_montant');
+      const sur_taux  = document.getElementById('sur_taux');
+      sur_base.textContent = data.grossIncomeDetails.sursal;
+      sur_montant.textContent = data.grossIncomeDetails.sursal;
+      sur_taux.textContent = data.daysWorked;
+
+      const conge_retenus = document.getElementById('conge_retenus');
+      const conge_base = document.getElementById('conge_base');
+      const conge_montant = document.getElementById('conge_montant');
+      const conge_taux = document.getElementById('conge_taux');
+      conge_montant.textContent = data.grossIncomeDetails.conge
+
+      const prime_retenus = document.getElementById('prime_retenus');
+      const prime_base = document.getElementById('prime_base');
+      const prime_montant = document.getElementById('prime_montant');
+      const prime_taux = document.getElementById('prime_taux');
+      prime_retenus.textContent = data.nonDeductibleIncome.totalprime - data.nonDeductibleIncome.primetransport ;
+
+      const heur_sup_15_retenus = document.getElementById('heur_sup_15_retenus');
+      const heur_sup_15_base = document.getElementById('heur_sup_15_base');
+      const heur_sup_15_montant = document.getElementById('heur_sup_15_montant');
+      const heur_sup_15_taux = document.getElementById('heur_sup_15_taux');
+      heur_sup_15_base.textContent = ((data.grossIncomeDetails.basesalary/173.33)*1.15)
+      heur_sup_15_base.textContent = data.grossIncomeDetails.hs15
+      heur_sup_15_taux.textContent = data.grossIncomeDetails.hs15
+
+      const heur_sup_50_retenus = document.getElementById('heur_sup_50_retenus');
+      const heur_sup_50_base = document.getElementById('heur_sup_50_base');
+      const heur_sup_50_montant = document.getElementById('heur_sup_50_montant');
+      const heur_sup_50_taux = document.getElementById('heur_sup_50_taux');
+      heur_sup_50_base.textContent = ((data.grossIncomeDetails.basesalary/173.33)*1.150)
+      heur_sup_50_base.textContent = data.grossIncomeDetails.hs50
+      heur_sup_50_montant.textContent = data.grossIncomeDetails.hs50
+
+      const heur_sup_75_retenus = document.getElementById('heur_sup_75_retenus');
+      const heur_sup_75_base = document.getElementById('heur_sup_75_base');
+      const heur_sup_75_montant = document.getElementById('heur_sup_75_montant');
+      const heur_sup_75_taux = document.getElementById('heur_sup_75_taux');
+      heur_sup_75_base.textContent = ((data.grossIncomeDetails.basesalary/173.33)*1.175)
+      heur_sup_75_base.textContent = data.grossIncomeDetails.hs75;
+      heur_sup_75_montant.textContent = data.grossIncomeDetails.hs50;
+
+      const heur_sup_100_retenus = document.getElementById('heur_sup_100_retenus');
+      const heur_sup_100_base = document.getElementById('heur_sup_100_base');
+      const heur_sup_100_montant = document.getElementById('heur_sup_100_montant');
+      const heur_sup_100_taux = document.getElementById('heur_sup_100_taux');
+      heur_sup_100_base.textContent = ((data.grossIncomeDetails.basesalary/173.33)*1.2)
+      heur_sup_100_base.textContent = data.grossIncomeDetails.hs100;
+      heur_sup_100_montant.textContent = data.grossIncomeDetails.hs100;
+
+      const anciennete_prime_retenus = document.getElementById('anciennete_prime_retenus');
+      const anciennete_prime_base = document.getElementById('anciennete_prime_base');
+      const anciennete_prime_montant = document.getElementById('anciennete_prime_montant');
+      const anciennete_prime_taux = document.getElementById('anciennete_prime_taux');
+
+      const fiscal_retenus  = document.getElementById('fiscal_retenus');
+      const fiscal_base  = document.getElementById('fiscal_base');
+      const fiscal_montant  = document.getElementById('fiscal_montant');
+      const fiscal_taux  = document.getElementById('fiscal_taux');
+      fiscal_montant.textContent = data.grossIncomeDetails.brutImposableFiscal;
+      
+      const social_retenus  = document.getElementById('social_retenus');
+      const social_base  = document.getElementById('social_base');
+      const social_montant  = document.getElementById('social_montant');
+      const social_taux  = document.getElementById('social_taux');
+      social_montant.textContent = data.grossIncomeDetails.brutImposableSocial
+
+      const sal_brut_retenus = document.getElementById('sal_brut_retenus');
+      const sal_brut_base = document.getElementById('sal_brut_base');
+      const sal_brut_montant = document.getElementById('sal_brut_montant');
+      const sal_brut_taux = document.getElementById('sal_brut_taux');
+      sal_brut_montant.textContent = data.grossIncome
+
+      const impot_sal_retenus  = document.getElementById('impot_sal_retenus');
+      const impot_sal_base  = document.getElementById('impot_sal_base');
+      const impot_sal_montant  = document.getElementById('impot_sal_montant');
+      const impot_sal_montantpat  = document.getElementById('impot_sal_montantpat');
+      const impot_sal_taux  = document.getElementById('impot_sal_taux');
+     
+      impot_sal_retenus.textContent = data.employeeDeductions.IS
+      impot_sal_montantpat.textContent = data.companyDeductions.is
+
+
+      const contri_n_retenus  = document.getElementById('contri_n_retenus');
+      const contri_n_base  = document.getElementById('contri_n_base');
+      const contri_n_montant  = document.getElementById('contri_n_montant');
+      const contri_n_taux  = document.getElementById('contri_n_taux');
+      contri_n_retenus.textContent = data.employeeDeductions.cn;
+        
+
+      const impot_general_retenus  = document.getElementById('impot_general_retenus');
+      const impot_general_base  = document.getElementById('impot_general_base');
+      const impot_general_montant  = document.getElementById('impot_general_montant');
+      const impot_general_montantpat  = document.getElementById('impot_general_montantpat');
+      const impot_general_taux  = document.getElementById('impot_general_taux');
+      impot_general_retenus.textContent = data.employeeDeductions.IGR
+
+      const contisation_retraite_retenus  = document.getElementById('contisation_retraite_retenus');
+      const contisation_retraite_base  = document.getElementById('contisation_retraite_base');
+      const contisation_retraite_montant  = document.getElementById('contisation_retraite_montant');
+      const contisation_retraite_montantpat  = document.getElementById('contisation_retraite_montantpat');
+      const contisation_retraite_taux  = document.getElementById('contisation_retraite_taux');
+        contisation_retraite_retenus.textContent = data.employeeDeductions.cnps
+        contisation_retraite_base.textContent = data.grossIncomeDetails.brutImposableSocial
+        contisation_retraite_montantpat.textContent = data.companyDeductions.cnpsPat
+
+      const cmu_retenus = document.getElementById('cmu_retenus');
+      const cmu_base = document.getElementById('cmu_base');
+      const cmu_montant = document.getElementById('cmu_montant');
+      const cmu_taux = document.getElementById('cmu_taux');
+      const cmu_montantpat = document.getElementById('cmu_montantpat')
+      //cmu_base.textContent = data.employeeDeductions
+      cmu_retenus.textContent = data.employeeDeductions.cmu
+
+      const ce_retenus =  document.getElementById('ce_retenus');
+      const ce_base =  document.getElementById('ce_retenus');
+      const ce_montant =  document.getElementById('ce_retenus');
+      const ce_taux =  document.getElementById('ce_retenus');
+
+      const taxe_apprentiassage_retenus =  document.getElementById('taxe_apprentiassage_retenus');
+      const taxe_apprentiassage_base =  document.getElementById('taxe_apprentiassage_base');
+      const taxe_apprentiassage_montant =  document.getElementById('taxe_apprentiassage_montant');
+      const taxe_apprentiassage_taux =  document.getElementById('taxe_apprentiassage_taux');
+      const taxe_apprentissage_montantpat =  document.getElementById('taxe_apprentissage_montantpat');
+        taxe_apprentiassage_base.textContent = data.grossIncomeDetails.brutImposableFiscal
+        taxe_apprentissage_montantpat.textContent = data.companyDeductions.taxtApp
+
+      const formation_continue_retenus = document.getElementById('formation_continue_retenus');
+      const formation_continue_base = document.getElementById('formation_continue_base');
+      const formation_continue_montant = document.getElementById('formation_continue_montant');
+      const formation_continue_taux = document.getElementById('formation_continue_taux');
+      const formation_continue_montantpat = document.getElementById('formation_continue_montantpat');
+        formation_continue_base.textContent = data.grossIncomeDetails.brutImposableFiscal
+        formation_continue_montantpat.textContent = data.companyDeductions.taxForm
+
+      const presta_family_retenus = document.getElementById('presta_family_retenus');
+      const presta_family_base = document.getElementById('presta_family_base');
+      const presta_family_montant = document.getElementById('presta_family_montant');
+      const presta_family_taux = document.getElementById('presta_family_taux');
+
+
+      const accident_travail_retenus  = document.getElementById('accident_travail_retenus');
+      const accident_travail_base = document.getElementById('accident_travail_retenus');
+      const accident_travail_montant  = document.getElementById('accident_travail_retenus');
+      const accident_travail_taux  = document.getElementById('accident_travail_retenus');
+        
+
+      const avance_sur_salaire_revenus =  document.getElementById('avance_sur_salaire_revenus');
+      const avance_sur_salaire_base =  document.getElementById('avance_sur_salaire_base');
+      const avance_sur_salaire_montant =  document.getElementById('avance_sur_salaire_montant');
+      const avance_sur_salaire_taux =  document.getElementById('avance_sur_salaire_taux');
+      avance_sur_salaire_revenus.textContent = data.employeeDeductions.payday
+
+      const pres_scolaire_retenus  =  document.getElementById('pres_scolaire_retenus');
+      const pres_scolaire_base  =  document.getElementById('pres_scolaire_base');
+      const pres_scolaire_montant  =  document.getElementById('pres_scolaire_montant');
+      const pres_scolaire_taux  =  document.getElementById('pres_scolaire_taux');
+
+      const pres_ordinaire_retenus = document.getElementById('pres_ordinaire_retenus');
+      const pres_ordinaire_base = document.getElementById('pres_ordinaire_base');
+      const pres_ordinaire_montant = document.getElementById('pres_ordinaire_montant');
+      const pres_ordinaire_taux = document.getElementById('pres_ordinaire_taux');
+
+      const total_rev_revenus = document.getElementById('total_rev_revenus');
+      const total_rev_base = document.getElementById('total_rev_base');
+      const total_rev_montant = document.getElementById('total_rev_montant');
+      const total_rev_taux = document.getElementById('total_rev_taux');
+      const total_rev_montantpat = document.getElementById('total_rev_montantpat');
+      total_rev_revenus.textContent = data.employeeDeductions.totret
+        total_rev_montantpat.textContent = data.companyDeductions.total
+
+      const brut_imposable_retenus = document.getElementById('brut_imposable_retenus');
+      const brut_imposable_base = document.getElementById('brut_imposable_base');
+      const brut_imposable_montant = document.getElementById('brut_imposable_montant');
+      const brut_imposable_taux = document.getElementById('brut_imposable_taux');
+
+      const net_imposable_retenus = document.getElementById('net_imposable_retenus');
+      const net_imposable_base = document.getElementById('net_imposable_base');
+      const net_imposable_montant = document.getElementById('net_imposable_montant');
+      const net_imposable_taux = document.getElementById('net_imposable_taux');
+
+      const transport_retenus  = document.getElementById('transport_retenus');
+      const transport_base  = document.getElementById('transport_base');
+      const transport_montant  = document.getElementById('transport_montant');
+      const transport_taux  = document.getElementById('transport_taux');
+      transport_montant.textContent = data.nonDeductibleIncome.primetransport
+
+      const net_a_payer_retenus = document.getElementById('net_a_payer_retenus');
+      const net_a_payer_base = document.getElementById('net_a_payer_base');
+      const net_a_payer_montant = document.getElementById('net_a_payer_montant');
+      const net_a_payer_taux = document.getElementById('net_a_payer_taux');
+        net_a_payer_montant.textContent = data.netToPay
+
+    const totrev = data.employeeDeductions.totret+data.netToPay
+      const sal_brut = document.getElementById('sal_brut');
+      sal_brut.textContent = data.employeeDeductions.totret+data.netToPay
+      const sal_brut_imposable = document.getElementById('sal_brut_imposable');
+      sal_brut_imposable.textContent = data.grossIncomeDetails.brutImposableSocial
+      const charge_sal = document.getElementById('charge_sal');
+      charge_sal.textContent = data.employeeDeductions.totret - data.employeeDeductions.payday
+      const charge_pat = document.getElementById('charge_pat');
+      charge_pat.textContent = data.companyDeductions.total
+      const net = document.getElementById('net');
+      net.textContent = data.netToPay
+      const montant_pat =  document.getElementById('montant_pat');
+      montant_pat.textContent = data.companyDeductions.total+totrev
+      const conges_base = document.getElementById('conges_base');
+      const conge_acquis = document.getElementById('conge_acquis');
+      const cn = document.getElementById('cn');
+      cn.textContent = data.employeeDeductions.cn
+      const is = document.getElementById('is');
+      is.textContent = data.companyDeductions.is +data.employeeDeductions.IS
+      const igr = document.getElementById('igr');
+      igr.textContent = data.employeeDeductions.IGR
+      const cnps = document.getElementById('cnps');
+      cnps.textContent = data.employeeDeductions.cnps+ data.companyDeductions.cnpsPat
+      
+    
+      // Mettre à jour les valeurs du bulletin avec les données de l'API ou les valeurs par défaut
+    
+
+
+    }
+    
+    // Appel initial pour mettre à jour le bulletin
+    updateBulletin();
+    
+    </script>
+</body>
+</html>

@@ -13,6 +13,7 @@ const form = reactive({
   email: "",
   username: "",
   contact:"",
+  cnps:"",
   address: "",
   picture: "",
   method_pay:"",
@@ -222,6 +223,17 @@ form.formErrors.contact = false;
                   label="Contact"
                 />
               </VCol>
+                    <!-- 👉 cnps -->
+                    <VCol
+                md="6"
+                cols="12"
+              >
+                <VTextField
+                type="number"
+                  v-model="form.cnps"
+                  label="CNPS"
+                />
+              </VCol>
                <!-- 👉 prime transport -->
                <VCol
                 md="6"
@@ -243,7 +255,7 @@ form.formErrors.contact = false;
                       type="number"
                       v-model="form.method_pay"
                       label="Methode depayement des salaires"
-                      :items="['Espèce', 'Virement']"
+                      :items="['Espèce', 'Virement','Transfert']"
                       :error="form.formErrors.method_pay"
                     />
       

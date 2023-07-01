@@ -9,7 +9,7 @@ import DemoSimpleTableDensityPresence from '@/views/pages/tables/DemoSimpleTable
 
 
     <VCol cols="12">
-      <VCard title="Density">
+      <VCard title="Présences">
         <!-- <VCardText>
           You can show a dense version of the table by using the <code>density</code> prop.
         </VCardText> -->

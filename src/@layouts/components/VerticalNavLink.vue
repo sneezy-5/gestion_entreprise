@@ -19,10 +19,10 @@ defineProps<{
       <VIcon
         :icon="item.icon"
         class="nav-item-icon"
-        style="color: rgb(0, 10, 156);"
+        
       />
  
-      <!-- 👉 Title -->
+      <!-- 👉 Title style="color: rgb(0, 10, 156);"-->
       <span class="nav-item-title">
         {{ item.title }}
       </span>

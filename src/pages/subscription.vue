@@ -3,6 +3,7 @@ import misc404 from '@images/pages/404.png'
 import miscMaskDark from '@images/pages/misc-mask-dark.png'
 import miscMaskLight from '@images/pages/misc-mask-light.png'
 import tree from '@images/pages/tree.png'
+import trees from '@images/pages/logoeso.png'
 import { useTheme } from 'vuetify'
 
 const vuetifyTheme = useTheme()
@@ -18,7 +19,7 @@ const authThemeMask = computed(() => {
     <ErrorHeader
       error-code="403"
       error-title="Abonnement ⚠️"
-      error-description="Votre abonnement à exprié."
+      error-description="Erreur d'accès : Votre abonnement a expiré. Veuillez renouveler votre abonnement pour continuer à bénéficier de toutes les fonctionnalités de l'application. Pour renouveler, veuillez vous rendre sur notre site web ou contacter notre service clientèle. Merci pour votre compréhension.."
     />
 
     <!-- 👉 Image -->
@@ -39,7 +40,7 @@ const authThemeMask = computed(() => {
 
     <!-- 👉 Footer -->
     <VImg
-      :src="tree"
+      :src="trees"
       class="misc-footer-tree d-none d-md-block"
     />
 

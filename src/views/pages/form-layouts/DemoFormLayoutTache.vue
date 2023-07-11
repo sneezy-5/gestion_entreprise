@@ -134,6 +134,19 @@ else{
 
 form.formErrors.user = false;
 }
+if(error.response.data['description']){
+
+form.formErrors.description = true;
+toast.value = {
+show: true,
+text: error.response.data['description'],
+color: 'danger', 
+};
+} else{
+
+form.formErrors.end_date = false;
+
+}
          console.log(error)
         
      });

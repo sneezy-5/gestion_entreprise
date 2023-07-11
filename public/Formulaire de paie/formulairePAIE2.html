@@ -552,12 +552,12 @@
         
                         <tr>
                             <td>33</td>
-                            <td style="text-align:start;">Prets Ordinaires</td>
-                            <td id="pres_ordinaire_base"></td>
-                            <td id="pres_ordinaire_taux"></td>
-                            <td id="pres_oridinaire_montant"></td>
-                            <td id="pres_ordnaire_revenus"></td>
-                            <td id="pres_ordnaire_tauxp"></td>
+                            <td style="text-align:start;">Congé Maternité</td>
+                            <td id="conge_maernite_base"></td>
+                            <td id="conge_maernite_taux"></td>
+                            <td id="conge_maernite_montant"></td>
+                            <td id="conge_maernite_revenus"></td>
+                            <td id="conge_maernite_tauxp"></td>
                             <td style="border-right: 1px solid rgb(0, 0, 0);"></td>
                             
                         </tr>
@@ -773,12 +773,12 @@
     // Fonction pour mettre à jour les valeurs du bulletin avec les données de l'API
   
     async function updateBulletin() {
-        const payslipurl = `http://3.83.16.194:8000/api/v0/payslips/${id}/`
-        const companyurl = `http://3.83.16.194:8000/api/v0/parameter/`
+        const payslipurl = `http://127.0.0.1:8000/api/v0/payslips/${id}/`
+        const companyurl = `http://127.0.0.1:8000/api/v0/parameter/`
              // Récupérer les données de l'API
       const data = await fetchDataFromAPI(payslipurl);
       const parameter = await fetchDataFromAPI(companyurl);
-      
+
       const start_payement_date = document.getElementById('periode');
       const payement_methode = document.getElementById('payement_methode');
       const jour_travailler = document.getElementById('jour_travailler');
@@ -803,6 +803,7 @@
       logo.src = parameter.results[0].picture;
 
       const categorie = document.getElementById('categorie');
+      categorie.textContent = data.categorie
       const nbr_enfant = document.getElementById('nbr_enfant');
       nbr_enfant.textContent = data.employee.numberOfDependents
       const situation_marital = document.getElementById('situation_marital');
@@ -973,6 +974,7 @@
 
       const presta_family_retenus = document.getElementById('presta_family_retenus');
       const presta_family_base = document.getElementById('presta_family_base');
+      presta_family_base.textContent = data.presta_family
       const presta_family_montant = document.getElementById('presta_family_montant');
       const presta_family_taux = document.getElementById('presta_family_taux');
 
@@ -991,13 +993,15 @@
 
       const pres_scolaire_retenus  =  document.getElementById('pres_scolaire_retenus');
       const pres_scolaire_base  =  document.getElementById('pres_scolaire_base');
+      pres_scolaire_base.textContent = data.pres_scolaire
       const pres_scolaire_montant  =  document.getElementById('pres_scolaire_montant');
       const pres_scolaire_taux  =  document.getElementById('pres_scolaire_taux');
 
-      const pres_ordinaire_retenus = document.getElementById('pres_ordinaire_retenus');
-      const pres_ordinaire_base = document.getElementById('pres_ordinaire_base');
-      const pres_ordinaire_montant = document.getElementById('pres_ordinaire_montant');
-      const pres_ordinaire_taux = document.getElementById('pres_ordinaire_taux');
+      const conge_maernite_retenus = document.getElementById('pres_ordinaire_retenus');
+      const conge_maernite_base = document.getElementById('conge_maernite_base');
+      conge_maernite_base.textContent = data.conge_maternite
+      const conge_maernite_montant = document.getElementById('pres_ordinaire_montant');
+      const conge_maernite_taux = document.getElementById('pres_ordinaire_taux');
 
       const total_rev_revenus = document.getElementById('total_rev_revenus');
       const total_rev_base = document.getElementById('total_rev_base');
@@ -1043,7 +1047,9 @@
       const montant_pat =  document.getElementById('montant_pat');
       montant_pat.textContent = data.companyDeductions.total+totrev
       const conges_base = document.getElementById('conges_base');
+      conges_base.textContent = data.grossIncomeDetails.baseConge
       const conge_acquis = document.getElementById('conge_acquis');
+      conge_acquis.textContent = data.grossIncomeDetails.congeAcquis
       const cn = document.getElementById('cn');
       cn.textContent = data.employeeDeductions.cn
       const is = document.getElementById('is');

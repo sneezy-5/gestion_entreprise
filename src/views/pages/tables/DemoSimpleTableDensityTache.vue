@@ -170,7 +170,7 @@ fetch(url, {
         <VIcon icon="mdi-microsoft-excel"></VIcon>
         </VBtn>
   </div>
-    <div class="flex-end" v-if="role=='true'">
+    <div class="flex-end" v-if="role === 'true' || formattedArray.includes('admin')">
  
 
 
@@ -225,6 +225,9 @@ fetch(url, {
         <th class="text-uppercase">
           Titre
         </th>
+        <th class="text-uppercase">
+          Description
+        </th>
         <th class="text-uppercase text-center">
           Début
         </th>
@@ -256,6 +259,9 @@ fetch(url, {
         </td>
         <td>
           {{ item.title }}
+        </td>
+        <td>
+          {{ item.description }}
         </td>
         <td class="text-center">
           {{ item.start_date }}

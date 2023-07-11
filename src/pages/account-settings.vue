@@ -6,8 +6,13 @@ import AccountSettingsSecurity from '@/views/pages/account-settings/AccountSetti
 import AccountSettingsSecurityT from '@/views/pages/account-settings/AccountSettingsSecurityT.vue';
 import AccountSettingsAccountT from '@/views/pages/account-settings/AccountSettingsAccountT.vue';
 import AccountSettingsAccountTParam from '@/views/pages/account-settings/AccountSettingsAccountTParam.vue';
+import { accountService } from '@/_services';
 
 const route = useRoute()
+const role = accountService.getRole()
+const groups = accountService.getGroups()
+const groupsArray = [groups];
+const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
 
 const activeTab = ref(route.params.tab)
 
@@ -32,6 +37,7 @@ const tabs = [
         :value="item.tab"
       >
         <VIcon
+        
           size="20"
           start
           :icon="item.icon"
@@ -47,16 +53,16 @@ const tabs = [
     >
       <!-- Account -->
       <VWindowItem value="account">
-        <AccountSettingsAccountT />
+        <AccountSettingsAccountT v-if="role === 'true' || formattedArray.includes('admin')"/>
       </VWindowItem>
 
       <!-- Security -->
-      <VWindowItem value="security">
-        <AccountSettingsSecurityT />
+      <VWindowItem value="security" >
+        <AccountSettingsSecurityT v-if="role === 'true' || formattedArray.includes('admin')"/>
       </VWindowItem>
 
       <!-- parameter -->
-      <VWindowItem value="parametre">
+      <VWindowItem value="parametre" v-if="role === 'true' || formattedArray.includes('admin')">
         <AccountSettingsAccountTParam/>
       </VWindowItem>
       <!-- Notification -->

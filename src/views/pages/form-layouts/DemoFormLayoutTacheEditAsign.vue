@@ -23,7 +23,7 @@ const form = reactive({
     end_date:null,
     user: null,
     project: null,
-    rapport_task:null,
+    rapport_taks:null,
     progress:0,
     status:false,
     formErrors: {
@@ -33,7 +33,7 @@ const form = reactive({
       end_date: false,
       user:false,
       project:false,
-      rapport_task:false,
+      rapport_taks:false,
       status:null
     
   },
@@ -50,7 +50,7 @@ tacheService.getTache(routeParam)
     form.project = res.data.project.id;
     form.user = res.data.user.id;
     form.progress = res.data.progress
-    form.rapport_task = res.data.rapport_task
+    form.rapport_taks = res.data.rapport_taks
     })
     .catch((error) => {
          if (error.status == 401) {
@@ -71,7 +71,7 @@ const submit = () => {
           form.formErrors.end_date = false;
           form.formErrors.user = false;
           form.formErrors.project = false;
-          form.formErrors.rapport_task = false;
+          form.formErrors.rapport_taks = false;
         toast.value = {
         show: true,
         text: 'Enregistré avec succès',
@@ -130,18 +130,18 @@ color: 'danger',
 else{
 
 form.formErrors.user = false;
-}if(error.response.data['rapport_task']){
+}if(error.response.data['rapport_taks']){
 
-form.formErrors.rapport_task = true;
+form.formErrors.rapport_taks = true;
 toast.value = {
 show: true,
-text: error.response.data['rapport_task'],
+text: error.response.data['rapport_taks'],
 color: 'danger', 
 };
 } 
 else{
 
-form.formErrors.rapport_task = false;
+form.formErrors.rapport_taks = false;
 }
          console.log(error)
         
@@ -164,10 +164,10 @@ form.formErrors.rapport_task = false;
         <VTextarea
         prepend-inner-icon="mdi-email-outline"
           type="textarea"
-          v-model="form.rapport_task"
+          v-model="form.rapport_taks"
           label="Rapport"
           placeholder="Rapprt"
-          :error="form.formErrors.rapport_task"
+          :error="form.formErrors.rapport_taks"
         />
       </VCol>
 

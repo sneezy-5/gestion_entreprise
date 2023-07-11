@@ -8,7 +8,7 @@ import DemoSimpleTableDensityDemandeConge from '@/views/pages/tables/DemoSimpleT
 
 
     <VCol cols="12">
-      <VCard title="Demande de congé">
+      <VCard title="Demande de permission">
         <!-- <VCardText>
           You can show a dense version of the table by using the <code>density</code> prop.
         </VCardText> -->

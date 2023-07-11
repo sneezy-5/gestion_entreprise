@@ -11,6 +11,7 @@ import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import { useMainStore } from './stores/main'
 
+
 loadFonts()
 
 // Create vue app

@@ -139,11 +139,11 @@ const router = createRouter({
           component: () => import("../pages/conges/congeEdit.vue"),
         },
         {
-          path: 'demande-conge',
+          path: 'demande_permission',
           component: () => import('../pages/demandeconge/demandeconges.vue'),
         },
         {
-          path: 'create-demande-conge',
+          path: 'create-demande-permission',
           component: () => import('../pages/demandeconge/createDemandeConge.vue'),
         },
         {
@@ -295,6 +295,73 @@ const router = createRouter({
           path: "/edit-taches/:id(\\d+)",
           name: "edit-taches",
           component: () => import("../pages/taches/tacheEditUser.vue"),
+        },
+
+        //<========================= gestion de stock ================================>
+        {
+          path: 'products',
+          component: () => import('../pages/products/products.vue'),
+        },
+        {
+          path: 'create-product',
+          component: () => import('../pages/products/createProduct.vue'),
+        },
+        {
+          path: 'edit-product/:id(\\d+)',
+          name:'edit-product',
+          component: () => import('../pages/products/editProduct.vue'),
+        },
+        {
+          path: 'categories',
+          component: () => import('../pages/categories/categorie.vue'),
+        },
+        {
+          path: 'create-categorie',
+          component: () => import('../pages/categories/createCategory.vue'),
+        },
+        {
+          path: 'edit-category/:id(\\d+)',
+          name:'edit-category',
+          component: () => import('../pages/categories/editCategory.vue'),
+        },
+        {
+          path: 'supplier',
+          component: () => import('../pages/supplier/supplier.vue'),
+        },
+        {
+          path: 'create-supplier',
+          component: () => import('../pages/supplier/createSupplier.vue'),
+        },
+        {
+          path: 'edit-supplier/:id(\\d+)',
+          name:'edit-supplier',
+          component: () => import('../pages/supplier/supplierEdit.vue'),
+        },
+        {
+          path: 'sales',
+          component: () => import('../pages/sale/sale.vue'),
+        },
+        {
+          path: 'create-sale',
+          component: () => import('../pages/sale/createSale.vue'),
+        },
+        {
+          path: 'edit-sale/:id(\\d+)',
+          name:'edit-sale',
+          component: () => import('../pages/sale/saleEdit.vue'),
+        },
+        {
+          path: 'purshase',
+          component: () => import('../pages/purshase/purshase.vue'),
+        },
+        {
+          path: 'create-purshase',
+          component: () => import('../pages/purshase/createPurshase.vue'),
+        },
+        {
+          path: 'edit-purshase/:id(\\d+)',
+          name:'edit-purshase',
+          component: () => import('../pages/purshase/purshaseEdit.vue'),
         },
       ],
     },

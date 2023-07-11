@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { accountService, projetService } from '@/_services';
 import router from '@/router';
+import AnalyticsWeeklyOverviewProjet from '@/views/dashboard/AnalyticsWeeklyOverviewProjet.vue';
 
 let ids = ref(0)
 const desserts: any[] = reactive([
@@ -30,12 +31,15 @@ const getAll =()=>{
   projetService.getProjects(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
-        // for (let i = 0; i < data.length; i++) {
-        //   desserts.push(data[i]);
-        // } 
         desserts.pop()
         desserts.push(res.data)
-        console.log(desserts[0].results, data)
+        const series = [{name: 'tâche', data: [100,19,22,80,45,99,56,97,99,23,88,78,66,95] }]
+   
+        for( var i =0; i<data.length;i++){
+          series[0].data.push(data[i])
+
+        }
+        console.log(series, data)
     })
     .catch((error: { status: string; }) => {
          // error.response.status Check status code
@@ -117,6 +121,9 @@ const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !
           Progression
         </th>
         <th class="text-uppercase text-center">
+          Gantt
+        </th>
+        <th class="text-uppercase text-center">
           Action
         </th>
       </tr>
@@ -134,23 +141,19 @@ const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !
           {{ item.description }}
         </td>
         <td>
+          
           <v-progress-linear v-model="item.progresion" color="success"></v-progress-linear>
-          <!-- <v-progress-circular
-      :rotate="360"
-      :size="100"
-      :width="15"
-      :value="item.progression"
-      color="teal"
-    >
-      {{ item.progression }}
-    </v-progress-circular> -->
+
         </td>
         <td class="text-center">
-          <button @click="goEdit(item.id)">
+          <AnalyticsWeeklyOverviewProjet :model-value="item.taks"/>
+        </td>
+        <td class="text-center">
+          <button @click="goEdit(item.id)" v-if="role === 'true' || formattedArray.includes('admin')">
             <VIcon icon="mdi-edit"></VIcon>
          
         </button>
-          <button @click="openDialog(item.id)">
+          <button @click="openDialog(item.id)" v-if="role === 'true' || formattedArray.includes('admin')">
           <VIcon icon="mdi-trash" style="color: red;"></VIcon>
       </button>
         </td>

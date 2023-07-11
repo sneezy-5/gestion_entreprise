@@ -2,6 +2,7 @@
 import {  accountService, demandeCongeService } from '@/_services';
 import router from '@/router';
 
+const GENERAL_NOTIFICATION_INTERVAL =10000
 let ids = ref(0)
 const desserts: any[] = reactive([
 
@@ -16,9 +17,6 @@ const closeDialog = () => {
 };
 
 
-let goEdit = (id: number)=>{
-  router.push({name: 'edit-demande-conge', params:{id:id}})
-};
 
 
 let page = ref(1);
@@ -71,8 +69,10 @@ const deleteEl = () => {
 
 
 getAll()
+// refresh all demande congé
+setInterval(getAll, GENERAL_NOTIFICATION_INTERVAL)
 
-
+//accepte permission
 const accept = (ids) => {
   demandeCongeService.updateDemandeConge({status:"Accorder"},ids)
       .then(res => {
@@ -89,7 +89,7 @@ const accept = (ids) => {
 
 };
 
-
+//decline demande permission 
 const decline = (ids) => {
   demandeCongeService.updateDemandeConge({status:"Refuser"},ids)
       .then(res => {
@@ -131,13 +131,16 @@ const role = accountService.getRole()
 
 
     <div class="flex-end" v-if="role=='false'">
-      <VBtn to="/create-demande-conge">Faire une demande</VBtn>
+      <VBtn to="/create-demande-permission">Faire une demande</VBtn>
     </div>
   <VTable density="compact">
     <thead>
       <tr>
         <th class="text-uppercase">
           Employe
+        </th>
+        <th class="text-uppercase">
+          Motif
         </th>
         <th class="text-uppercase text-center">
           Debut
@@ -161,6 +164,9 @@ const role = accountService.getRole()
       >
         <td>
           {{ item?.employee.firstName }}   {{ item?.employee?.lastName }}
+        </td>
+        <td class="text-center">
+          {{ item.motif_demande }}
         </td>
         <td class="text-center">
           {{ item.start_date }}

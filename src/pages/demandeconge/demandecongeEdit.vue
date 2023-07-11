@@ -12,7 +12,7 @@ import DemoFormLayoutCongeEdit from '@/views/pages/form-layouts/DemoFormLayoutCo
         
       <VCol cols="12">
         <!-- 👉 Multiple Column -->
-        <VCard title="Editer congé">
+        <VCard title="Editer Demande permission">
           <VCardText>
             <DemoFormLayoutCongeEdit />
           </VCardText>

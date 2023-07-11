@@ -39,7 +39,7 @@ userService.getParameter()
      form.contact = profileData.contact
      form.database = profileData.database
      form.email = profileData.email
-     //form.picture = profileData.picture 
+     form.cnps = profileData.cnps
      form.method_pay = profileData.method_pay
      form.prime_transport = profileData.prime_transport
      form.avatar1 = profileData.picture 

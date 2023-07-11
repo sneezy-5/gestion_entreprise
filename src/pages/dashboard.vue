@@ -104,8 +104,7 @@ dashboardService.getDashboardByfiter(form.start_date,form.end_date)
         projects.stats  = data.projets
         avance.stats  = data.avance
 
-       
-       // console.log('dashboardhome',dashboard[0].employees)
+
     })
 
 </script>

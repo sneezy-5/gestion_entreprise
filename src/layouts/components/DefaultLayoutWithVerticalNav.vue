@@ -11,6 +11,7 @@ import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTit
 import Footer from '@/layouts/components/Footer.vue'
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
 import UserProfile from '@/layouts/components/UserProfile.vue'
+import Notif from '@/layouts/components/Notif.vue'
 import { accountService } from '@/_services'
 
 // Banner
@@ -60,14 +61,19 @@ console.log(formattedArray,formattedArray.includes('admin'))
 
        
 
-        <IconBtn class="me-2">
+        <!-- <IconBtn class="me-2">
           <VIcon icon="mdi-bell-outline" />
-        </IconBtn>
+        </IconBtn> -->
 
+        <Notif></Notif>
         <NavbarThemeSwitcher class="me-2" />
 
         <UserProfile />
+
+        
       </div>
+
+      
     </template>
 
     <template #vertical-nav-content>
@@ -97,9 +103,9 @@ console.log(formattedArray,formattedArray.includes('admin'))
       <VerticalNavLink
       
         :item="{
-          title: 'démande de congé',
+          title: 'permissions',
           icon: 'mdi-gamepad-round-down',
-          to: '/demande-conge',
+          to: '/demande_permission',
         }"
       />
       <!-- <VerticalNavLink
@@ -219,7 +225,7 @@ console.log(formattedArray,formattedArray.includes('admin'))
       v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') "
         :item="{
           title: 'Balance',
-          icon: 'mdi-book',
+          icon: 'mdi-scale-balance',
           to: '/balances',
         }"
       />
@@ -280,6 +286,56 @@ console.log(formattedArray,formattedArray.includes('admin'))
           to: '/taches',
         }"
       />
+
+           <!-- 👉 Gestion de stock -->
+           <VerticalNavSectionTitle
+        :item="{
+          heading: 'Gestion Stock',
+        }"
+         v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+      />
+
+      <VerticalNavLink
+        :item="{
+          title: 'Produits',
+          icon: 'mdi-tag',
+          to: '/products',
+        }"
+         v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Catégorie',
+          icon: 'mdi-silverware-fork-knife',
+          to: '/categories',
+        }"
+         v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Fournisseurs',
+          icon: 'mdi-user',
+          to: '/supplier',
+        }"
+         v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Vente',
+          icon: 'mdi-cart-percent',
+          to: '/sales',
+        }"
+         v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Approvisionner',
+          icon: 'mdi-package-variant-plus',
+          to: '/purshase',
+        }"
+         v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh')"
+      />
+
     </template>
 
 

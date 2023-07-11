@@ -35,6 +35,7 @@ employeesService.getList ()
 const form = reactive({
     username: "",
     email:"",
+    oldemail:"",
     is_superuser:null,
     role:null,
     employee: null,
@@ -55,6 +56,7 @@ userService.getUser(routeParam)
     form.id =res.data.id  
     form.username = res.data.username;
     form.email = res.data.email;
+    form.oldemail = res.data.email;
     form.is_superuser = res.data.is_superuser;
     form.employee = res.data.employee.id;
         console.log(res)

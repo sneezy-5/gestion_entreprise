@@ -98,7 +98,7 @@ const logout =()=>{
           <VDivider class="my-2" />
 
           <!-- 👉 Profile -->
-          <VListItem link >
+          <VListItem link to="/account-settings" >
             <template #prepend>
               <VIcon
                 class="me-2"
@@ -112,7 +112,7 @@ const logout =()=>{
           </VListItem>
 
           <!-- 👉 Settings -->
-          <VListItem link to="/account-settings">
+          <VListItem link to="/account-settings" value="security" v-if="role === 'true' || formattedArray.includes('admin')">
             <template #prepend>
               <VIcon
                 class="me-2"

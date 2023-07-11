@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { userService } from '@/_services';
+import { accountService, userService } from '@/_services';
 import avatar1 from '@images/avatars/avatar-1.png';
 import { useMainStore } from '@/stores/main';
 
@@ -20,7 +20,10 @@ const profileForm = reactive({
   }
 });
 
-
+const role = accountService.getRole()
+const groups = accountService.getGroups()
+const groupsArray = [groups];
+const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
 
 const refInputEl = ref<HTMLElement>()
 
@@ -185,6 +188,7 @@ profileForm.formErrors.email = false;
               <VCol
                 md="6"
                 cols="12"
+                v-if="role === 'true' || formattedArray.includes('admin')"
               >
                 <VTextField
                 type="email"
@@ -197,6 +201,7 @@ profileForm.formErrors.email = false;
               <VCol
                 md="6"
                 cols="12"
+                v-if="role === 'true' || formattedArray.includes('admin')"
               >
                 <VTextField
                   v-model="profileForm.username"

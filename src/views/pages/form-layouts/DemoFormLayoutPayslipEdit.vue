@@ -20,6 +20,11 @@ const form = reactive({
     netToPay: null,
     grossIncome: null,
     TotalPayDeduction: null,
+    presta_family: null,
+    conge_maternite:null,
+    accident_travail:null,
+    pres_scolaire:null,
+    categorie:null,
     daysWorked: null,
     hoursWorked: null,
     grossIncomeDetails: {hs15: "", hs50: "", hs75: "", conge: "", hs100: "", sursal: "", hstotal: "", seniority: "", salairBase: "", sommeprime: "", sursalairecontra: "", ancienneteInYR: "", brutImposableFiscal: "", brutImposableSocial: ""},
@@ -35,6 +40,11 @@ const form = reactive({
       netToPay: false,
       grossIncome: false,
       TotalPayDeduction: false,
+      presta_family:false,
+      conge_maternite:false,
+      accident_travail:false,
+      pres_scolaire:false,
+      categorie:false,
       daysWorked: false,
       hoursWorked: false,
       grossIncomeDetails: false,
@@ -59,7 +69,12 @@ payslipsService.getPayslips(routeParam)
     form.nonDeductibleIncome = res.data.nonDeductibleIncome;
     form.employeeDeductions = res.data.employeeDeductions;
     form.grossIncomeDetails = res.data.grossIncomeDetails
+    form.presta_family = res.data.presta_family
+    form.accident_travail = res.data.accident_travail
+    form.conge_maternite = res.data.conge_maternite
+    form.categorie = res.data.categorie
     form.matricule = res.data.matricule;
+    form.pres_scolaire = res.data.pres_scolaire;
         console.log(res,form)
     })
     .catch((error) => {
@@ -82,6 +97,11 @@ const submit = () => {
           form.formErrors.companyDeductions = false;
           form.formErrors.nonDeductibleIncome = false;
           form.formErrors.employeeDeductions = false;
+          form.formErrors.presta_family = false;
+          form.formErrors.conge_maternite = false;
+          form.formErrors.categorie = false;
+          form.formErrors.accident_travail = false;
+          form.formErrors.pres_scolaire = false;
         toast.value = {
         show: true,
         text: 'Modifé avec succès',
@@ -90,7 +110,69 @@ const submit = () => {
     })
     .catch((error) => {
 
+if(error.response.data['pres_scolaire']){
 
+form.formErrors.pres_scolaire = true;
+toast.value = {
+show: true,
+text: error.response.data['pres_scolaire'],
+color: 'danger', 
+};
+}else{
+
+form.formErrors.pres_scolaire = false;
+
+}
+if(error.response.data['presta_family']){
+
+form.formErrors.presta_family = true;
+toast.value = {
+show: true,
+text: error.response.data['presta_family'],
+color: 'danger', 
+};
+}else{
+
+form.formErrors.presta_family = false;
+
+}if(error.response.data['categorie']){
+
+form.formErrors.categorie = true;
+toast.value = {
+show: true,
+text: error.response.data['categorie'],
+color: 'danger', 
+};
+}else{
+
+form.formErrors.categorie = false;
+
+}if(error.response.data['accident_travail']){
+
+form.formErrors.accident_travail = true;
+toast.value = {
+show: true,
+text: error.response.data['accident_travail'],
+color: 'danger', 
+};
+}else{
+
+form.formErrors.accident_travail = false;
+
+}
+if(error.response.data['conge_maternite']){
+
+form.formErrors.conge_maternite = true;
+toast.value = {
+show: true,
+text: error.response.data['conge_maternite'],
+color: 'danger', 
+};
+}else{
+
+form.formErrors.conge_maternite = false;
+
+}
 if(error.response.data['issuanceDate']){
 
 form.formErrors.issuanceDate = true;
@@ -250,12 +332,63 @@ form.formErrors.employeeDeductions = false;
       >
       <VTextField
           type="number"
-          v-model="form.TotalPayDeduction"
-          label="Total deduction"
-          :error="form.formErrors.TotalPayDeduction"
+          v-model="form.pres_scolaire"
+          label="Prêt Scolaire"
+          :error="form.formErrors.pres_scolaire"
         />
       </VCol>
 
+  <!-- 👉  presta family -->
+  <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.presta_family"
+          label="Prestation Familiale"
+          :error="form.formErrors.presta_family"
+        />
+      </VCol>
+
+       <!-- 👉  congé maternité -->
+  <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.conge_maternite"
+          label="Congé Maternité"
+          :error="form.formErrors.conge_maternite"
+        />
+      </VCol>
+
+       <!-- 👉  categorie -->
+  <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="text"
+          v-model="form.categorie"
+          label="Catégorie"
+          :error="form.formErrors.categorie"
+        />
+      </VCol>
+
+       <!-- 👉 Accident de travail -->
+  <VCol
+        cols="12"
+        md="6"
+      >
+      <VTextField
+          type="number"
+          v-model="form.accident_travail"
+          label="Accident de travail"
+          :error="form.formErrors.accident_travail"
+        />
+      </VCol>
     <!-- 👉 Payement method -->
     <VCol
         cols="12"
@@ -329,7 +462,7 @@ form.formErrors.employeeDeductions = false;
       <VTextField
           type="number"
           v-model="form.companyDeductions.taxtApp"
-          label="Deduction employeur taxtapp"
+          label="Deduction employeur tax apprentissage"
           :error="form.formErrors.companyDeductions"
         />
       </VCol>

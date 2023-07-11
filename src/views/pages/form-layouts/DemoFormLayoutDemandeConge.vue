@@ -31,12 +31,14 @@ const form = reactive({
     end_date: null,
     user: null,
     employee:null,
+    motif_demande:null,
 
     formErrors: {
       start_date: false,
       end_date: false,
       user: false,
       employee: false,
+      motif_demande:false,
     
   },
 });
@@ -53,6 +55,7 @@ const submit = () => {
           form.formErrors.end_date = false;
           form.formErrors.user = false;
           form.formErrors.employee = false;
+          form.formErrors.motif_demande = false;
         toast.value = {
         show: true,
         text: 'Démande effectué avec succès',
@@ -86,6 +89,18 @@ color: 'danger',
 else{
 
 form.formErrors.end_date = false;
+}if(error.response.data['motif_demande']){
+
+form.formErrors.motif_demande = true;
+toast.value = {
+show: true,
+text: error.response.data['motif_demande'],
+color: 'danger', 
+};
+} 
+else{
+
+form.formErrors.motif_demande = false;
 }
  
          console.log(error)
@@ -130,7 +145,17 @@ form.formErrors.end_date = false;
         />
       </VCol>
 
-  
+     <!-- 👉 motif -->
+     <VCol
+       
+      >
+        <VTextarea
+          v-model="form.motif_demande"
+          label="Motif"
+          placeholder="Motif"
+          :error="form.formErrors.motif_demande"
+        />
+      </VCol>
     
  <!--shoxw toats message-->
  <VSnackbar 

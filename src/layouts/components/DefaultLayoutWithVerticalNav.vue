@@ -275,7 +275,7 @@ console.log(formattedArray,formattedArray.includes('admin'))
       v-if="role === 'true' || formattedArray.includes('admin') || formattedArray.includes('drh') || formattedArray.includes('comptable') || formattedArray.includes('editeur')"
         :item="{
           title: 'Projets',
-          icon: 'mdi-inbox-arrow-down',
+          icon: 'mdi-briefcase-variant-outline',
           to: '/projets',
         }"
       />

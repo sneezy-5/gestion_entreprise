@@ -73,11 +73,11 @@ const submit = () => {
     <VCardItem>
       <VCardTitle>Transactions</VCardTitle>
 
-      <template #append>
+      <!-- <template #append>
         <div class="me-n3">
           <MoreBtn />
         </div>
-      </template>
+      </template> -->
     </VCardItem>
 
     <VCardText>
@@ -134,7 +134,7 @@ const submit = () => {
     </VRow>
   </VForm>
       <h6 class="text-sm font-weight-medium mb-12">
-        <span>Total 48</span>
+        <!-- <span>Total 48</span> -->
         <span class="font-weight-regular"> ce mois</span>
       </h6>
 

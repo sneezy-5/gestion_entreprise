@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
     <link rel="stylesheet" href="formulairePAIE2.css">
 </head>
@@ -779,6 +780,7 @@
       const data = await fetchDataFromAPI(payslipurl);
       const parameter = await fetchDataFromAPI(companyurl);
 
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }
       const start_payement_date = document.getElementById('periode');
       const payement_methode = document.getElementById('payement_methode');
       const jour_travailler = document.getElementById('jour_travailler');
@@ -800,8 +802,12 @@
       const tel = document.getElementById('tel');
       tel.textContent = parameter.results[0].contact
       const logo = document.getElementById('logo')
-      logo.src = parameter.results[0].picture;
-
+    //   logo.src = parameter.results[0].picture;
+    var image = new Image();
+image.onload = function() {
+  logo.src = this.src;
+};
+image.src = parameter.results[0].picture;
       const categorie = document.getElementById('categorie');
       categorie.textContent = data.categorie
       const nbr_enfant = document.getElementById('nbr_enfant');
@@ -811,10 +817,10 @@
       nbr_cnps.textContent = data.employee.CNPSnumber
       const br_cmu =  document.getElementById('br_cmu');
       const date_embauche = document.getElementById('date_embauche');
-      date_embauche.textContent = data.employee.hiringDate
+      date_embauche.textContent = moment(data.employee.hiringDate).format('DD-MM-YYYY')
       const date_paie = document.getElementById('date_paie');
-      date_paie.textContent = data.paymentDate
-      start_payement_date.textContent = data.start_payement_date + ' Au ' + data.end_payement_date;
+      date_paie.textContent = moment(data.paymentDate).format('DD-MM-YYYY');//new  Date(data.paymentDate).toLocaleDateString('fr-FR',options)
+      start_payement_date.textContent = moment(data.start_payement_date).format('DD-MM-YYYY') + ' Au ' + moment(data.end_payement_date).format('DD-MM-YYYY');
       payement_methode.textContent = data.paymentMethod;
       jour_travailler.textContent = data.daysWorked ;
       jour_absence.textContent = data.absence ;
@@ -822,7 +828,7 @@
       poste.textContent = data.employee.currentPosition ;
       nomTravailleur.textContent = data.employee.firstName + ' ' + data.employee.lastName  ;
       nbr_part_igr.textContent = data.employee.NbrOfParts ;
-      anciennete.textContent = data.employee.seniority;
+      anciennete.textContent = data.grossIncomeDetails.seniority;
       situation_marital.textContent = data.employee.maritalStatus;
       br_cmu.textContent = data.employee.CMUnumber
 

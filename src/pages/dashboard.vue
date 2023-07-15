@@ -9,6 +9,9 @@ import AnalyticsTotalProfitLineCharts from '@/views/dashboard/AnalyticsTotalProf
 import AnalyticsTransactions from '@/views/dashboard/AnalyticsTransactions.vue';
 import AnalyticsUserTable from '@/views/dashboard/AnalyticsUserTable.vue';
 import AnalyticsWeeklyOverview from '@/views/dashboard/AnalyticsWeeklyOverview.vue';
+import AnalyticsWeeklyOverviewSale from '@/views/dashboard/AnalyticsWeeklyOverviewSale.vue';
+import AnalyticsWeeklyOverviewSaleMorth from '@/views/dashboard/AnalyticsWeeklyOverviewSaleMorth.vue';
+import AnalyticsWeeklyOverviewSaleYear from '@/views/dashboard/AnalyticsWeeklyOverviewSaleYear.vue';
 import CardStatisticsVertical from '@core/components/cards/CardStatisticsVertical.vue';
 
 const totalProfit = {
@@ -31,58 +34,58 @@ const newProject = {
 
 const employe = {
   title: 'Employés',
-  color: 'primary',
+  color: 'secondary',
   icon: 'mdi-account-tie',
-  stats: '',
-  change: 1,
+  stats: "",
+  change: 0,
   subtitle: '',
 }
 
 const contract = {
   title: 'Contrats',
-  color: 'primary',
+  color: 'secondary',
   icon: 'mdi-file-document-edit',
-  stats: '',
-  change: 1,
+  stats: "",
+  change: 0,
   subtitle: '',
 }
 
-const primes = {
+const primes = reactive({
   title: 'Primes',
-  color: 'primary',
+  color: 'secondary',
   icon: 'mdi-square-edit-outline',
-  stats: '',
-  change: 1,
+  stats: "23",
+  change: 0,
   subtitle: '',
-}
+})
 
-const conge = {
+const conge = reactive({
   title: 'Congés',
-  color: 'primary',
+  color: 'secondary',
   icon: 'mdi-camera-document',
-  stats: '',
-  change: 1,
+  stats: "",
+  change: 0,
   subtitle: '',
-}
+})
 
 
-const projects = {
+const projects = reactive({
   title: 'Projets',
   color: 'primary',
-  icon: 'mdi-inbox-arrow-down',
-  stats: '',
-  change: 1,
+  icon: 'mdi-briefcase-variant-outline',
+  stats: "",
+  change: 0,
   subtitle: 'Projets de en cour',
-}
+})
 
-const avance = {
+const avance = reactive({
   title: 'Avances',
-  color: 'primary',
+  color: 'secondary',
   icon: 'mdi-notebook',
-  stats: '',
-  change: 1,
+  stats: "",
+  change: 0,
   subtitle: 'avance sur salaire',
-}
+})
 
 const form = reactive({
   start_date: new Date().toISOString().substr(0, 10),
@@ -95,7 +98,7 @@ const form = reactive({
 dashboardService.getDashboardByfiter(form.start_date,form.end_date)
       .then(res => {
         
-        console.log(res.data)
+     
         const data = res.data
         employe.stats = data.employees
         contract.stats = data.contracts
@@ -104,7 +107,7 @@ dashboardService.getDashboardByfiter(form.start_date,form.end_date)
         projects.stats  = data.projets
         avance.stats  = data.avance
 
-
+        console.log(res.data,employe)
     })
 
 </script>
@@ -129,7 +132,7 @@ dashboardService.getDashboardByfiter(form.start_date,form.end_date)
       cols="12"
       md="4"
     >
-      <AnalyticsWeeklyOverview />
+      <AnalyticsWeeklyOverviewSaleMorth />
     </VCol>
 
     <VCol
@@ -137,7 +140,8 @@ dashboardService.getDashboardByfiter(form.start_date,form.end_date)
       md="4"
     >
       <!-- <AnalyticsTotalEarning /> -->
-      <CardStatisticsVertical v-bind="conge" />
+      <AnalyticsWeeklyOverviewSaleYear />
+      <!-- <CardStatisticsVertical v-bind="conge" /> -->
     </VCol>
 
     <VCol

@@ -147,7 +147,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
          
         </button>
           <button @click="openDialog(item.id)">
-          <VIcon icon="mdi-trash" style="color: red;"></VIcon>
+          <VIcon icon="mdi-trash" color="warning"></VIcon>
       </button>
         </td>
       </tr>

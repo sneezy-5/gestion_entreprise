@@ -143,7 +143,7 @@ form.formErrors.newpassword = false;
       </v-card-text>
 
       <v-card-actions>
-        <v-btn  @click="deleteEl" color="danger">Confimer</v-btn>
+        <v-btn  @click="deleteEl" color="warning">Confimer</v-btn>
         <v-btn  @click="closeDialog">Annuler</v-btn>
       </v-card-actions>
     </v-card>
@@ -244,14 +244,14 @@ form.formErrors.newpassword = false;
        
        
         <td class="text-center">
-          <button @click="goEdit(item.id)">
+          <button @click="goEdit(item.id)" v-if="item.is_superuser !=true">
             <VIcon icon="mdi-edit"></VIcon>
 
         </button>
-        <button @click="openDialogEdtpass(item.id)">
+        <button @click="openDialogEdtpass(item.id)" v-if="item.is_superuser !=true">
           <VIcon icon="mdi-key-outline"></VIcon>
         </button>
-        <button @click="openDialog(item.id)" >
+        <button @click="openDialog(item.id)" v-if="item.is_superuser !=true" >
             <VIcon icon="mdi-trash" style="color: red;"></VIcon>
         </button>
         </td>

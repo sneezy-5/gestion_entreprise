@@ -35,15 +35,14 @@ const logout =()=>{
             form.userAvatar = profileData.profile_image;
             form.lastLogin = profileData.last_login;
           }
-          console.log(form)
-          //useMainStore().setUser(form)
+ 
           
         })
         .catch(error => {
           console.error(error);
         });
      
-//console.log(useMainStore().userAvatar)
+
 </script>
 
 <template>

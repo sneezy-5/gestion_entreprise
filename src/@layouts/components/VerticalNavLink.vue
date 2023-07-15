@@ -19,7 +19,7 @@ defineProps<{
       <VIcon
         :icon="item.icon"
         class="nav-item-icon"
-        color="primary"
+        
       />
  
       <!-- 👉 Title style="color: rgb(0, 10, 156);"-->

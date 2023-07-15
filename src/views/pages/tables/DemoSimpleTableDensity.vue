@@ -15,7 +15,7 @@ const closeDialog = () => {
   showDialog.value = false;
 };
 
-
+/**got employee edit page */
 let goEdit = (id: number)=>{
   router.push({name: 'edit-employe', params:{id:id}})
 };
@@ -23,6 +23,8 @@ let goEdit = (id: number)=>{
 
 let page = ref(1);
 const limit = 5;
+
+/** get all employees in database  */
 const getAll =()=>{
   console.log(page)
   const offset = (page.value - 1) * limit;
@@ -37,10 +39,9 @@ const getAll =()=>{
     })
     .catch((error: { status: string; }) => {
          // error.response.status Check status code
-            if(error.status ="401"){
-                    //console.error(error.response.data.message);
+            if(error.status =="401"){
                    
-                    console.error(error)
+                 //   console.error(error)
          
             }
      
@@ -48,7 +49,7 @@ const getAll =()=>{
 
 }
 
-
+/***get popup to confirm delete  */
 const deleteEl = () => {
   employeesService.deleteEmploye(ids.value)
       .then((res: { data: { results: any; }; }) => {
@@ -56,10 +57,8 @@ const deleteEl = () => {
     })
     .catch((error: { status: string; }) => {
          // error.response.status Check status code
-            if(error.status ="401"){
-                    //console.error(error.response.data.message);
-                   
-                    console.error(error)
+            if(error.status =="401"){
+
          
             }
      
@@ -112,7 +111,7 @@ fetch(url, {
       </v-card-text>
 
       <v-card-actions>
-        <v-btn  @click="deleteEl" style="color: red;">Confimer</v-btn>
+        <v-btn  @click="deleteEl" color="warning">Confimer</v-btn>
         <v-btn  @click="closeDialog">Annuler</v-btn>
       </v-card-actions>
     </v-card>
@@ -130,6 +129,9 @@ fetch(url, {
   <VTable density="compact">
     <thead>
       <tr>
+        <th class="text-uppercase">
+         photo
+        </th> 
         <th class="text-uppercase">
          Matricule
         </th> 
@@ -207,6 +209,19 @@ fetch(url, {
         v-for="item in desserts[0]?.results"
         :key="item.id"
       >
+        <td>
+          <VAvatar
+      class="cursor-pointer"
+      color="secondary"
+      variant="tonal"
+    
+    >
+      <VImg :src="item.pictureURL" />
+
+     
+      <!-- !SECTION -->
+    </VAvatar>
+        </td>
         <td>
           {{ item.matricule }}
         </td>

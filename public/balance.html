@@ -202,7 +202,7 @@ const TSFD =  document.getElementById('TSFD');
 
   // Récupérer les données de l'API
   const datas = await fetchDataFromAPI();
-  console.log(datas.totaux_debit_ini, datas.totaux_credit_ini)
+  console.log(datas, datas.totaux_credit_ini)
   const data = datas.data
   // Vérifier si des données ont été récupérées
   if (data && data.length > 0) {

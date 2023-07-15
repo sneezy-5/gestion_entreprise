@@ -1,40 +1,8 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted } from 'vue';
-import { accountService, userService } from '@/_services';
-import router from '@/router';
-import { not } from '@vueuse/math';
+import { ref,onUnmounted } from 'vue';
+import { accountService } from '@/_services';
 
-const role = accountService.getRole();
-const superadmin = role === 'true' ? 'SuperAdmin' : '';
-const groups = accountService.getGroups();
-const groupsArray = [groups];
-const formattedArray: string[] = groupsArray[0].split(",").filter(item => item !== "");
-const admin = formattedArray.includes('admin') == true ? 'Admin' : '';
 
-const form = reactive({
-  userName: '',
-  userEmail: '',
-  userAvatar: '',
-  lastLogin: '',
-  is_admin: admin,
-  is_superadmin: superadmin === '' ? admin : superadmin,
-});
-
-userService.getProfile()
-  .then(res => {
-    const profileData = res.data.results[0];
-    if (profileData) {
-      form.userName = profileData.username;
-      form.userEmail = profileData.email;
-      form.userAvatar = profileData.profile_image;
-      form.lastLogin = profileData.last_login;
-    }
-    console.log(form);
-    // useMainStore().setUser(form)
-  })
-  .catch(error => {
-    console.error(error);
-  });
 
 const showNotifications = ref(false);
 const notifications = ref([]);
@@ -310,6 +278,7 @@ onUnmounted(() => {
       <VIcon icon="mdi-bell-outline" @click="setGeneralNotificationsAsRead" />
 
       <!-- SECTION Menu -->
+
       <VMenu
         activator="parent"
         width="350"
@@ -329,9 +298,22 @@ onUnmounted(() => {
               </VAvatar>
             </div>
             <div class="notification-content">
+
               <div class="notification-title"> {{ notif.from.user }}</div>
               <div class="notification-subtitle">
-                <router-link :to="notif.actions.redirect_url" class="verb" @click="setGeneralNotificationsAsOpen(notif.notification_id)"> {{ notif.verb }}</router-link>
+            
+                <!-- <div class="notification-dot" v-if="notif.is_read =='False'"></div> -->
+                <router-link :to="notif.actions.redirect_url" class="verb" @click="setGeneralNotificationsAsOpen(notif.notification_id)"> {{ notif.verb }}
+                  
+              </router-link>
+                <!-- Ajouter le point de notification non lue -->
+              
+                <VBadge
+                        location="end"
+                        content=""
+                        v-if="notif.is_open =='False'"
+                      style="margin: 0px 0px 0px 80px;"
+                    ></VBadge>
               </div>
          
               <div class="notification-subtitle">il y a {{ notif.natural_timestamp }}</div>
@@ -394,6 +376,17 @@ onUnmounted(() => {
   100% {
     background-position: 100% 0;
   }
+}
+
+.notification-dot {
+  position: absolute;
+  top: 20%; /* Positionnement au milieu */
+  right: 20px; /* Ajustement horizontal */
+  transform: translate(-50%, -50%); /* Centre horizontalement et verticalement */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgb(15, 114, 228); /* Couleur du point de notification non lue */
 }
 
 </style>

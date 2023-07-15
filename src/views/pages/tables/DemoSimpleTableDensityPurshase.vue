@@ -29,10 +29,7 @@ const getAll =()=>{
   purshaseService.getAllPursharses(filter)
       .then((res: { data: { results: any; }; }) => {
         const data = res.data.results
-        // for (let i = 0; i < data.length; i++) {
-        //   desserts.push(data[i]);
-        // } 
-        
+ 
         desserts.pop()
         desserts.push(res.data)
         console.log(desserts[0].results, data)
@@ -89,7 +86,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
       </v-card-text>
 
       <v-card-actions>
-        <v-btn  @click="deleteEl" style="color: red;">Confimer</v-btn>
+        <v-btn  @click="deleteEl" color="warning">Confimer</v-btn>
         <v-btn  @click="closeDialog">Annuler</v-btn>
       </v-card-actions>
     </v-card>

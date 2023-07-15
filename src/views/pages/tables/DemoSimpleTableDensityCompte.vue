@@ -90,7 +90,7 @@ const numPages = computed(() => Math.ceil(desserts[0]?.count / 5));
       </v-card-text>
 
       <v-card-actions>
-        <v-btn  @click="deleteEl" style="color: red;" color="red">Confimer</v-btn>
+        <v-btn  @click="deleteEl" color="warning" >Confimer</v-btn>
         <v-btn  @click="closeDialog">Annuler</v-btn>
       </v-card-actions>
     </v-card>

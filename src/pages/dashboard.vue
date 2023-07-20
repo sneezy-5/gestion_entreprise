@@ -9,7 +9,6 @@ import AnalyticsTotalProfitLineCharts from '@/views/dashboard/AnalyticsTotalProf
 import AnalyticsTransactions from '@/views/dashboard/AnalyticsTransactions.vue';
 import AnalyticsUserTable from '@/views/dashboard/AnalyticsUserTable.vue';
 import AnalyticsWeeklyOverview from '@/views/dashboard/AnalyticsWeeklyOverview.vue';
-import AnalyticsWeeklyOverviewSale from '@/views/dashboard/AnalyticsWeeklyOverviewSale.vue';
 import AnalyticsWeeklyOverviewSaleMorth from '@/views/dashboard/AnalyticsWeeklyOverviewSaleMorth.vue';
 import AnalyticsWeeklyOverviewSaleYear from '@/views/dashboard/AnalyticsWeeklyOverviewSaleYear.vue';
 import CardStatisticsVertical from '@core/components/cards/CardStatisticsVertical.vue';

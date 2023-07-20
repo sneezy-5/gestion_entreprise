@@ -33,4 +33,5 @@ npm run dev
 ```sh
 npm run build
 ```
-# ges_stock
+
+# gestion entreprise
